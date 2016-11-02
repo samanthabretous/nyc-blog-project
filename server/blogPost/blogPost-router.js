@@ -20,25 +20,3 @@ router.route('/')
   .post(createBlogPost)
 
 module.exports = router;
-
-
-// const router = require('express').Router();
-// const Post = require('mongoose').model('Post');
-
-
-
-// //Create a new test post in database
-// const postPosts = (req, res) => {
-//   console.log(req.body)
-//   Post.create({title: 'testing123', test: 'sucessfully created a test post'}, () => {
-//     console.log('post successfully created');
-//   })
-// }
-
-// //Configure router for get and post calls
-// router.route('/')
-//   .get(getPosts)
-//   .post(postPosts)
-
-
-// module.exports = router;
