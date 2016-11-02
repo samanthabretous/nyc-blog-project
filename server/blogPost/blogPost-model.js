@@ -14,7 +14,7 @@ const blogSchema = mongoose.Schema({
 });
 
 
-mongoose.model('Post', blogSchema)  
+mongoose.model('BlogPost', blogSchema)  
 
 //collage like feel blog that turns the concrete jungle into a circus
 //distorted objects

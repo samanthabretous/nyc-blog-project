@@ -1,13 +1,14 @@
 //Models
-const Posts = require('./posts/posts-model');
+const BlogPost = require('./blogPost/blogPost-model');
 const home = require('./home/home-router');
-//const posts = require('./posts/posts-router');
+const blogPost = require('./blogPost/blogPost-router');
 
 module.exports = {
   models: {
-    Posts: Posts
+    BlogPost: BlogPost
   },
   routes: {
-    home: home
+    home: home, 
+    blogPost: blogPost
   }
 }

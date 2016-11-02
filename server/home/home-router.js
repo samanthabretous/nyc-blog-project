@@ -8,7 +8,7 @@ const home = (req, res) => {
 }
 
 //configure router for get and post calls
-router.route('*')
+router.route('/')
   .get(home)
 
 module.exports = router;
