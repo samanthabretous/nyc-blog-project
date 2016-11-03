@@ -1,24 +1,22 @@
 import React from 'react'
 import $ from 'jquery'
 
-const Blog = React.createClass({
-  getInitialState(){
-    return {data: ''}
-  },
+import {updateStoreData} from '../actions/index'
+
+const BlogPage = React.createClass({
   componentDidMount(){
     let that = this;
     $.ajax({
       url: '/api/blogpost',
       success: (data) => {
-        that.setState({data: data})
+        updateStoreData(data)
       }
     })
   },
 
   render(){
-
-    let posts = this.state.data ? this.state.data.map((post, index)=> 
-      <h1 key={index}>{post.title}</h1>
+    let posts = this.props.data ? this.props.data.map((post, index)=> 
+      <h1 key={index}>{post.blogTitle}</h1>
     ) : null
     return (
       <div>
@@ -28,4 +26,4 @@ const Blog = React.createClass({
   }
 })
 
-export default Blog
+export default BlogPage
