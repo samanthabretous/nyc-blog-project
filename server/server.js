@@ -21,7 +21,7 @@ const routes = require('./index').routes
 db.on('open', function() {
   app.use(bodyParser.urlencoded({extended:false}))
   app.use(express.static('client/js/bundle'))
-  app.use('/blogpost', routes.blogPost)
+  app.use('/api/blogpost', routes.blogPost)
   app.use('*', routes.home)
   app.listen(5555, function() {
     console.log('Listening on port 5555');

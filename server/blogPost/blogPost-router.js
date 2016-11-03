@@ -2,7 +2,7 @@ const router = require('express').Router();
 const BlogPost = require('mongoose').model('BlogPost');
 
 //Response from the home page
-const getBlogPost = (req, res) => {
+const getBlogPost = (req, res, next) => {
   BlogPost.find({}, (err, data) => {
     res.send(data);
   })
