@@ -5,5 +5,4 @@ const appToState = state => ({
   data: state.data,
 })
 
-
 export default connect(appToState)(BlogPage)

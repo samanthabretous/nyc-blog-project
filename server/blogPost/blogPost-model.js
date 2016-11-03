@@ -1,16 +1,14 @@
 const mongoose = require('mongoose');
-const authorSchema = null;
-const commentSchema = null;
 
 const blogSchema = mongoose.Schema({
-  title: {type: String, required: true},
-  //author: [authorSchema],
+  blogTitle: {type: String, required: true},
+  author: String,
   date: { type: Date, default: Date.now },
   location: String, 
   bodyText: String, 
   categories: [String],
   images: String,
-  //comments: [commentSchema]
+  comments: [Number]
 });
 
 
