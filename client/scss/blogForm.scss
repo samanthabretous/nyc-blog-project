@@ -1,0 +1,62 @@
+
+$formFont: 18px;
+
+.blogForm{
+  border: 1px solid red;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .formInner{
+    width: 80%;
+    margin: 0 auto;
+    border: 1px solid red;
+
+    .inputContainer {
+      display: flex;
+      flex-direction: row;
+      height: 50px;
+      padding-bottom: 5%;
+
+        label {
+          border: 1px solid grey;
+          border-radius: 15px 0 0 15px;
+          font-size: $formFont;
+          padding: 1% auto;
+          width: 150px;
+        }
+
+        input {
+          width: 100%;
+          border: 1px solid grey;
+          border-radius: 0 15px 15px 0;
+          padding: 1%;
+          font-size: $formFont;
+        }
+    }
+    .author-location {
+      border: 1px solid green;
+      display: flex;
+      justify-content: space-between;
+
+      .inputContainer {
+        width: 50%;
+
+        .input[name=author], .input[name=author] {
+          width: 100%;
+        }
+      }
+    }
+
+    textarea {
+      width: 90%;
+      height: 200px;
+      font-size: $formFont;
+      border: 1px solid grey;
+      border-radius: 0 15px 15px 0;
+      resize: none;
+    }
+  }
+
+}

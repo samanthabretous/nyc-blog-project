@@ -1,11 +1,13 @@
 import React from 'react'
+import LatestCategoryPost from './parts/latestCategoryPost'
 
 const HomePage = React.createClass({
   render(){
-    return (<div>
-      <div>Hello World</div>
-      {this.props.children}
-    </div>)
+    return (
+      <div>
+        <LatestCategoryPost />
+      </div>
+    )
   }
 })
 

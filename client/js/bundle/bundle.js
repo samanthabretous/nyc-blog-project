@@ -64,6 +64,8 @@
 	
 	var _reactRouter = __webpack_require__(208);
 	
+	__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../scss/app.scss\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	(0, _reactDom.render)(_react2.default.createElement(
@@ -28214,6 +28216,10 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _navBar = __webpack_require__(275);
+	
+	var _navBar2 = _interopRequireDefault(_navBar);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var Main = _react2.default.createClass({
@@ -28222,11 +28228,7 @@
 	    return _react2.default.createElement(
 	      'div',
 	      null,
-	      _react2.default.createElement(
-	        'div',
-	        null,
-	        'Nav Bar'
-	      ),
+	      _react2.default.createElement(_navBar2.default, null),
 	      this.props.children,
 	      _react2.default.createElement(
 	        'div',
@@ -28279,6 +28281,10 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _latestCategoryPost = __webpack_require__(277);
+	
+	var _latestCategoryPost2 = _interopRequireDefault(_latestCategoryPost);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var HomePage = _react2.default.createClass({
@@ -28287,12 +28293,7 @@
 	    return _react2.default.createElement(
 	      'div',
 	      null,
-	      _react2.default.createElement(
-	        'div',
-	        null,
-	        'Hello World'
-	      ),
-	      this.props.children
+	      _react2.default.createElement(_latestCategoryPost2.default, null)
 	    );
 	  }
 	});
@@ -38740,48 +38741,96 @@
 	
 	  return _react2.default.createElement(
 	    'form',
-	    { onSubmit: submitFormDataToDatabase },
+	    { className: 'blogForm', onSubmit: submitFormDataToDatabase },
 	    _react2.default.createElement(
-	      'h1',
-	      null,
-	      'PROPS',
-	      props.blogTitle
-	    ),
-	    _react2.default.createElement('input', {
-	      type: 'text',
-	      name: 'blogTitle',
-	      placeholder: 'Title',
-	      onChange: handleFormChange
-	    }),
-	    _react2.default.createElement('input', {
-	      type: 'text',
-	      name: 'author',
-	      placeholder: 'author',
-	      onChange: handleFormChange
-	    }),
-	    _react2.default.createElement('input', {
-	      type: 'text',
-	      name: 'location',
-	      placeholder: 'Location',
-	      onChange: handleFormChange
-	    }),
-	    _react2.default.createElement('input', {
-	      type: 'textbox',
-	      name: 'bodyText',
-	      placeholder: 'Description',
-	      onChange: handleFormChange
-	    }),
-	    _react2.default.createElement('input', {
-	      type: 'text',
-	      name: 'images',
-	      placeholder: 'Enter Url of Image (seperate each entry with a comma)',
-	      onChange: handleFormChange
-	    }),
-	    createCheckboxes(),
-	    _react2.default.createElement(
-	      'button',
-	      null,
-	      'Submit'
+	      'div',
+	      { className: 'formInner' },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'inputContainer' },
+	        _react2.default.createElement(
+	          'label',
+	          null,
+	          'Title'
+	        ),
+	        _react2.default.createElement('input', {
+	          type: 'text',
+	          name: 'blogTitle',
+	          placeholder: 'Title',
+	          onChange: handleFormChange
+	        })
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'author-location' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'inputContainer' },
+	          _react2.default.createElement(
+	            'label',
+	            null,
+	            'Author'
+	          ),
+	          _react2.default.createElement('input', {
+	            type: 'text',
+	            name: 'author',
+	            placeholder: 'author',
+	            onChange: handleFormChange
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'inputContainer' },
+	          _react2.default.createElement(
+	            'label',
+	            null,
+	            'Location'
+	          ),
+	          _react2.default.createElement('input', {
+	            type: 'text',
+	            name: 'location',
+	            placeholder: 'Location',
+	            onChange: handleFormChange
+	          })
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'inputContainer' },
+	        _react2.default.createElement(
+	          'label',
+	          null,
+	          'Enter Description'
+	        ),
+	        _react2.default.createElement('textarea', {
+	          type: 'textbox',
+	          name: 'bodyText',
+	          placeholder: 'Description',
+	          onChange: handleFormChange
+	          //style={{height: '200px'}}
+	        })
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'inputContainer' },
+	        _react2.default.createElement(
+	          'label',
+	          null,
+	          'Enter Description'
+	        ),
+	        _react2.default.createElement('input', {
+	          type: 'text',
+	          name: 'images',
+	          placeholder: 'Enter Url of Image (seperate each entry with a comma)',
+	          onChange: handleFormChange
+	        })
+	      ),
+	      createCheckboxes(),
+	      _react2.default.createElement(
+	        'button',
+	        null,
+	        'Submit'
+	      )
 	    )
 	  );
 	};
@@ -38903,6 +38952,98 @@
 	    value: value
 	  });
 	}
+
+/***/ },
+/* 274 */,
+/* 275 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var logoImage = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../../../images/nycweird.png\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	
+	var NavBar = function NavBar() {
+	  var navLinks = function navLinks() {
+	    var navLinks = ['Things to Do', 'Food', 'Subway', "Hating"];
+	    return navLinks.map(function (link, index) {
+	      return _react2.default.createElement(
+	        'li',
+	        { key: index },
+	        link.toUpperCase()
+	      );
+	    });
+	  };
+	
+	  return _react2.default.createElement(
+	    'nav',
+	    null,
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'main' },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'navLeft' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'logo' },
+	          _react2.default.createElement('img', { src: logoImage })
+	        ),
+	        _react2.default.createElement(
+	          'ul',
+	          { className: 'navLinks' },
+	          navLinks()
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'searchInput' },
+	        _react2.default.createElement('input', { type: 'text', placeholder: 'SEARCH', name: 'search' })
+	      )
+	    )
+	  );
+	};
+	
+	exports.default = NavBar;
+
+/***/ },
+/* 276 */,
+/* 277 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var LatestCategoryPost = _react2.default.createClass({
+	  displayName: 'LatestCategoryPost',
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      'LatestCategoryPost'
+	    );
+	  }
+	});
+	
+	exports.default = LatestCategoryPost;
 
 /***/ }
 /******/ ]);
