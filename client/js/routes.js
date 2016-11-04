@@ -9,7 +9,7 @@ import BlogFormContainer from './middleware/blogFormContainer'
 export default (
   <Route path="/" component={MainContainer}>
     <IndexRoute component={HomePageContainer}/>
-    <Route path='/blogpost' component={BlogPageContainer}/>
+    <Route path='/blogpost:id' component={BlogPageContainer}/>
     <Route path='/blogform' component={BlogFormContainer}/>
   </Route> 
 );

@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 
 const appToState = state => ({
   data: state.data,
+  categories: state.categories
 })
 
 

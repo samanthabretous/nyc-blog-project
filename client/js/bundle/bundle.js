@@ -23286,7 +23286,7 @@
 	
 	var _homePageContainer2 = _interopRequireDefault(_homePageContainer);
 	
-	var _blogPageContainer = __webpack_require__(266);
+	var _blogPageContainer = __webpack_require__(268);
 	
 	var _blogPageContainer2 = _interopRequireDefault(_blogPageContainer);
 	
@@ -23300,7 +23300,7 @@
 	  _reactRouter.Route,
 	  { path: '/', component: _mainContainer2.default },
 	  _react2.default.createElement(_reactRouter.IndexRoute, { component: _homePageContainer2.default }),
-	  _react2.default.createElement(_reactRouter.Route, { path: '/blogpost', component: _blogPageContainer2.default }),
+	  _react2.default.createElement(_reactRouter.Route, { path: '/blogpost:id', component: _blogPageContainer2.default }),
 	  _react2.default.createElement(_reactRouter.Route, { path: '/blogform', component: _blogFormContainer2.default })
 	);
 
@@ -28174,6 +28174,8 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _reactRouter = __webpack_require__(206);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var logoImage = __webpack_require__(262);
@@ -28183,9 +28185,13 @@
 	    var navLinks = ['Things to Do', 'Food', 'Subway', "Hating"];
 	    return navLinks.map(function (link, index) {
 	      return _react2.default.createElement(
-	        'li',
-	        { key: index },
-	        link.toUpperCase()
+	        _reactRouter.Link,
+	        { key: index, to: link },
+	        _react2.default.createElement(
+	          'li',
+	          null,
+	          link.toUpperCase()
+	        )
 	      );
 	    });
 	  };
@@ -28247,7 +28253,8 @@
 	
 	var appToState = function appToState(state) {
 	  return {
-	    data: state.data
+	    data: state.data,
+	    categories: state.categories
 	  };
 	};
 	
@@ -28267,7 +28274,15 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _latestCategoryPost = __webpack_require__(265);
+	var _reactRouter = __webpack_require__(206);
+	
+	var _jquery = __webpack_require__(265);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
+	
+	var _index = __webpack_require__(266);
+	
+	var _latestCategoryPost = __webpack_require__(267);
 	
 	var _latestCategoryPost2 = _interopRequireDefault(_latestCategoryPost);
 	
@@ -28275,111 +28290,29 @@
 	
 	var HomePage = _react2.default.createClass({
 	  displayName: 'HomePage',
-	  render: function render() {
-	    return _react2.default.createElement(
-	      'div',
-	      null,
-	      _react2.default.createElement(_latestCategoryPost2.default, null)
-	    );
-	  }
-	});
 	
-	exports.default = HomePage;
-
-/***/ },
-/* 265 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
 	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var LatestCategoryPost = _react2.default.createClass({
-	  displayName: 'LatestCategoryPost',
-	  render: function render() {
-	    return _react2.default.createElement(
-	      'div',
-	      null,
-	      'LatestCategoryPost'
-	    );
-	  }
-	});
-	
-	exports.default = LatestCategoryPost;
-
-/***/ },
-/* 266 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _blogPage = __webpack_require__(267);
-	
-	var _blogPage2 = _interopRequireDefault(_blogPage);
-	
-	var _reactRedux = __webpack_require__(172);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var appToState = function appToState(state) {
-	  return {
-	    data: state.data
-	  };
-	};
-	
-	exports.default = (0, _reactRedux.connect)(appToState)(_blogPage2.default);
-
-/***/ },
-/* 267 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _jquery = __webpack_require__(268);
-	
-	var _jquery2 = _interopRequireDefault(_jquery);
-	
-	var _index = __webpack_require__(269);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var BlogPage = _react2.default.createClass({
-	  displayName: 'BlogPage',
+	  //retrive ALL data from the database to display all blog post
 	  componentDidMount: function componentDidMount() {
-	    var that = this;
 	    _jquery2.default.ajax({
-	      url: '/api/blogpost',
+	      url: '/api/blogpost/',
 	      success: function success(data) {
 	        (0, _index.updateStoreData)(data);
 	      }
 	    });
 	  },
 	  render: function render() {
+	
+	    //loop through all the blog post from the data received from the ajax call above and display
 	    var posts = this.props.data ? this.props.data.map(function (post, index) {
 	      return _react2.default.createElement(
-	        'h1',
-	        { key: index },
-	        post.blogTitle
+	        _reactRouter.Link,
+	        { to: '/blogpost/' + post._id, key: index },
+	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          post.blogTitle
+	        )
 	      );
 	    }) : null;
 	    return _react2.default.createElement(
@@ -28390,10 +28323,10 @@
 	  }
 	});
 	
-	exports.default = BlogPage;
+	exports.default = HomePage;
 
 /***/ },
-/* 268 */
+/* 265 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -38619,7 +38552,7 @@
 
 
 /***/ },
-/* 269 */
+/* 266 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38652,6 +38585,126 @@
 	    value: value
 	  });
 	}
+
+/***/ },
+/* 267 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _jquery = __webpack_require__(265);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var LatestCategoryPost = _react2.default.createClass({
+	  displayName: 'LatestCategoryPost',
+	  componentDidMount: function componentDidMount() {
+	    var _this = this;
+	
+	    console.log('hello');
+	    _jquery2.default.ajax({
+	      url: '/api/blogpost'
+	    }).done(function (data) {
+	      console.log('AJAX data', data);
+	      data.filter(function (element, index) {
+	        console.log('elelment', element);
+	        console.log('cat', _this.props.categories);
+	      });
+	    });
+	  },
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      'LatestCategoryPost'
+	    );
+	  }
+	});
+	
+	exports.default = LatestCategoryPost;
+
+/***/ },
+/* 268 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _blogPage = __webpack_require__(269);
+	
+	var _blogPage2 = _interopRequireDefault(_blogPage);
+	
+	var _reactRedux = __webpack_require__(172);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var appToState = function appToState(state) {
+	  return {
+	    data: state.data
+	  };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(appToState)(_blogPage2.default);
+
+/***/ },
+/* 269 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _jquery = __webpack_require__(265);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
+	
+	var _index = __webpack_require__(266);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var BlogPage = _react2.default.createClass({
+	  displayName: 'BlogPage',
+	
+	
+	  //go to the database and fetch one entry that relates to the url
+	  componentDidMount: function componentDidMount() {
+	    _jquery2.default.ajax({
+	      url: '/api/blogpost/' + this.props.params.id
+	    }).done(function (data) {
+	      console.log('AJAX data', data);
+	      (0, _index.updateStoreData)(data);
+	    });
+	  },
+	  render: function render() {
+	    var posts = this.props.data;
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      posts
+	    );
+	  }
+	});
+	
+	exports.default = BlogPage;
 
 /***/ },
 /* 270 */
@@ -38702,11 +38755,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _jquery = __webpack_require__(268);
+	var _jquery = __webpack_require__(265);
 	
 	var _jquery2 = _interopRequireDefault(_jquery);
 	
-	var _index = __webpack_require__(269);
+	var _index = __webpack_require__(266);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -38736,7 +38789,9 @@
 	    (0, _index.newEntryFormStoreData)(name, value);
 	  };
 	
-	  var handleCheckboxes = function handleCheckboxes() {};
+	  var handleCheckboxes = function handleCheckboxes(event) {
+	    console.log(event);
+	  };
 	
 	  var createCheckboxes = function createCheckboxes() {
 	    return props.categories.map(function (category, index) {
@@ -38747,6 +38802,7 @@
 	          type: 'checkbox',
 	          name: 'category',
 	          value: category,
+	          checked: undefined.state.checked,
 	          onChange: handleCheckboxes
 	        }),
 	        category

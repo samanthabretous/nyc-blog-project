@@ -7,7 +7,7 @@ const home = (req, res) => {
   res.sendFile(rootPath + './client/index.html');
 }
 
-//configure router for get and post calls
+//configure router for get calls
 router.route('/')
   .get(home)
 

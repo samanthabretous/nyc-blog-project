@@ -35,8 +35,8 @@ const BlogForm = (props) => {
     newEntryFormStoreData(name, value)
   }
 
-  let handleCheckboxes = () => {
-
+  let handleCheckboxes = (event) => {
+    console.log(event)
   }
   
   let createCheckboxes = () => {
@@ -46,6 +46,7 @@ const BlogForm = (props) => {
           type='checkbox' 
           name='category'
           value={category}  
+          checked={this.state.checked}
           onChange={handleCheckboxes}
         />
         {category}

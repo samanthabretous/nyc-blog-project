@@ -1,11 +1,12 @@
 import React from 'react'
+import {Link} from 'react-router'
 let logoImage = require("../../../images/nycweird.png")
 
 const NavBar = () => {
   let navLinks = () => {
     let navLinks =['Things to Do', 'Food', 'Subway', "Hating"]
     return navLinks.map((link, index) =>
-      <li key={index}>{link.toUpperCase()}</li>
+      <Link key={index} to={link}><li>{link.toUpperCase()}</li></Link>
     ) 
   }
 
