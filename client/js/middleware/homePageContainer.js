@@ -2,8 +2,8 @@ import HomePage from '../components/homePage'
 import {connect} from 'react-redux'
 
 const appToState = state => ({
-  data: state.data,
-  categories: state.categories
+  data: state.blogReducer.data,
+  categories: state.blogReducer.categories
 })
 
 

@@ -46,7 +46,6 @@ const BlogForm = (props) => {
           type='checkbox' 
           name='category'
           value={category}  
-          checked={this.state.checked}
           onChange={handleCheckboxes}
         />
         {category}
