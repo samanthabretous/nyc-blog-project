@@ -4,20 +4,20 @@ import $ from 'jquery'
 import {updateStoreData} from '../actions/index'
 
 const BlogPage = React.createClass({
-  componentDidMount(){
-    let that = this;
+
+  //go to the database and fetch one entry that relates to the url
+  componentDidMount() {
     $.ajax({
-      url: '/api/blogpost',
-      success: (data) => {
-        updateStoreData(data)
-      }
+      url: `/api/blogpost/${this.props.params.id}`,
+    })
+    .done((data) => {
+      console.log('AJAX data', data);
+      updateStoreData(data)
     })
   },
 
   render(){
-    let posts = this.props.data ? this.props.data.map((post, index)=> 
-      <h1 key={index}>{post.blogTitle}</h1>
-    ) : null
+    let posts = this.props.data
     return (
       <div>
         {posts}

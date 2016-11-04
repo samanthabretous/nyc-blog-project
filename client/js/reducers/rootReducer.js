@@ -6,10 +6,12 @@ import {store} from '../store.js';
 
 // ************************************ IMPORT REDUCERS ************************************
 import authorFormReducer from './authorFormReducer.js';
+import blogReducer from './blogReducer.js';
 
 // ************************************ COMBINE REDUCERS ************************************
 const rootReducer = combineReducers({
-  authorFormReducer
+  authorFormReducer, 
+  blogReducer
 })
 
 export default rootReducer;

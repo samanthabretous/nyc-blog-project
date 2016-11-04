@@ -10,22 +10,25 @@ const getBlogPost = (req, res, next) => {
 
 const createBlogPost = (req, res) =>{
   console.log(req.body)
-  BlogPost.create({
-    blogTitle: req.body.blogTitle,
-    blogAuthor: req.body.blogAuthor,
-    //date: req.body.date,
-    location: req.body.location, 
-    bodyText: req.body.bodyText, 
-    categories: req.body.categories,
-    images: req.body.images
-  }, () => {
+  BlogPost.create(req.body, () => {
     console.log('post successfully created');
   })
 }
+const getOneBlogPost = (req, res) => {
+  BlogPost.findById(req.params.id, (err, data) => {
+    res.send(data);
+  })
+};
 
 //configure router for get and post calls
+router.route('/:id')
+  .get(getOneBlogPost)
+
 router.route('/')
   .get(getBlogPost)
   .post(createBlogPost)
+
+
+
 
 module.exports = router;

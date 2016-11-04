@@ -35,8 +35,8 @@ const BlogForm = (props) => {
     newEntryFormStoreData(name, value)
   }
 
-  let handleCheckboxes = () => {
-
+  let handleCheckboxes = (event) => {
+    console.log(event)
   }
   
   let createCheckboxes = () => {
