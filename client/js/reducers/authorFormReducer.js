@@ -13,7 +13,6 @@ export default function authorFormReducer(state = _initialState, action) {
   switch(action.type) {
     case HANDLE_NEW_AUTHOR_FORM:
       stateCopy[action.name] = action.value;
-      console.log('STATE COPY:', stateCopy)
       return stateCopy;
     default:
       return stateCopy;

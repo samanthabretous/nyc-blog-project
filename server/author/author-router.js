@@ -11,7 +11,12 @@ const getAuthor = (req, res, next) => {
 // ***** Creates new author and stores in Author model in DB
 const createAuthor = (req, res) => {
   Author.create({
-    console.log('AUTHOR REQUEST:', req.body);
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    email: req.body.email,
+    location:  req.body.location
+  }, () => {
+    console.log('New author profile created.')
   })
 }
 

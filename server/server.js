@@ -6,8 +6,10 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser')
-const postModel = require('./blogPost/blogPost-model')
+const postModel = require('./blogPost/blogPost-model');
+const authorModel = require('./author/author-model.js');
 const BlogPost = mongoose.model('BlogPost');
+const Author = mongoose.model('Author');
 
 //let port = process.env.PORT || 8080;
 
@@ -23,7 +25,8 @@ db.on('open', function() {
   app.use(express.static('client/js/bundle'))
   
   // Handles API/server side routing
-  app.use('/api/blogpost', routes.blogPost)
+  app.use('/api/blogpost', routes.blogPost);
+  app.use('/api/authors', routes.authors);
   
   // Handles client side routing
   app.use('*', routes.home)

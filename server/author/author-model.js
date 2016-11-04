@@ -3,10 +3,8 @@ const mongoose = require('mongoose');
 
  // ************************************ AUTHOR/PROFILE SCHEMA ************************************
  const authorSchema = mongoose.Schema({
-  name: {
-    firstName: {type: String, required: true},
-    lastName: {type: String}
-  },
+  firstName: {type: String, required: true},
+  lastName: String,
   email: String,
   location: String,
   bio: String, // specify a character limit

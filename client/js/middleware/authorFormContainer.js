@@ -3,7 +3,6 @@ import AuthorForm from '../components/authorForm.jsx';
 import {connect} from 'react-redux';
 
 const mapStateToProps = state => {
-console.log('STATE', state);
 return {
   firstName: state.authorFormReducer.firstName,
   lastName: state.authorFormReducer.lastName,
