@@ -1,0 +1,12 @@
+
+@import "navBar.scss";
+@import "blogForm.scss";
+
+@import 'utilities/variables';
+
+body{
+  background: $pale;
+  margin: 0;
+  width: 100%;
+  box-sizing: border-box;
+}

@@ -11,6 +11,5 @@ export default (
     <IndexRoute component={HomePageContainer}/>
     <Route path='/blogpost' component={BlogPageContainer}/>
     <Route path='/blogform' component={BlogFormContainer}/>
-
   </Route> 
 );

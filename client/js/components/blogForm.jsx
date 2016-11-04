@@ -54,40 +54,63 @@ const BlogForm = (props) => {
   }
 
   return (
-    <form onSubmit={submitFormDataToDatabase}>
-    <h1>PROPS{props.blogTitle}</h1>
-      <input 
-        type="text" 
-        name='blogTitle'
-        placeholder="Title"
-        onChange={handleFormChange}
-      />
-      <input 
-        type="text"
-        name='author' 
-        placeholder="author"
-        onChange={handleFormChange}
-      />
-      <input 
-        type="text"
-        name='location' 
-        placeholder="Location"
-        onChange={handleFormChange}
-      />
-      <input 
-        type="textbox"
-        name='bodyText' 
-        placeholder="Description"
-        onChange={handleFormChange}
-      />
-      <input 
-        type="text"
-        name='images' 
-        placeholder="Enter Url of Image (seperate each entry with a comma)"
-        onChange={handleFormChange}
-      />
-      {createCheckboxes()}
-      <button>Submit</button>
+      <form className='blogForm' onSubmit={submitFormDataToDatabase}>
+        <div className='formInner'>
+
+          <div className='inputContainer'>
+            <label>Title</label>
+            <input 
+              type="text" 
+              name='blogTitle'
+              placeholder="Title"
+              onChange={handleFormChange}
+            />
+          </div>
+
+          <div className='author-location'>
+            <div className='inputContainer'>
+              <label>Author</label>
+              <input 
+                type="text"
+                name='author' 
+                placeholder="author"
+                onChange={handleFormChange}
+              />
+            </div>
+
+            <div className='inputContainer'>
+              <label>Location</label>
+              <input 
+                type="text"
+                name='location' 
+                placeholder="Location"
+                onChange={handleFormChange}
+              />
+            </div>
+          </div>
+
+          <div className='inputContainer'>
+            <label>Enter Description</label>
+            <textarea 
+              type="textbox"
+              name='bodyText' 
+              placeholder="Description"
+              onChange={handleFormChange}
+              //style={{height: '200px'}}
+            ></textarea>
+          </div>
+        <div className='inputContainer'>
+          <label>Enter Description</label>
+          <input 
+            type="text"
+            name='images' 
+            placeholder="Enter Url of Image (seperate each entry with a comma)"
+            onChange={handleFormChange}
+          />
+        </div>
+        {createCheckboxes()}
+        <button>Submit</button>
+      </div>
     </form>
   )
 }
