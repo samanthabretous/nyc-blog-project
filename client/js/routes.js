@@ -12,7 +12,7 @@ import AuthorForm from './components/authorForm.jsx';
 export default (
   <Route path="/" component={MainContainer}>
     <IndexRoute component={HomePageContainer}/>
-    <Route path='/blogpost' component={BlogPageContainer}/>
+    <Route path='/blogpost:id' component={BlogPageContainer}/>
     <Route path='/blogform' component={BlogFormContainer}/>
     <Route path='/authorform' component={AuthorFormContainer}/>
   </Route> 

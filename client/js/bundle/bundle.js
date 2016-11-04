@@ -64,7 +64,7 @@
 	
 	var _reactRouter = __webpack_require__(208);
 	
-	__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../scss/app.scss\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	__webpack_require__(277);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -23198,11 +23198,7 @@
 	
 	var _redux = __webpack_require__(179);
 	
-	var _mainReducer = __webpack_require__(203);
-	
-	var _mainReducer2 = _interopRequireDefault(_mainReducer);
-	
-	var _rootReducer = __webpack_require__(205);
+	var _rootReducer = __webpack_require__(203);
 	
 	var _rootReducer2 = _interopRequireDefault(_rootReducer);
 	
@@ -23216,62 +23212,6 @@
 /* 203 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	exports.default = function () {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : INTIAL_STATE;
-	  var action = arguments[1];
-	
-	  switch (action.type) {
-	    case _types.UPDATE_DATA:
-	      return Object.assign({}, state, { data: action.data });
-	    case _types.HANDLE_BLOGFORM_CHANGE:
-	      state.newBlogEntry[action.name] = action.value;
-	      return Object.assign({}, state);
-	  }
-	  return state;
-	};
-	
-	var _types = __webpack_require__(204);
-	
-	var INTIAL_STATE = {
-	  data: [],
-	  categories: ["Things to Do", "OH MY the Subway", "What are Humans", "I just need to leave NYC", "I would not eat that"],
-	  newBlogEntry: {
-	    blogTitle: '',
-	    blogAuthor: '',
-	    location: '',
-	    bodyText: '',
-	    categories: '',
-	    images: []
-	  }
-	};
-
-/***/ },
-/* 204 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	/**
-	 * export our different types so that our actions and components can use them
-	 */
-	var UPDATE_DATA = exports.UPDATE_DATA = 'update_data';
-	var HANDLE_BLOGFORM_CHANGE = exports.HANDLE_BLOGFORM_CHANGE = 'handle_blogform_change';
-	
-	var HANDLE_NEW_AUTHOR_FORM = exports.HANDLE_NEW_AUTHOR_FORM = 'handle_new_author_form';
-
-/***/ },
-/* 205 */
-/***/ function(module, exports, __webpack_require__) {
-
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
@@ -23282,26 +23222,31 @@
 	
 	var _store = __webpack_require__(202);
 	
-	var _authorFormReducer = __webpack_require__(206);
+	var _authorFormReducer = __webpack_require__(204);
 	
 	var _authorFormReducer2 = _interopRequireDefault(_authorFormReducer);
+	
+	var _blogReducer = __webpack_require__(206);
+	
+	var _blogReducer2 = _interopRequireDefault(_blogReducer);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	// ************************************ COMBINE REDUCERS ************************************
 	
 	
-	// ************************************ IMPORT STORE ************************************
-	var rootReducer = (0, _redux.combineReducers)({
-	  authorFormReducer: _authorFormReducer2.default
-	});
-	
 	// ************************************ IMPORT REDUCERS ************************************
 	// ************************************ IMPORT NODE MODULES ************************************
+	var rootReducer = (0, _redux.combineReducers)({
+	  authorFormReducer: _authorFormReducer2.default,
+	  blogReducer: _blogReducer2.default
+	});
+	
+	// ************************************ IMPORT STORE ************************************
 	exports.default = rootReducer;
 
 /***/ },
-/* 206 */
+/* 204 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -23311,7 +23256,7 @@
 	});
 	exports.default = authorFormReducer;
 	
-	var _types = __webpack_require__(204);
+	var _types = __webpack_require__(205);
 	
 	var _initialState = {
 	  firstName: "",
@@ -23337,6 +23282,62 @@
 	}
 
 /***/ },
+/* 205 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	/**
+	 * export our different types so that our actions and components can use them
+	 */
+	var UPDATE_DATA = exports.UPDATE_DATA = 'update_data';
+	var HANDLE_BLOGFORM_CHANGE = exports.HANDLE_BLOGFORM_CHANGE = 'handle_blogform_change';
+	
+	var HANDLE_NEW_AUTHOR_FORM = exports.HANDLE_NEW_AUTHOR_FORM = 'handle_new_author_form';
+
+/***/ },
+/* 206 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	exports.default = function () {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : INTIAL_STATE;
+	  var action = arguments[1];
+	
+	  switch (action.type) {
+	    case _types.UPDATE_DATA:
+	      return Object.assign({}, state, { data: action.data });
+	    case _types.HANDLE_BLOGFORM_CHANGE:
+	      state.newBlogEntry[action.name] = action.value;
+	      return Object.assign({}, state);
+	  }
+	  return state;
+	};
+	
+	var _types = __webpack_require__(205);
+	
+	var INTIAL_STATE = {
+	  data: [],
+	  categories: ["Things to Do", "OH MY the Subway", "What are Humans", "I just need to leave NYC", "I would not eat that"],
+	  newBlogEntry: {
+	    blogTitle: '',
+	    blogAuthor: '',
+	    location: '',
+	    bodyText: '',
+	    categories: '',
+	    images: []
+	  }
+	};
+
+/***/ },
 /* 207 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -23356,21 +23357,21 @@
 	
 	var _mainContainer2 = _interopRequireDefault(_mainContainer);
 	
-	var _homePageContainer = __webpack_require__(263);
+	var _homePageContainer = __webpack_require__(265);
 	
 	var _homePageContainer2 = _interopRequireDefault(_homePageContainer);
 	
-	var _blogPageContainer = __webpack_require__(265);
+	var _blogPageContainer = __webpack_require__(270);
 	
 	var _blogPageContainer2 = _interopRequireDefault(_blogPageContainer);
 	
-	var _blogFormContainer = __webpack_require__(269);
+	var _blogFormContainer = __webpack_require__(272);
 	
 	var _blogFormContainer2 = _interopRequireDefault(_blogFormContainer);
 	
-	var _authorFormContainer = __webpack_require__(271);
+	var _authorFormContainer = __webpack_require__(274);
 	
-	var _authorForm = __webpack_require__(272);
+	var _authorForm = __webpack_require__(275);
 	
 	var _authorForm2 = _interopRequireDefault(_authorForm);
 	
@@ -23380,7 +23381,7 @@
 	  _reactRouter.Route,
 	  { path: '/', component: _mainContainer2.default },
 	  _react2.default.createElement(_reactRouter.IndexRoute, { component: _homePageContainer2.default }),
-	  _react2.default.createElement(_reactRouter.Route, { path: '/blogpost', component: _blogPageContainer2.default }),
+	  _react2.default.createElement(_reactRouter.Route, { path: '/blogpost:id', component: _blogPageContainer2.default }),
 	  _react2.default.createElement(_reactRouter.Route, { path: '/blogform', component: _blogFormContainer2.default }),
 	  _react2.default.createElement(_reactRouter.Route, { path: '/authorform', component: _authorFormContainer.AuthorFormContainer })
 	);
@@ -28196,7 +28197,7 @@
 	
 	var appToState = function appToState(state) {
 	  return {
-	    data: state.data
+	    data: state.blogReducer.data
 	  };
 	};
 	
@@ -28216,7 +28217,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _navBar = __webpack_require__(275);
+	var _navBar = __webpack_require__(263);
 	
 	var _navBar2 = _interopRequireDefault(_navBar);
 	
@@ -28251,54 +28252,68 @@
 	  value: true
 	});
 	
-	var _homePage = __webpack_require__(264);
-	
-	var _homePage2 = _interopRequireDefault(_homePage);
-	
-	var _reactRedux = __webpack_require__(172);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var appToState = function appToState(state) {
-	  return {
-	    data: state.data
-	  };
-	};
-	
-	exports.default = (0, _reactRedux.connect)(appToState)(_homePage2.default);
-
-/***/ },
-/* 264 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
 	var _react = __webpack_require__(1);
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _latestCategoryPost = __webpack_require__(277);
-	
-	var _latestCategoryPost2 = _interopRequireDefault(_latestCategoryPost);
+	var _reactRouter = __webpack_require__(208);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var HomePage = _react2.default.createClass({
-	  displayName: 'HomePage',
-	  render: function render() {
-	    return _react2.default.createElement(
-	      'div',
-	      null,
-	      _react2.default.createElement(_latestCategoryPost2.default, null)
-	    );
-	  }
-	});
+	var logoImage = __webpack_require__(264);
 	
-	exports.default = HomePage;
+	var NavBar = function NavBar() {
+	  var navLinks = function navLinks() {
+	    var navLinks = ['Things to Do', 'Food', 'Subway', "Hating"];
+	    return navLinks.map(function (link, index) {
+	      return _react2.default.createElement(
+	        _reactRouter.Link,
+	        { key: index, to: link },
+	        _react2.default.createElement(
+	          'li',
+	          null,
+	          link.toUpperCase()
+	        )
+	      );
+	    });
+	  };
+	
+	  return _react2.default.createElement(
+	    'nav',
+	    null,
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'main' },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'navLeft' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'logo' },
+	          _react2.default.createElement('img', { src: logoImage })
+	        ),
+	        _react2.default.createElement(
+	          'ul',
+	          { className: 'navLinks' },
+	          navLinks()
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'searchInput' },
+	        _react2.default.createElement('input', { type: 'text', placeholder: 'SEARCH', name: 'search' })
+	      )
+	    )
+	  );
+	};
+	
+	exports.default = NavBar;
+
+/***/ },
+/* 264 */
+/***/ function(module, exports) {
+
+	module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAABECAYAAAA7rQj2AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAADOBJREFUeNrsXYutpTgSrc2AEBwCGaxDIARCIARnQAhoI2Ay8GTAZkAIbAZvX0tcDbq6tutnw3uqI1nT6p4L2FU+PlX+ARgMBoPBYDAYDAaDwWAwGAwGg8FgMBgMBoPBYDAYDAaDwWAwGAwGg8FgMBgMBgb+ZU3wWHTfZfgu//4u7rv059/99yz/+S5/WzP9CvSnjf+q9Ozu/PPfDX23P//8x1f/91sMtXyX/VI5LQMdZ2e/4o9DxA9/XwPjWS/H+K3/Lut3+UKU5UG2HC8d44kYT7/wyr7253nTdwlnGYl2705f+VLoB/35LetZ108+s53fqWmr7qz3cqnLtfz5u5nZHx4D/1YpLdLaLoa5IlzeNVbuGK/3TMT22JBEdS3xAUQxXr7lqQrm1YED8bfuQkrzWccdYZcZaZf58pvAqNuQIYpc0RAK/fnug/De6acS1nsDHwodb3p75vV5q/K7Uorxi+iAHUFRvRwtPkxpXW3pFIglViKrd5uEt7Kc744MAkgNJpRBOyIJdCL6TKocTNIaP/ggpSw/jaxCBfZ1H5jef1BetVTW8qE+pfBzQI5O+9lmLtMR7xq5RqV27d5IQsM+3QfiuT73UOj0pTISvi0m1F1gqihM2YhKTqvNfgxpdZlKS0bWTyPOVUXVbLAlUZ+OQdrvI2Cu48a3//eOHMHGUJWlulA6Us7PPoXYfSIcq1VWRCh4DSNTA4GG2kspxzGhTGehkiqV8BMIaxFIaKy0fnXga+NrkuO1U0TiCNIV2oCSA7k7NPRKTpgiDm0/2wmDJ0WhxLMO4VQi/lJcggxKEYb02+L5vD5htyPTLtgBNTfQLmdbdG8qba+Uu66W/PyqQFh7YWTzFQirKyTJHeM3L2N75DccGZJugZURBn8KNb6UCSsQwrMeGWq9cmvhfI6ko6UGub5ALBg1NyLzs2Ph3Y5BmBvi/e/P3Z5MWLECYWGcc1LuECXiCUyy2gA/GdATiLIGHLLTURLiGvYZMnnALmPP1DcMoDtBM2a+L9VGa6HPjIxv7BD5Y2yOdQHacpFQOZ+sggHksyrYfNiOILW9ElltTLKihnOpsNI3smcohOHSduTYJ0eAIyMk1c6x5MI8zLtWZXtj/M9lku0b8Mi8q5CeUQdGdgelThsQDhkrkVVHzNtxc0+HgsLRtueiYLtSsppjm0jMw5UUGRczMYWAUdS9EmFFBmFGRf9xTyKrCfQXlVEcLSqpuQ3oa1pKM1EcOTxWyPtoqOVR0R+oyzTWjF0cYyDVVqq9cMCKQkVb6j+RYXMJYcWnhoWU2Q4vqHCu4lLCwigrRyQWzSUAXFXCxSroPD3SFygj7sQcEELDdoyCuo6gv5ZpJvSHLkHsQbE95qcQVgD8LANWgo9E6S8JX7hhYCmhzHU2V0gQtxiAuPXpkKkBysyRZ7axS9inxnq2QTBo5QZ8L7DhQfiOuYK/xSfmsRzQpkWl+bAeEatTt81wyAoKv5MYZwK9JLXm+zGdB7udZBJ0PGxCeIV2ixn3TLhaGqRDBXvPBCXaZ75ds00eQVhLprLcThwYoyl3ZOOSVU5VSpO5q2IujION2XmweUxKOLgBb4+cb0j63HC1NOBz7d0To5sIdbbWfD2NsBzkV8FyPrjLyPiOSFhDJbIqqUrpLN7OHKlrJo5n5u8k4eAsCI1bJdpLCpCb99qVv2clpl6ks3r+iYQVM3I/MqV4YKglT3TOElktBXKIoDfzhSXfVgnLmeG8XUEJcdoolxMqtcVUIUzn5G89o1NL1FXODp5ItnOFdlnvJKuS5OYQlmOGWJ5opBJZcZ1Mq0Ps8Ky1VyWlsGSc/mCM3E6gWnKd0Cm3Ve47Mb6wKfoRZ41aEOTdOHULdxJWLJAER8YvzNHGI2N2KVmV1JUWqSzAn1GrEQ7mFNGYIZaBGSZtgo40V8rHUPxVsoyBE7aWFK4jkq2UWBzcN8NNIohYCGs8o7Nsgu/RJisvCFMkBh8b2ZV6hI6D/LKBhREOzoKO7CoqBkoeE+NLqRwbNWwqbeweibbWmJQIjRSuKGy4fpBjKJAI/NFmLBCWBlkB5Fdaa3eI8Xxuq2Q7EJO1OSU0ZJ7nmAPCJCDcGqGIxBcC8Fbsf8rV5dYBBqI40FJBO9y3JAdNDgtR8VAVG9UBdoRzUcjKgf5qdsw7W41K1K04odCe1HAwl3vCqI5STrVFhCFdJBoIflE6FWVhiINYkR9uW+WOmXKnEhb27CAKYUVEnoGS15gbqqs7sAB+4aCH8lIQajiYm97HtG+EdmvXJEsRgqCeHeB2lQQm2faV+OG2Q/xGZANNCs5PIZMUYWmRVc4QC/wOHMi6dUinpISDQdiJpApdS12NCMLhHI3zIqrSft0D8Q2xoh+PIN+G1VxdlRQPtgGdkLA0j3rpof7M4J3whHzGgsgx9QSn7UG+FgmzSLSD8rHGEnW1Cfw0ZkK/GXAHC2wIX/QVowQuGTdXVyMxRNNWV1TC4owk09NGDmXMSEU8IHNMpcsXMGptEfrly+dynX0HneOOMJND2A3OrwtLKRdDBGHYHCr50K3Jdkrmf0YmTrW2oISKZAWQTtpPv4SwdgTBULZMYRe+zkDfFoVVV5SCTQhLktUhQ/b9+e/U22siQeHXVFeSMPl2dZUybGDmw7gJY80Y/e6TP2sCe8oldtmJQw5sA8gv/hwVyAprS0myWuPmnvf2pBJBzUmJ/Seoq0hsnFBJXQHIpngxsXmNozeegoBwtImgTCaBWqN2IM1LRwPTxxZmG3OvG+MQjKtIKAvordivqq68gLAG5Vg6ViKr3Mi6/hLC2goE44B2OcEnWwyKnV+iruJpt3AWfymcvarYySEpsS7Czs/d8iaxwW39g3P0cCw0TlRUV65yo2mT65PgECEOdY1cSYlOCnmrEglc7xccQL74VkKw3LCVcv8gx8bSCaPcabu3rU30TKkXM7/xygSwKHUAqpz3lQgkQrvV7WMhTEiRy0Qg9xWh1qj5wDFDIH0Fm0g6JUVdHRX8qob/lo4Gv22TM/dihyPTQFExlpY609MIK0Lb2cc1Ew6myCVn/9KxvBF0Zlu3hqO6ZH+iz4SmLTbRA8hO/k3ldLeG3y8mA0xHTf3OK8fSAepPpabeUVPNtor/j4zSSYXtjkgkrqDWVkE71Q7RpQPimvlt7lQKLf8dlJ9fIqtbTxRdBB+Ukvya6gp7I/RPIaytseH7TNtNwNs+ksqTpNQaRxVp5j+5tg8CsgsI9UZZ2kElzJq3od+2p7YrhHUcwnLKbD9Bm4VqQwPCmqD9/sTU8oMUuayMdgqFUNArkGzNCRAJyc6I3+ZIQEoAnWL/cMC7YLgZJqHcSyVENdVQqzN3fGXC+kQQLXJYqYmRldlJQ+J5E9RdIFxLXY3C78ZeSlrrXPURdNYOesgn2G8nq1RjeyFhaaoh7dicU58aoWDLkxk/OV6qXQcGAR6QX8OlpRhqqStJYn8A2pqt3Kwbd8ZtVWir0rVtjyCrXsHBsNsLNPNrNbcBbFBnlhC757KFjVfAHzGDsfmaUWscQp4aqisnJMeF0Y4j6M54cy7/uA4OpQtxN3jI1rRFQblgNnFy1VAH7TdZTtBulXALJxgThM89PM8BfuqeG+7u0E5dzULi4JLFrBQaOoHoGKC87/HWBHvJMTjKpURYe4XOVhMOdLf8tE4eY/JNkqS4B/zWGM32co36AMU2XlhvjQkKzxgoHEJVPe7Ayl5pRCwRlkSdLKA3akveewjaWCuvwwXGMWdhB9EM3yghlju/J8A/R7a8ymsfoSMOTpRvD0KySSXho9AefeZ9AWm/ER6GUcnJQqHimvmkVvuWnALxjvCMvVcYBdwpE9agaPOrunqR0wq0I1zmTEgkUb6rgvrvhSrrU9okRVTY00wdPBBBSf6NUO+GmTslamASTW5l8x0zLaXzwzzxeR2UN/Jq2nxnEBQ2n8a1cWow4KqSSejr7/7WXchwQbbdAQ8/pDKATgLYVVQSd1/O+OlW5r5A3vvDRq6pQo5ir2jzVUhMFLUfQJbwjop1l6i190WpB9A2Yi/wA26DGhRzKhvUSSofN+V9SgplPYnAn/9dCg4y3+gQfQVyCVBv575XJqlrTqsUEjqBb0jV/6cz7zXypVrHLt8OB3qJ7E9OptFBV2izlAET9nIOZlsekg+IyuTyqXOtlb+3lHd5Jdk9oRM6IeGMyuq/B9mCZSxpPcUv2erBKXVq7VzToEyAGnXM5QSOi/p6ksR+n41alTrXAXUmEnqEanqRk/S9s7APbKC7gX0S2qhLEP72QL9kVU7zAC5/NrRTJonw0Pbzl/J09Kcq2hWdtod/boKpMTgcb4NArfBFqja11cqsUNfX7TwD/FA1ZTAYDAaDwWAwGAwGg8FgMBgMBoPBYDAYDAaDwXAj/i/AAEFp76PIkpsdAAAAAElFTkSuQmCC"
 
 /***/ },
 /* 265 */
@@ -28310,9 +28325,9 @@
 	  value: true
 	});
 	
-	var _blogPage = __webpack_require__(266);
+	var _homePage = __webpack_require__(266);
 	
-	var _blogPage2 = _interopRequireDefault(_blogPage);
+	var _homePage2 = _interopRequireDefault(_homePage);
 	
 	var _reactRedux = __webpack_require__(172);
 	
@@ -28320,11 +28335,12 @@
 	
 	var appToState = function appToState(state) {
 	  return {
-	    data: state.data
+	    data: state.blogReducer.data,
+	    categories: state.blogReducer.categories
 	  };
 	};
 	
-	exports.default = (0, _reactRedux.connect)(appToState)(_blogPage2.default);
+	exports.default = (0, _reactRedux.connect)(appToState)(_homePage2.default);
 
 /***/ },
 /* 266 */
@@ -28340,31 +28356,45 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _reactRouter = __webpack_require__(208);
+	
 	var _jquery = __webpack_require__(267);
 	
 	var _jquery2 = _interopRequireDefault(_jquery);
 	
 	var _index = __webpack_require__(268);
 	
+	var _latestCategoryPost = __webpack_require__(269);
+	
+	var _latestCategoryPost2 = _interopRequireDefault(_latestCategoryPost);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var BlogPage = _react2.default.createClass({
-	  displayName: 'BlogPage',
+	var HomePage = _react2.default.createClass({
+	  displayName: 'HomePage',
+	
+	
+	  //retrive ALL data from the database to display all blog post
 	  componentDidMount: function componentDidMount() {
-	    var that = this;
 	    _jquery2.default.ajax({
-	      url: '/api/blogpost',
+	      url: '/api/blogpost/',
 	      success: function success(data) {
 	        (0, _index.updateStoreData)(data);
 	      }
 	    });
 	  },
 	  render: function render() {
+	
+	    //loop through all the blog post from the data received from the ajax call above and display
 	    var posts = this.props.data ? this.props.data.map(function (post, index) {
 	      return _react2.default.createElement(
-	        'h1',
-	        { key: index },
-	        post.blogTitle
+	        _reactRouter.Link,
+	        { to: '/blogpost/' + post._id, key: index },
+	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          post.blogTitle
+	        )
 	      );
 	    }) : null;
 	    return _react2.default.createElement(
@@ -28375,7 +28405,7 @@
 	  }
 	});
 	
-	exports.default = BlogPage;
+	exports.default = HomePage;
 
 /***/ },
 /* 267 */
@@ -38619,7 +38649,7 @@
 	
 	var _store2 = _interopRequireDefault(_store);
 	
-	var _types = __webpack_require__(204);
+	var _types = __webpack_require__(205);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -38648,7 +38678,127 @@
 	  value: true
 	});
 	
-	var _blogForm = __webpack_require__(270);
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _jquery = __webpack_require__(267);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var LatestCategoryPost = _react2.default.createClass({
+	  displayName: 'LatestCategoryPost',
+	  componentDidMount: function componentDidMount() {
+	    var _this = this;
+	
+	    console.log('hello');
+	    _jquery2.default.ajax({
+	      url: '/api/blogpost'
+	    }).done(function (data) {
+	      console.log('AJAX data', data);
+	      data.filter(function (element, index) {
+	        console.log('elelment', element);
+	        console.log('cat', _this.props.categories);
+	      });
+	    });
+	  },
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      'LatestCategoryPost'
+	    );
+	  }
+	});
+	
+	exports.default = LatestCategoryPost;
+
+/***/ },
+/* 270 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _blogPage = __webpack_require__(271);
+	
+	var _blogPage2 = _interopRequireDefault(_blogPage);
+	
+	var _reactRedux = __webpack_require__(172);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var appToState = function appToState(state) {
+	  return {
+	    data: state.blogReducer.data
+	  };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(appToState)(_blogPage2.default);
+
+/***/ },
+/* 271 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _jquery = __webpack_require__(267);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
+	
+	var _index = __webpack_require__(268);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var BlogPage = _react2.default.createClass({
+	  displayName: 'BlogPage',
+	
+	
+	  //go to the database and fetch one entry that relates to the url
+	  componentDidMount: function componentDidMount() {
+	    _jquery2.default.ajax({
+	      url: '/api/blogpost/' + this.props.params.id
+	    }).done(function (data) {
+	      console.log('AJAX data', data);
+	      (0, _index.updateStoreData)(data);
+	    });
+	  },
+	  render: function render() {
+	    var posts = this.props.data;
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      posts
+	    );
+	  }
+	});
+	
+	exports.default = BlogPage;
+
+/***/ },
+/* 272 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _blogForm = __webpack_require__(273);
 	
 	var _blogForm2 = _interopRequireDefault(_blogForm);
 	
@@ -38661,20 +38811,20 @@
 	var appToState = function appToState(state) {
 	  console.log(state);
 	  return _defineProperty({
-	    blogTitle: state.newBlogEntry.blogTitle,
-	    blogAuthor: state.newBlogEntry.blogAuthor,
-	    location: state.newBlogEntry.location,
-	    bodyText: state.newBlogEntry.bodyText,
-	    categories: state.newBlogEntry.categories,
-	    images: state.newBlogEntry.images,
-	    comments: state.newBlogEntry.comments
-	  }, 'categories', state.categories);
+	    blogTitle: state.blogReducer.newBlogEntry.blogTitle,
+	    blogAuthor: state.blogReducer.newBlogEntry.blogAuthor,
+	    location: state.blogReducer.newBlogEntry.location,
+	    bodyText: state.blogReducer.newBlogEntry.bodyText,
+	    categories: state.blogReducer.newBlogEntry.categories,
+	    images: state.blogReducer.newBlogEntry.images,
+	    comments: state.blogReducer.newBlogEntry.comments
+	  }, 'categories', state.blogReducer.categories);
 	};
 	
 	exports.default = (0, _reactRedux.connect)(appToState)(_blogForm2.default);
 
 /***/ },
-/* 270 */
+/* 273 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38721,7 +38871,9 @@
 	    (0, _index.newEntryFormStoreData)(name, value);
 	  };
 	
-	  var handleCheckboxes = function handleCheckboxes() {};
+	  var handleCheckboxes = function handleCheckboxes(event) {
+	    console.log(event);
+	  };
 	
 	  var createCheckboxes = function createCheckboxes() {
 	    return props.categories.map(function (category, index) {
@@ -38838,7 +38990,7 @@
 	exports.default = BlogForm;
 
 /***/ },
-/* 271 */
+/* 274 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38848,7 +39000,7 @@
 	});
 	exports.AuthorFormContainer = undefined;
 	
-	var _authorForm = __webpack_require__(272);
+	var _authorForm = __webpack_require__(275);
 	
 	var _authorForm2 = _interopRequireDefault(_authorForm);
 	
@@ -38870,7 +39022,7 @@
 	var AuthorFormContainer = exports.AuthorFormContainer = (0, _reactRedux.connect)(mapStateToProps)(_authorForm2.default);
 
 /***/ },
-/* 272 */
+/* 275 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38887,7 +39039,7 @@
 	
 	var _jquery2 = _interopRequireDefault(_jquery);
 	
-	var _newAuthorAction = __webpack_require__(273);
+	var _newAuthorAction = __webpack_require__(276);
 	
 	var _newAuthorAction2 = _interopRequireDefault(_newAuthorAction);
 	
@@ -38927,7 +39079,7 @@
 	exports.default = AuthorForm;
 
 /***/ },
-/* 273 */
+/* 276 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38937,7 +39089,7 @@
 	});
 	exports.default = newAuthorFormAction;
 	
-	var _types = __webpack_require__(204);
+	var _types = __webpack_require__(205);
 	
 	var _store = __webpack_require__(202);
 	
@@ -38954,96 +39106,352 @@
 	}
 
 /***/ },
-/* 274 */,
-/* 275 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var logoImage = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../../../images/nycweird.png\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
-	
-	var NavBar = function NavBar() {
-	  var navLinks = function navLinks() {
-	    var navLinks = ['Things to Do', 'Food', 'Subway', "Hating"];
-	    return navLinks.map(function (link, index) {
-	      return _react2.default.createElement(
-	        'li',
-	        { key: index },
-	        link.toUpperCase()
-	      );
-	    });
-	  };
-	
-	  return _react2.default.createElement(
-	    'nav',
-	    null,
-	    _react2.default.createElement(
-	      'div',
-	      { className: 'main' },
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'navLeft' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'logo' },
-	          _react2.default.createElement('img', { src: logoImage })
-	        ),
-	        _react2.default.createElement(
-	          'ul',
-	          { className: 'navLinks' },
-	          navLinks()
-	        )
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'searchInput' },
-	        _react2.default.createElement('input', { type: 'text', placeholder: 'SEARCH', name: 'search' })
-	      )
-	    )
-	  );
-	};
-	
-	exports.default = NavBar;
-
-/***/ },
-/* 276 */,
 /* 277 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
+	// load the styles
+	var content = __webpack_require__(278);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(280)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./app.scss", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./app.scss");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 278 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(279)();
+	// imports
 	
-	var _react = __webpack_require__(1);
 	
-	var _react2 = _interopRequireDefault(_react);
+	// module
+	exports.push([module.id, "/*COLORS*/\nnav {\n  width: 100%;\n  background: green;\n  /*.main */ }\n  nav .main {\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n    justify-content: space-between;\n    max-width: 1220px;\n    margin: 0 auto;\n    font-size: 1.2em;\n    height: 65px;\n    /*.navLeft*/\n    /*.searchinput */ }\n    nav .main .navLeft {\n      width: 75%;\n      display: flex;\n      /*.navLinks*/ }\n      nav .main .navLeft .logo {\n        width: 15%;\n        display: flex;\n        align-content: center;\n        justify-content: center;\n        margin-right: 3%; }\n        nav .main .navLeft .logo img {\n          width: 100%;\n          height: auto; }\n      nav .main .navLeft .navLinks {\n        display: flex;\n        justify-content: space-between;\n        width: 50%;\n        margin-right: 3%;\n        padding: 0;\n        color: #FFEABC; }\n        nav .main .navLeft .navLinks li {\n          text-decoration: none;\n          list-style: none;\n          margin: 0%; }\n    nav .main .searchInput {\n      width: 20%;\n      border: 1px solid grey; }\n      nav .main .searchInput input {\n        width: 100%;\n        font-size: 20px; }\n\n/*.nav */\n.blogForm {\n  border: 1px solid red;\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n  align-items: center; }\n  .blogForm .formInner {\n    width: 80%;\n    margin: 0 auto;\n    border: 1px solid red; }\n    .blogForm .formInner .inputContainer {\n      display: flex;\n      flex-direction: row;\n      height: 50px;\n      padding-bottom: 5%; }\n      .blogForm .formInner .inputContainer label {\n        border: 1px solid grey;\n        border-radius: 15px 0 0 15px;\n        font-size: 18px;\n        padding: 1% auto;\n        width: 150px; }\n      .blogForm .formInner .inputContainer input {\n        width: 100%;\n        border: 1px solid grey;\n        border-radius: 0 15px 15px 0;\n        padding: 1%;\n        font-size: 18px; }\n    .blogForm .formInner .author-location {\n      border: 1px solid green;\n      display: flex;\n      justify-content: space-between; }\n      .blogForm .formInner .author-location .inputContainer {\n        width: 50%; }\n        .blogForm .formInner .author-location .inputContainer .input[name=author], .blogForm .formInner .author-location .inputContainer .input[name=author] {\n          width: 100%; }\n    .blogForm .formInner textarea {\n      width: 90%;\n      height: 200px;\n      font-size: 18px;\n      border: 1px solid grey;\n      border-radius: 0 15px 15px 0;\n      resize: none; }\n\n/*COLORS*/\nbody {\n  background: #FFEABC;\n  margin: 0;\n  width: 100%;\n  box-sizing: border-box; }\n", ""]);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	// exports
+
+
+/***/ },
+/* 279 */
+/***/ function(module, exports) {
+
+	/*
+		MIT License http://www.opensource.org/licenses/mit-license.php
+		Author Tobias Koppers @sokra
+	*/
+	// css base code, injected by the css-loader
+	module.exports = function() {
+		var list = [];
 	
-	var LatestCategoryPost = _react2.default.createClass({
-	  displayName: 'LatestCategoryPost',
-	  render: function render() {
-	    return _react2.default.createElement(
-	      'div',
-	      null,
-	      'LatestCategoryPost'
-	    );
-	  }
-	});
+		// return the list of modules as css string
+		list.toString = function toString() {
+			var result = [];
+			for(var i = 0; i < this.length; i++) {
+				var item = this[i];
+				if(item[2]) {
+					result.push("@media " + item[2] + "{" + item[1] + "}");
+				} else {
+					result.push(item[1]);
+				}
+			}
+			return result.join("");
+		};
 	
-	exports.default = LatestCategoryPost;
+		// import a list of modules into the list
+		list.i = function(modules, mediaQuery) {
+			if(typeof modules === "string")
+				modules = [[null, modules, ""]];
+			var alreadyImportedModules = {};
+			for(var i = 0; i < this.length; i++) {
+				var id = this[i][0];
+				if(typeof id === "number")
+					alreadyImportedModules[id] = true;
+			}
+			for(i = 0; i < modules.length; i++) {
+				var item = modules[i];
+				// skip already imported module
+				// this implementation is not 100% perfect for weird media query combinations
+				//  when a module is imported multiple times with different media queries.
+				//  I hope this will never occur (Hey this way we have smaller bundles)
+				if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+					if(mediaQuery && !item[2]) {
+						item[2] = mediaQuery;
+					} else if(mediaQuery) {
+						item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+					}
+					list.push(item);
+				}
+			}
+		};
+		return list;
+	};
+
+
+/***/ },
+/* 280 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/*
+		MIT License http://www.opensource.org/licenses/mit-license.php
+		Author Tobias Koppers @sokra
+	*/
+	var stylesInDom = {},
+		memoize = function(fn) {
+			var memo;
+			return function () {
+				if (typeof memo === "undefined") memo = fn.apply(this, arguments);
+				return memo;
+			};
+		},
+		isOldIE = memoize(function() {
+			return /msie [6-9]\b/.test(window.navigator.userAgent.toLowerCase());
+		}),
+		getHeadElement = memoize(function () {
+			return document.head || document.getElementsByTagName("head")[0];
+		}),
+		singletonElement = null,
+		singletonCounter = 0,
+		styleElementsInsertedAtTop = [];
+	
+	module.exports = function(list, options) {
+		if(false) {
+			if(typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
+		}
+	
+		options = options || {};
+		// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+		// tags it will allow on a page
+		if (typeof options.singleton === "undefined") options.singleton = isOldIE();
+	
+		// By default, add <style> tags to the bottom of <head>.
+		if (typeof options.insertAt === "undefined") options.insertAt = "bottom";
+	
+		var styles = listToStyles(list);
+		addStylesToDom(styles, options);
+	
+		return function update(newList) {
+			var mayRemove = [];
+			for(var i = 0; i < styles.length; i++) {
+				var item = styles[i];
+				var domStyle = stylesInDom[item.id];
+				domStyle.refs--;
+				mayRemove.push(domStyle);
+			}
+			if(newList) {
+				var newStyles = listToStyles(newList);
+				addStylesToDom(newStyles, options);
+			}
+			for(var i = 0; i < mayRemove.length; i++) {
+				var domStyle = mayRemove[i];
+				if(domStyle.refs === 0) {
+					for(var j = 0; j < domStyle.parts.length; j++)
+						domStyle.parts[j]();
+					delete stylesInDom[domStyle.id];
+				}
+			}
+		};
+	}
+	
+	function addStylesToDom(styles, options) {
+		for(var i = 0; i < styles.length; i++) {
+			var item = styles[i];
+			var domStyle = stylesInDom[item.id];
+			if(domStyle) {
+				domStyle.refs++;
+				for(var j = 0; j < domStyle.parts.length; j++) {
+					domStyle.parts[j](item.parts[j]);
+				}
+				for(; j < item.parts.length; j++) {
+					domStyle.parts.push(addStyle(item.parts[j], options));
+				}
+			} else {
+				var parts = [];
+				for(var j = 0; j < item.parts.length; j++) {
+					parts.push(addStyle(item.parts[j], options));
+				}
+				stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
+			}
+		}
+	}
+	
+	function listToStyles(list) {
+		var styles = [];
+		var newStyles = {};
+		for(var i = 0; i < list.length; i++) {
+			var item = list[i];
+			var id = item[0];
+			var css = item[1];
+			var media = item[2];
+			var sourceMap = item[3];
+			var part = {css: css, media: media, sourceMap: sourceMap};
+			if(!newStyles[id])
+				styles.push(newStyles[id] = {id: id, parts: [part]});
+			else
+				newStyles[id].parts.push(part);
+		}
+		return styles;
+	}
+	
+	function insertStyleElement(options, styleElement) {
+		var head = getHeadElement();
+		var lastStyleElementInsertedAtTop = styleElementsInsertedAtTop[styleElementsInsertedAtTop.length - 1];
+		if (options.insertAt === "top") {
+			if(!lastStyleElementInsertedAtTop) {
+				head.insertBefore(styleElement, head.firstChild);
+			} else if(lastStyleElementInsertedAtTop.nextSibling) {
+				head.insertBefore(styleElement, lastStyleElementInsertedAtTop.nextSibling);
+			} else {
+				head.appendChild(styleElement);
+			}
+			styleElementsInsertedAtTop.push(styleElement);
+		} else if (options.insertAt === "bottom") {
+			head.appendChild(styleElement);
+		} else {
+			throw new Error("Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.");
+		}
+	}
+	
+	function removeStyleElement(styleElement) {
+		styleElement.parentNode.removeChild(styleElement);
+		var idx = styleElementsInsertedAtTop.indexOf(styleElement);
+		if(idx >= 0) {
+			styleElementsInsertedAtTop.splice(idx, 1);
+		}
+	}
+	
+	function createStyleElement(options) {
+		var styleElement = document.createElement("style");
+		styleElement.type = "text/css";
+		insertStyleElement(options, styleElement);
+		return styleElement;
+	}
+	
+	function createLinkElement(options) {
+		var linkElement = document.createElement("link");
+		linkElement.rel = "stylesheet";
+		insertStyleElement(options, linkElement);
+		return linkElement;
+	}
+	
+	function addStyle(obj, options) {
+		var styleElement, update, remove;
+	
+		if (options.singleton) {
+			var styleIndex = singletonCounter++;
+			styleElement = singletonElement || (singletonElement = createStyleElement(options));
+			update = applyToSingletonTag.bind(null, styleElement, styleIndex, false);
+			remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true);
+		} else if(obj.sourceMap &&
+			typeof URL === "function" &&
+			typeof URL.createObjectURL === "function" &&
+			typeof URL.revokeObjectURL === "function" &&
+			typeof Blob === "function" &&
+			typeof btoa === "function") {
+			styleElement = createLinkElement(options);
+			update = updateLink.bind(null, styleElement);
+			remove = function() {
+				removeStyleElement(styleElement);
+				if(styleElement.href)
+					URL.revokeObjectURL(styleElement.href);
+			};
+		} else {
+			styleElement = createStyleElement(options);
+			update = applyToTag.bind(null, styleElement);
+			remove = function() {
+				removeStyleElement(styleElement);
+			};
+		}
+	
+		update(obj);
+	
+		return function updateStyle(newObj) {
+			if(newObj) {
+				if(newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap)
+					return;
+				update(obj = newObj);
+			} else {
+				remove();
+			}
+		};
+	}
+	
+	var replaceText = (function () {
+		var textStore = [];
+	
+		return function (index, replacement) {
+			textStore[index] = replacement;
+			return textStore.filter(Boolean).join('\n');
+		};
+	})();
+	
+	function applyToSingletonTag(styleElement, index, remove, obj) {
+		var css = remove ? "" : obj.css;
+	
+		if (styleElement.styleSheet) {
+			styleElement.styleSheet.cssText = replaceText(index, css);
+		} else {
+			var cssNode = document.createTextNode(css);
+			var childNodes = styleElement.childNodes;
+			if (childNodes[index]) styleElement.removeChild(childNodes[index]);
+			if (childNodes.length) {
+				styleElement.insertBefore(cssNode, childNodes[index]);
+			} else {
+				styleElement.appendChild(cssNode);
+			}
+		}
+	}
+	
+	function applyToTag(styleElement, obj) {
+		var css = obj.css;
+		var media = obj.media;
+	
+		if(media) {
+			styleElement.setAttribute("media", media)
+		}
+	
+		if(styleElement.styleSheet) {
+			styleElement.styleSheet.cssText = css;
+		} else {
+			while(styleElement.firstChild) {
+				styleElement.removeChild(styleElement.firstChild);
+			}
+			styleElement.appendChild(document.createTextNode(css));
+		}
+	}
+	
+	function updateLink(linkElement, obj) {
+		var css = obj.css;
+		var sourceMap = obj.sourceMap;
+	
+		if(sourceMap) {
+			// http://stackoverflow.com/a/26603875
+			css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
+		}
+	
+		var blob = new Blob([css], { type: "text/css" });
+	
+		var oldSrc = linkElement.href;
+	
+		linkElement.href = URL.createObjectURL(blob);
+	
+		if(oldSrc)
+			URL.revokeObjectURL(oldSrc);
+	}
+
 
 /***/ }
 /******/ ]);

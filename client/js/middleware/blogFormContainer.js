@@ -4,14 +4,14 @@ import {connect} from 'react-redux'
 const appToState = state => {
   console.log(state)
   return{
-  blogTitle: state.newBlogEntry.blogTitle,
-  blogAuthor: state.newBlogEntry.blogAuthor,
-  location: state.newBlogEntry.location, 
-  bodyText: state.newBlogEntry.bodyText, 
-  categories: state.newBlogEntry.categories,
-  images: state.newBlogEntry.images,
-  comments: state.newBlogEntry.comments,
-  categories: state.categories
+  blogTitle: state.blogReducer.newBlogEntry.blogTitle,
+  blogAuthor: state.blogReducer.newBlogEntry.blogAuthor,
+  location: state.blogReducer.newBlogEntry.location, 
+  bodyText: state.blogReducer.newBlogEntry.bodyText, 
+  categories: state.blogReducer.newBlogEntry.categories,
+  images: state.blogReducer.newBlogEntry.images,
+  comments: state.blogReducer.newBlogEntry.comments,
+  categories: state.blogReducer.categories
 }}
 
 export default connect(appToState)(BlogForm)
