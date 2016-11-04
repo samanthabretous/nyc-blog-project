@@ -64,7 +64,7 @@
 	
 	var _reactRouter = __webpack_require__(206);
 	
-	__webpack_require__(271);
+	__webpack_require__(272);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -23286,11 +23286,11 @@
 	
 	var _homePageContainer2 = _interopRequireDefault(_homePageContainer);
 	
-	var _blogPageContainer = __webpack_require__(265);
+	var _blogPageContainer = __webpack_require__(266);
 	
 	var _blogPageContainer2 = _interopRequireDefault(_blogPageContainer);
 	
-	var _blogFormContainer = __webpack_require__(269);
+	var _blogFormContainer = __webpack_require__(270);
 	
 	var _blogFormContainer2 = _interopRequireDefault(_blogFormContainer);
 	
@@ -28135,7 +28135,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _navBar = __webpack_require__(276);
+	var _navBar = __webpack_require__(261);
 	
 	var _navBar2 = _interopRequireDefault(_navBar);
 	
@@ -28161,7 +28161,67 @@
 	exports.default = Main;
 
 /***/ },
-/* 261 */,
+/* 261 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var logoImage = __webpack_require__(262);
+	
+	var NavBar = function NavBar() {
+	  var navLinks = function navLinks() {
+	    var navLinks = ['Things to Do', 'Food', 'Subway', "Hating"];
+	    return navLinks.map(function (link, index) {
+	      return _react2.default.createElement(
+	        'li',
+	        { key: index },
+	        link.toUpperCase()
+	      );
+	    });
+	  };
+	
+	  return _react2.default.createElement(
+	    'nav',
+	    null,
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'main' },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'navLeft' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'logo' },
+	          _react2.default.createElement('img', { src: logoImage })
+	        ),
+	        _react2.default.createElement(
+	          'ul',
+	          { className: 'navLinks' },
+	          navLinks()
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'searchInput' },
+	        _react2.default.createElement('input', { type: 'text', placeholder: 'SEARCH', name: 'search' })
+	      )
+	    )
+	  );
+	};
+	
+	exports.default = NavBar;
+
+/***/ },
 /* 262 */
 /***/ function(module, exports) {
 
@@ -28207,7 +28267,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _latestCategoryPost = __webpack_require__(275);
+	var _latestCategoryPost = __webpack_require__(265);
 	
 	var _latestCategoryPost2 = _interopRequireDefault(_latestCategoryPost);
 	
@@ -28236,7 +28296,36 @@
 	  value: true
 	});
 	
-	var _blogPage = __webpack_require__(266);
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var LatestCategoryPost = _react2.default.createClass({
+	  displayName: 'LatestCategoryPost',
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      'LatestCategoryPost'
+	    );
+	  }
+	});
+	
+	exports.default = LatestCategoryPost;
+
+/***/ },
+/* 266 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _blogPage = __webpack_require__(267);
 	
 	var _blogPage2 = _interopRequireDefault(_blogPage);
 	
@@ -28253,7 +28342,7 @@
 	exports.default = (0, _reactRedux.connect)(appToState)(_blogPage2.default);
 
 /***/ },
-/* 266 */
+/* 267 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28266,11 +28355,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _jquery = __webpack_require__(267);
+	var _jquery = __webpack_require__(268);
 	
 	var _jquery2 = _interopRequireDefault(_jquery);
 	
-	var _index = __webpack_require__(268);
+	var _index = __webpack_require__(269);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -28304,7 +28393,7 @@
 	exports.default = BlogPage;
 
 /***/ },
-/* 267 */
+/* 268 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -38530,7 +38619,7 @@
 
 
 /***/ },
-/* 268 */
+/* 269 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38565,7 +38654,7 @@
 	}
 
 /***/ },
-/* 269 */
+/* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38574,7 +38663,7 @@
 	  value: true
 	});
 	
-	var _blogForm = __webpack_require__(270);
+	var _blogForm = __webpack_require__(271);
 	
 	var _blogForm2 = _interopRequireDefault(_blogForm);
 	
@@ -38600,7 +38689,7 @@
 	exports.default = (0, _reactRedux.connect)(appToState)(_blogForm2.default);
 
 /***/ },
-/* 270 */
+/* 271 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38613,11 +38702,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _jquery = __webpack_require__(267);
+	var _jquery = __webpack_require__(268);
 	
 	var _jquery2 = _interopRequireDefault(_jquery);
 	
-	var _index = __webpack_require__(268);
+	var _index = __webpack_require__(269);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -38764,16 +38853,16 @@
 	exports.default = BlogForm;
 
 /***/ },
-/* 271 */
+/* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(272);
+	var content = __webpack_require__(273);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(273)(content, {});
+	var update = __webpack_require__(275)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -38790,7 +38879,7 @@
 	}
 
 /***/ },
-/* 272 */
+/* 273 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(274)();
@@ -38804,7 +38893,63 @@
 
 
 /***/ },
-/* 273 */
+/* 274 */
+/***/ function(module, exports) {
+
+	/*
+		MIT License http://www.opensource.org/licenses/mit-license.php
+		Author Tobias Koppers @sokra
+	*/
+	// css base code, injected by the css-loader
+	module.exports = function() {
+		var list = [];
+	
+		// return the list of modules as css string
+		list.toString = function toString() {
+			var result = [];
+			for(var i = 0; i < this.length; i++) {
+				var item = this[i];
+				if(item[2]) {
+					result.push("@media " + item[2] + "{" + item[1] + "}");
+				} else {
+					result.push(item[1]);
+				}
+			}
+			return result.join("");
+		};
+	
+		// import a list of modules into the list
+		list.i = function(modules, mediaQuery) {
+			if(typeof modules === "string")
+				modules = [[null, modules, ""]];
+			var alreadyImportedModules = {};
+			for(var i = 0; i < this.length; i++) {
+				var id = this[i][0];
+				if(typeof id === "number")
+					alreadyImportedModules[id] = true;
+			}
+			for(i = 0; i < modules.length; i++) {
+				var item = modules[i];
+				// skip already imported module
+				// this implementation is not 100% perfect for weird media query combinations
+				//  when a module is imported multiple times with different media queries.
+				//  I hope this will never occur (Hey this way we have smaller bundles)
+				if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+					if(mediaQuery && !item[2]) {
+						item[2] = mediaQuery;
+					} else if(mediaQuery) {
+						item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+					}
+					list.push(item);
+				}
+			}
+		};
+		return list;
+	};
+
+
+/***/ },
+/* 275 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -39054,152 +39199,6 @@
 			URL.revokeObjectURL(oldSrc);
 	}
 
-
-/***/ },
-/* 274 */
-/***/ function(module, exports) {
-
-	/*
-		MIT License http://www.opensource.org/licenses/mit-license.php
-		Author Tobias Koppers @sokra
-	*/
-	// css base code, injected by the css-loader
-	module.exports = function() {
-		var list = [];
-	
-		// return the list of modules as css string
-		list.toString = function toString() {
-			var result = [];
-			for(var i = 0; i < this.length; i++) {
-				var item = this[i];
-				if(item[2]) {
-					result.push("@media " + item[2] + "{" + item[1] + "}");
-				} else {
-					result.push(item[1]);
-				}
-			}
-			return result.join("");
-		};
-	
-		// import a list of modules into the list
-		list.i = function(modules, mediaQuery) {
-			if(typeof modules === "string")
-				modules = [[null, modules, ""]];
-			var alreadyImportedModules = {};
-			for(var i = 0; i < this.length; i++) {
-				var id = this[i][0];
-				if(typeof id === "number")
-					alreadyImportedModules[id] = true;
-			}
-			for(i = 0; i < modules.length; i++) {
-				var item = modules[i];
-				// skip already imported module
-				// this implementation is not 100% perfect for weird media query combinations
-				//  when a module is imported multiple times with different media queries.
-				//  I hope this will never occur (Hey this way we have smaller bundles)
-				if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-					if(mediaQuery && !item[2]) {
-						item[2] = mediaQuery;
-					} else if(mediaQuery) {
-						item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-					}
-					list.push(item);
-				}
-			}
-		};
-		return list;
-	};
-
-
-/***/ },
-/* 275 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var LatestCategoryPost = _react2.default.createClass({
-	  displayName: 'LatestCategoryPost',
-	  render: function render() {
-	    return _react2.default.createElement(
-	      'div',
-	      null,
-	      'LatestCategoryPost'
-	    );
-	  }
-	});
-	
-	exports.default = LatestCategoryPost;
-
-/***/ },
-/* 276 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var logoImage = __webpack_require__(262);
-	
-	var NavBar = function NavBar() {
-	  var navLinks = function navLinks() {
-	    var navLinks = ['Things to Do', 'Food', 'Subway', "Hating"];
-	    return navLinks.map(function (link, index) {
-	      return _react2.default.createElement(
-	        'li',
-	        { key: index },
-	        link.toUpperCase()
-	      );
-	    });
-	  };
-	
-	  return _react2.default.createElement(
-	    'nav',
-	    null,
-	    _react2.default.createElement(
-	      'div',
-	      { className: 'main' },
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'navLeft' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'logo' },
-	          _react2.default.createElement('img', { src: logoImage })
-	        ),
-	        _react2.default.createElement(
-	          'ul',
-	          { className: 'navLinks' },
-	          navLinks()
-	        )
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'searchInput' },
-	        _react2.default.createElement('input', { type: 'text', placeholder: 'SEARCH', name: 'search' })
-	      )
-	    )
-	  );
-	};
-	
-	exports.default = NavBar;
 
 /***/ }
 /******/ ]);
