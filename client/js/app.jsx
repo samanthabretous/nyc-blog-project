@@ -12,7 +12,7 @@ import '../scss/app.scss';
 
 render (
   <Provider store={store}>
-    <Router history={browserHistory} routes={routes}/>
+    <Router history={browserHistory} routes={routes} onUpdate={() => window.scrollTo(0, 0)}/>
   </Provider>,
   document.getElementById('root')
 )

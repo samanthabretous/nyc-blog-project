@@ -16,11 +16,21 @@ const BlogPage = React.createClass({
     })
   },
 
+
+  deletePost(postId){
+    $.ajax({
+      url: "/api/blogpost", 
+      type: 'DELETE', 
+      data: {_id: postId}
+    }) 
+  },
+
   render(){
-    let posts = this.props.data
+    let post = this.props.data;
     return (
       <div>
-        {posts}
+      <li>{post.blogTitle}</li>
+      <button onClick={()=>{this.deletePost(post._id)}}>Delete</button>
       </div>
     )
   }

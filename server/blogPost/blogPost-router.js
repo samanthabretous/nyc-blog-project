@@ -14,6 +14,13 @@ const createBlogPost = (req, res) =>{
     console.log('post successfully created');
   })
 }
+
+const deleteBlogPost =(req, res) =>{
+  BlogPost.remove(req.body, (err) =>{
+    if(err)console.log('hello')
+  })
+}
+
 const getOneBlogPost = (req, res) => {
   BlogPost.findById(req.params.id, (err, data) => {
     res.send(data);
@@ -27,6 +34,7 @@ router.route('/:id')
 router.route('/')
   .get(getBlogPost)
   .post(createBlogPost)
+  .delete(deleteBlogPost)
 
 
 

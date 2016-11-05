@@ -5,13 +5,13 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+
+
 const postModel = require('./blogPost/blogPost-model');
 const authorModel = require('./author/author-model.js');
 const BlogPost = mongoose.model('BlogPost');
 const Author = mongoose.model('Author');
-
-//let port = process.env.PORT || 8080;
 
 mongoose.connect('mongodb://localhost/first-blog');
 
@@ -30,6 +30,10 @@ db.on('open', function() {
   
   // Handles client side routing
   app.use('*', routes.home)
+
+  const port = process.env.PORT || 5555;
+  const env = process.env.NODE_ENV || 'production';
+
   app.listen(5555, function() {
     console.log('Listening on port 5555');
   })

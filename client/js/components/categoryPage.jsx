@@ -5,7 +5,7 @@ import $ from 'jquery'
 import {updateStoreData} from '../actions/index'
 import LatestCategoryPost from './parts/latestCategoryPost'
 
-const HomePage = React.createClass({
+const CategoryPage = React.createClass({
 
   //retrive ALL data from the database to display all blog post
   componentDidMount(){
@@ -19,10 +19,10 @@ const HomePage = React.createClass({
   },
 
   render(){
-    console.log(this.props.data)
+
     //loop through all the blog post from the data received from the ajax call above and display
     let posts = this.props.data ? this.props.data.map((post, index)=> 
-      <h1 key={index}>{post.blogTitle}</h1>
+      <Link to={'/blogpost/' + post._id} key={index}>{post.blogTitle}</Link>
     ) : null
     return (
       <div>
@@ -32,6 +32,6 @@ const HomePage = React.createClass({
   }
 })
 
-export default HomePage
+export default CategoryPage
 
       // <Link to={`/blogpost/${post._id}`} key={index}><h1>{post.blogTitle}</h1></Link>

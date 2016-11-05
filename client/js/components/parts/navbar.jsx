@@ -6,7 +6,7 @@ const NavBar = () => {
   let navLinks = () => {
     let navLinks =['Things to Do', 'Food', 'Subway', "Hating"]
     return navLinks.map((link, index) =>
-      <Link key={index} to={link}><li>{link.toUpperCase()}</li></Link>
+      <Link key={index} to={'/category/'+link}><li>{link.toUpperCase()}</li></Link>
     ) 
   }
 
@@ -15,7 +15,7 @@ const NavBar = () => {
       <div className='main'>
         <div className="navLeft">
           <div className="logo">
-            <img src={logoImage}/>
+            <Link to='/'><img src={logoImage}/></Link>
           </div>
           <ul className='navLinks'>
             {navLinks()}
