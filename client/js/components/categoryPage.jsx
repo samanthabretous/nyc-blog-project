@@ -12,14 +12,13 @@ const CategoryPage = React.createClass({
     $.ajax({
       url: '/api/blogpost/',
       success: (data) => {
-        console.log(data)
         updateStoreData(data)
       }
     })
   },
 
   render(){
-
+    
     //loop through all the blog post from the data received from the ajax call above and display
     let posts = this.props.data ? this.props.data.map((post, index)=> 
       <li key={index}><Link to={'/blogpost/' + post._id} key={index}>{post.blogTitle}</Link></li>

@@ -9,10 +9,10 @@ const getBlogPost = (req, res, next) => {
 }
 
 const createBlogPost = (req, res) =>{
-  console.log(req.body['bodyText[]'])
+  console.log(typeof req.body.blogAuthor)
   BlogPost.create({
     blogTitle: req.body.blogTitle,
-    author: req.body.author,
+    blogAuthor: req.body.blogAuthor,
     location: req.body.location, 
     bodyText: req.body.bodyText, 
     categories: req.body['categories[]'],
@@ -23,7 +23,7 @@ const createBlogPost = (req, res) =>{
 
 const deleteBlogPost =(req, res) =>{
   BlogPost.remove(req.body, (err) =>{
-    if(err)console.log('hello')
+    if(err)console.log(err)
   })
 }
 
