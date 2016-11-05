@@ -1,7 +1,8 @@
 import React from 'react'
+import {Link} from 'react-dom'
 import $ from 'jquery'
 
-import {updateStoreData} from '../actions/index'
+import {updateStoreData} from '../actions/blogActions'
 
 const BlogPage = React.createClass({
 
@@ -30,7 +31,7 @@ const BlogPage = React.createClass({
     return (
       <div>
       <li>{post.blogTitle}</li>
-      <button onClick={()=>{this.deletePost(post._id)}}>Delete</button>
+      <Link to='/' onClick={()=>{this.deletePost(post._id)}}>Delete</Link>
       </div>
     )
   }

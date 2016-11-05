@@ -9,8 +9,14 @@ const getBlogPost = (req, res, next) => {
 }
 
 const createBlogPost = (req, res) =>{
-  console.log(req.body)
-  BlogPost.create(req.body, () => {
+  console.log(req.body['bodyText[]'])
+  BlogPost.create({
+    blogTitle: req.body.blogTitle,
+    author: req.body.author,
+    location: req.body.location, 
+    bodyText: req.body.bodyText, 
+    categories: req.body['categories[]'],
+  }, () => {
     console.log('post successfully created');
   })
 }

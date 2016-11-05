@@ -1,26 +1,24 @@
 import React from 'react'
 import $ from 'jquery'
 
-import {newEntryFormStoreData} from '../actions/index'
+import {newEntryFormStoreData, addCategoryToStore} from '../actions/blogActions'
 
 const BlogForm = (props) => {
   let submitFormDataToDatabase = (event) => {
     event.preventDefault()
     let that = this;
-    let d = new Date()
-    let date = (d.getMonth()+1) +" "+ d.getDay() +" "+ d.getFullYear()
+    console.log( Array.isArray(props.categories))
     $.ajax({
       url: '/api/blogpost',
       type: 'POST',
       data:{
         blogTitle: props.blogTitle,
-        // blogAuthor: props.blogAuthor,
-        // date: date,
-        // location: props.location, 
-        // bodyText: props.bodyText, 
-        // //categories: props.categories,
-        // images: props.images
-      } 
+        blogAuthor: props.blogAuthor,
+        location: props.location, 
+        bodyText: props.bodyText, 
+        categories: props.categories,
+        images: props.images
+      }
     })
     newEntryFormStoreData('blogTitle', '')
     newEntryFormStoreData('blogAuthor', '')
@@ -36,11 +34,29 @@ const BlogForm = (props) => {
   }
 
   let handleCheckboxes = (event) => {
-    console.log(event)
+    let newCategory = event.target.value;
+    let allCategories;
+
+    //check to see if the category already in the state 
+    if(props.categories.length > 0){
+      if (props.categories.indexOf(newCategory) === -1){
+        allCategories = props.categories.concat(newCategory)
+      } else {
+        console.log('same', props.categories)
+        allCategories = props.categories.filter((category)=>{
+          if (category !== newCategory) return category
+        })
+      }
+    } else {
+      allCategories = [newCategory]
+    }
+
+    //send the previous values and new added value to the store
+    addCategoryToStore(allCategories)
   }
   
   let createCheckboxes = () => {
-    return props.categories.map((category, index) => ( 
+    return props.dropDownCategories.map((category, index) => ( 
       <div key={index}>
         <input 
           type='checkbox' 

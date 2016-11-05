@@ -1,9 +1,7 @@
 import BlogForm from '../components/blogForm'
 import {connect} from 'react-redux'
 
-const appToState = state => {
-  console.log(state)
-  return{
+const appToState = state => ({
   blogTitle: state.blogReducer.newBlogEntry.blogTitle,
   blogAuthor: state.blogReducer.newBlogEntry.blogAuthor,
   location: state.blogReducer.newBlogEntry.location, 
@@ -11,7 +9,7 @@ const appToState = state => {
   categories: state.blogReducer.newBlogEntry.categories,
   images: state.blogReducer.newBlogEntry.images,
   comments: state.blogReducer.newBlogEntry.comments,
-  categories: state.blogReducer.categories
-}}
+  dropDownCategories: state.blogReducer.categories
+})
 
 export default connect(appToState)(BlogForm)

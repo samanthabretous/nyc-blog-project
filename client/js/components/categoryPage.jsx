@@ -2,7 +2,7 @@ import React from 'react'
 import {Link} from 'react-router'
 import $ from 'jquery'
 
-import {updateStoreData} from '../actions/index'
+import {updateStoreData} from '../actions/blogActions'
 import LatestCategoryPost from './parts/latestCategoryPost'
 
 const CategoryPage = React.createClass({
@@ -22,7 +22,7 @@ const CategoryPage = React.createClass({
 
     //loop through all the blog post from the data received from the ajax call above and display
     let posts = this.props.data ? this.props.data.map((post, index)=> 
-      <Link to={'/blogpost/' + post._id} key={index}>{post.blogTitle}</Link>
+      <li key={index}><Link to={'/blogpost/' + post._id} key={index}>{post.blogTitle}</Link></li>
     ) : null
     return (
       <div>

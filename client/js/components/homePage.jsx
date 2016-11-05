@@ -2,7 +2,7 @@ import React from 'react'
 import {Link} from 'react-router'
 import $ from 'jquery'
 
-import {updateStoreData} from '../actions/index'
+import {updateStoreData} from '../actions/blogActions'
 import LatestCategoryPost from './parts/latestCategoryPost'
 
 const HomePage = React.createClass({
