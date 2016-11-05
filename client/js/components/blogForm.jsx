@@ -88,7 +88,7 @@ const BlogForm = (props) => {
               <label>Author</label>
               <input 
                 type="text"
-                name='author' 
+                name='blogAuthor' 
                 placeholder="author"
                 onChange={handleFormChange}
               />

@@ -1,8 +1,8 @@
 import React from 'react'
-import {Link} from 'react-dom'
 import $ from 'jquery'
 
-import {updateStoreData} from '../actions/blogActions'
+import DisplayBlogPost from './parts/blog/DisplayBlogPost'
+import {updateBlogData} from '../actions/blogActions'
 
 const BlogPage = React.createClass({
 
@@ -12,26 +12,17 @@ const BlogPage = React.createClass({
       url: `/api/blogpost/${this.props.params.id}`,
     })
     .done((data) => {
-      console.log('AJAX data', data);
-      updateStoreData(data)
+      updateBlogData(data)
     })
   },
 
-
-  deletePost(postId){
-    $.ajax({
-      url: "/api/blogpost", 
-      type: 'DELETE', 
-      data: {_id: postId}
-    }) 
-  },
-
   render(){
-    let post = this.props.data;
     return (
       <div>
-      <li>{post.blogTitle}</li>
-      <Link to='/' onClick={()=>{this.deletePost(post._id)}}>Delete</Link>
+        <DisplayBlogPost 
+          blogPost={this.props.singleBlogData}
+          author={this.props.author}
+        />
       </div>
     )
   }

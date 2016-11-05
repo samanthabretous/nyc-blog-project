@@ -1,7 +1,8 @@
 import {
   UPDATE_DATA, 
   HANDLE_BLOGFORM_CHANGE, 
-  ADD_CATEGORY_TO_NEW_BlOGPOST
+  ADD_CATEGORY_TO_NEW_BlOGPOST, 
+  UPDATE_BLOG_DATA
 } from '../actions/types'
 
 const INTIAL_STATE = {
@@ -14,7 +15,8 @@ const INTIAL_STATE = {
     bodyText: '', 
     categories: [],
     images: [],
-  }
+  }, 
+  singleBlogData: []
 }
 
 export default function(state = INTIAL_STATE, action) {
@@ -25,9 +27,10 @@ export default function(state = INTIAL_STATE, action) {
       state.newBlogEntry[action.name] = action.value
       return Object.assign({}, state);
     case ADD_CATEGORY_TO_NEW_BlOGPOST: 
-    console.log('state', state)
       state.newBlogEntry.categories = action.name
       return Object.assign({}, state);
+    case UPDATE_BLOG_DATA: 
+      return Object.assign({}, state, {singleBlogData: action.data});
   }
   return state
 }

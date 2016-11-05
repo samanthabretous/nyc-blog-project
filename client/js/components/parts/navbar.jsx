@@ -21,6 +21,9 @@ const NavBar = () => {
             {navLinks()}
           </ul>
         </div>
+        <div>
+          <Link to='/signup'><li>SIGN IN</li></Link>
+        </div>
         <div className='searchInput'>
           <input type='text' placeholder='SEARCH' name='search'/>
         </div>

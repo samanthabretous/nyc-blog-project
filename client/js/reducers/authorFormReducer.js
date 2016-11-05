@@ -1,12 +1,23 @@
 import {HANDLE_NEW_AUTHOR_FORM} from '../actions/types.js';
 
 const _initialState = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  location: "",
+  _id: '581e144da8de15a917da801a', 
+  firstName: 'Victoria',
+  lastName: "Mack",
+  email: 'victoria_mack24@gmail.com',
+  location: "12345",
   bio: ""
 }
+
+// const _initialState = {
+//   _id: "", 
+//   firstName: "",
+//   lastName: "",
+//   email: "",
+//   location: "",
+//   bio: ""
+// }
+
 
 export default function authorFormReducer(state = _initialState, action) {
   let stateCopy = Object.assign({}, state)
