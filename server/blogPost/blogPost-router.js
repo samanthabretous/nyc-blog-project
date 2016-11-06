@@ -9,7 +9,7 @@ const getBlogPost = (req, res, next) => {
 }
 
 const createBlogPost = (req, res) =>{
-  console.log(typeof req.body.blogAuthor)
+  console.log(req.body)
   BlogPost.create({
     blogTitle: req.body.blogTitle,
     blogAuthor: req.body.blogAuthor,
@@ -27,6 +27,18 @@ const deleteBlogPost =(req, res) =>{
   })
 }
 
+const updateBlogPost = (req, res) => {
+  console.log(req.body)
+  BlogPost.update(
+    {_id: contact.id}, 
+    upsertData, 
+    {upsert: true}, 
+    (err) => {
+
+    }
+  );
+}
+
 const getOneBlogPost = (req, res) => {
   BlogPost.findById(req.params.id, (err, data) => {
     res.send(data);
@@ -41,6 +53,7 @@ router.route('/')
   .get(getBlogPost)
   .post(createBlogPost)
   .delete(deleteBlogPost)
+  .put(updateBlogPost)
 
 
 

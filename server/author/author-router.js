@@ -20,6 +20,16 @@ const createAuthor = (req, res) => {
   })
 }
 
+const getOneAuthor = (req, res) => {
+  Author.findById(req.params.id, (err, data) => {
+    res.send(data);
+  })
+};
+
+//configure router for get and post calls
+router.route('/:id')
+  .get(getOneAuthor)
+
 // ***** Routing for GET and POST requests
 router.route('/')
   .get(getAuthor)

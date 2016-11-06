@@ -64,7 +64,7 @@
 	
 	var _reactRouter = __webpack_require__(208);
 	
-	__webpack_require__(279);
+	__webpack_require__(286);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -23228,7 +23228,7 @@
 	
 	var _authorFormReducer2 = _interopRequireDefault(_authorFormReducer);
 	
-	var _blogReducer = __webpack_require__(205);
+	var _blogReducer = __webpack_require__(206);
 	
 	var _blogReducer2 = _interopRequireDefault(_blogReducer);
 	
@@ -23258,7 +23258,7 @@
 	});
 	exports.default = authorFormReducer;
 	
-	var _types = __webpack_require__(206);
+	var _types = __webpack_require__(205);
 	
 	var _initialState = {
 	  _id: '581e144da8de15a917da801a',
@@ -23295,6 +23295,25 @@
 
 /***/ },
 /* 205 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	/**
+	 * export our different types so that our actions and components can use them
+	 */
+	var UPDATE_DATA = exports.UPDATE_DATA = 'update_data';
+	var HANDLE_BLOGFORM_CHANGE = exports.HANDLE_BLOGFORM_CHANGE = 'handle_blogform_change';
+	var ADD_CATEGORY_TO_NEW_BlOGPOST = exports.ADD_CATEGORY_TO_NEW_BlOGPOST = 'add_category_to_new_blogpost';
+	var UPDATE_BLOG_DATA = exports.UPDATE_BLOG_DATA = 'update_blog_data';
+	
+	var HANDLE_NEW_AUTHOR_FORM = exports.HANDLE_NEW_AUTHOR_FORM = 'handle_new_author_form';
+
+/***/ },
+/* 206 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -23322,7 +23341,7 @@
 	  return state;
 	};
 	
-	var _types = __webpack_require__(206);
+	var _types = __webpack_require__(205);
 	
 	var INTIAL_STATE = {
 	  data: [],
@@ -23337,25 +23356,6 @@
 	  },
 	  singleBlogData: []
 	};
-
-/***/ },
-/* 206 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	/**
-	 * export our different types so that our actions and components can use them
-	 */
-	var UPDATE_DATA = exports.UPDATE_DATA = 'update_data';
-	var HANDLE_BLOGFORM_CHANGE = exports.HANDLE_BLOGFORM_CHANGE = 'handle_blogform_change';
-	var ADD_CATEGORY_TO_NEW_BlOGPOST = exports.ADD_CATEGORY_TO_NEW_BlOGPOST = 'add_category_to_new_blogpost';
-	var UPDATE_BLOG_DATA = exports.UPDATE_BLOG_DATA = 'update_blog_data';
-	
-	var HANDLE_NEW_AUTHOR_FORM = exports.HANDLE_NEW_AUTHOR_FORM = 'handle_new_author_form';
 
 /***/ },
 /* 207 */
@@ -23385,23 +23385,27 @@
 	
 	var _blogPageContainer2 = _interopRequireDefault(_blogPageContainer);
 	
-	var _blogFormContainer = __webpack_require__(272);
+	var _blogPageUpdateContainer = __webpack_require__(274);
+	
+	var _blogPageUpdateContainer2 = _interopRequireDefault(_blogPageUpdateContainer);
+	
+	var _blogFormContainer = __webpack_require__(277);
 	
 	var _blogFormContainer2 = _interopRequireDefault(_blogFormContainer);
 	
-	var _categoryPageContainer = __webpack_require__(274);
+	var _categoryPageContainer = __webpack_require__(279);
 	
 	var _categoryPageContainer2 = _interopRequireDefault(_categoryPageContainer);
 	
-	var _authorFormContainer = __webpack_require__(276);
+	var _authorFormContainer = __webpack_require__(281);
 	
 	var _authorFormContainer2 = _interopRequireDefault(_authorFormContainer);
 	
-	var _signupContainer = __webpack_require__(283);
+	var _signupContainer = __webpack_require__(284);
 	
 	var _signupContainer2 = _interopRequireDefault(_signupContainer);
 	
-	var _authorForm = __webpack_require__(277);
+	var _authorForm = __webpack_require__(282);
 	
 	var _authorForm2 = _interopRequireDefault(_authorForm);
 	
@@ -23413,6 +23417,7 @@
 	  _react2.default.createElement(_reactRouter.IndexRoute, { component: _homePageContainer2.default }),
 	  _react2.default.createElement(_reactRouter.Route, { path: '/category/:category', component: _categoryPageContainer2.default }),
 	  _react2.default.createElement(_reactRouter.Route, { path: '/blogpost/:id', component: _blogPageContainer2.default }),
+	  _react2.default.createElement(_reactRouter.Route, { path: '/blogpost/:id/update', component: _blogPageUpdateContainer2.default }),
 	  _react2.default.createElement(_reactRouter.Route, { path: '/blogform', component: _blogFormContainer2.default }),
 	  _react2.default.createElement(_reactRouter.Route, { path: '/signup', component: _signupContainer2.default }),
 	  _react2.default.createElement(_reactRouter.Route, { path: '/authorform', component: _authorFormContainer2.default })
@@ -28337,6 +28342,15 @@
 	      _react2.default.createElement(
 	        'div',
 	        null,
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          { to: '/blogform' },
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            'New Post'
+	          )
+	        ),
 	        _react2.default.createElement(
 	          _reactRouter.Link,
 	          { to: '/signup' },
@@ -38699,7 +38713,7 @@
 	
 	var _store2 = _interopRequireDefault(_store);
 	
-	var _types = __webpack_require__(206);
+	var _types = __webpack_require__(205);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -38789,11 +38803,11 @@
 	  value: true
 	});
 	
+	var _reactRedux = __webpack_require__(172);
+	
 	var _blogPage = __webpack_require__(271);
 	
 	var _blogPage2 = _interopRequireDefault(_blogPage);
-	
-	var _reactRedux = __webpack_require__(172);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -38825,7 +38839,7 @@
 	
 	var _jquery2 = _interopRequireDefault(_jquery);
 	
-	var _DisplayBlogPost = __webpack_require__(286);
+	var _DisplayBlogPost = __webpack_require__(272);
 	
 	var _DisplayBlogPost2 = _interopRequireDefault(_DisplayBlogPost);
 	
@@ -38835,23 +38849,41 @@
 	
 	var BlogPage = _react2.default.createClass({
 	  displayName: 'BlogPage',
+	  getInitialState: function getInitialState() {
+	    return { blogAuthor: null };
+	  },
 	
 	
 	  //go to the database and fetch one entry that relates to the url
 	  componentDidMount: function componentDidMount() {
+	    var _this = this;
+	
+	    this.setState({ blogAuthor: null });
 	    _jquery2.default.ajax({
 	      url: '/api/blogpost/' + this.props.params.id
 	    }).done(function (data) {
 	      (0, _blogActions.updateBlogData)(data);
+	      console.log(data);
+	
+	      //get infomation about the author
+	      _jquery2.default.ajax({
+	        url: '/api/authors/' + data.blogAuthor
+	      }).done(function (authorData) {
+	        console.log(authorData);
+	        _this.setState({ blogAuthor: authorData.firstName + " " + authorData.lastName });
+	      });
 	    });
 	  },
 	  render: function render() {
+	    console.log(this.state.blogAuthor);
 	    return _react2.default.createElement(
 	      'div',
 	      null,
 	      _react2.default.createElement(_DisplayBlogPost2.default, {
 	        blogPost: this.props.singleBlogData,
-	        author: this.props.author
+	        blogAuthor: this.state.blogAuthor,
+	        author: this.props.author,
+	        whichPost: this.props.params.id
 	      })
 	    );
 	  }
@@ -38869,28 +38901,114 @@
 	  value: true
 	});
 	
-	var _blogForm = __webpack_require__(273);
+	var _react = __webpack_require__(1);
 	
-	var _blogForm2 = _interopRequireDefault(_blogForm);
+	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactRedux = __webpack_require__(172);
+	var _reactRouter = __webpack_require__(208);
+	
+	var _jquery = __webpack_require__(267);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
+	
+	var _display = __webpack_require__(273);
+	
+	var _display2 = _interopRequireDefault(_display);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var appToState = function appToState(state) {
-	  return {
-	    blogTitle: state.blogReducer.newBlogEntry.blogTitle,
-	    blogAuthor: state.blogReducer.newBlogEntry.blogAuthor,
-	    location: state.blogReducer.newBlogEntry.location,
-	    bodyText: state.blogReducer.newBlogEntry.bodyText,
-	    categories: state.blogReducer.newBlogEntry.categories,
-	    images: state.blogReducer.newBlogEntry.images,
-	    comments: state.blogReducer.newBlogEntry.comments,
-	    dropDownCategories: state.blogReducer.categories
+	var DisplayBlogPost = function DisplayBlogPost(props) {
+	
+	  var deleteBlogPost = function deleteBlogPost(postId) {
+	    _jquery2.default.ajax({
+	      url: "/api/blogpost",
+	      type: 'DELETE',
+	      data: { _id: postId }
+	    });
 	  };
+	
+	  var listCategories = function listCategories() {
+	    props.listCategories.map(function (category, index) {
+	      return _react2.default.createElement(
+	        _reactRouter.Link,
+	        { key: index, to: '' },
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          category
+	        )
+	      );
+	    });
+	  };
+	
+	  console.log(props.blogPost);
+	  return _react2.default.createElement(
+	    'section',
+	    null,
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'listCategories' },
+	      props.categories ? listCategories() : null
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'blogHeader' },
+	      _react2.default.createElement(
+	        'h1',
+	        null,
+	        props.blogPost.blogTitle
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          props.blogAuthor,
+	          ' \u2022 ',
+	          props.blogPost.date
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          props.blogPost.location
+	        )
+	      )
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement('img', { src: props.blogPost.image })
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(
+	        'p',
+	        null,
+	        props.blogPost.bodyText
+	      )
+	    ),
+	    _react2.default.createElement(
+	      _display2.default,
+	      { 'if': props.blogPost.blogAuthor === props.author },
+	      _react2.default.createElement(
+	        _reactRouter.Link,
+	        { to: '/blogpost/' + props.whichPost + '/update' },
+	        'UPDATE'
+	      ),
+	      _react2.default.createElement(
+	        _reactRouter.Link,
+	        { to: '/', onClick: function onClick() {
+	            deleteBlogPost(props.blogPost._id);
+	          } },
+	        'Delete'
+	      )
+	    )
+	  );
 	};
 	
-	exports.default = (0, _reactRedux.connect)(appToState)(_blogForm2.default);
+	exports.default = DisplayBlogPost;
 
 /***/ },
 /* 273 */
@@ -38906,39 +39024,140 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _jquery = __webpack_require__(267);
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var _jquery2 = _interopRequireDefault(_jquery);
+	var Display = function Display(props) {
+	  return props.if ? _react2.default.createElement(
+	    'div',
+	    null,
+	    props.children
+	  ) : null;
+	};
+	
+	exports.default = Display;
+
+/***/ },
+/* 274 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _reactRedux = __webpack_require__(172);
+	
+	var _blogPageUpdate = __webpack_require__(275);
+	
+	var _blogPageUpdate2 = _interopRequireDefault(_blogPageUpdate);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var appToState = function appToState(state) {
+	  return {
+	    data: state.blogReducer.data,
+	    singleBlogData: state.blogReducer.singleBlogData,
+	    author: state.authorFormReducer._id,
+	    categories: state.blogReducer.categories
+	  };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(appToState)(_blogPageUpdate2.default);
+
+/***/ },
+/* 275 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(208);
+	
+	var _form = __webpack_require__(276);
+	
+	var _form2 = _interopRequireDefault(_form);
+	
+	var _display = __webpack_require__(273);
+	
+	var _display2 = _interopRequireDefault(_display);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var BlogPageUpdate = _react2.default.createClass({
+	  displayName: 'BlogPageUpdate',
+	  updateBlogPost: function updateBlogPost(postId) {
+	    $.ajax({
+	      url: "/api/blogpost",
+	      type: 'PUT',
+	      data: { _id: postId }
+	    });
+	  },
+	  render: function render() {
+	    var _this = this;
+	
+	    console.log(this.props);
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(
+	        _display2.default,
+	        { 'if': this.props.singleBlogData.blogAuthor === this.props.author },
+	        _react2.default.createElement(
+	          'form',
+	          null,
+	          _react2.default.createElement(_form2.default, {
+	            dropDownCategories: this.props.categories,
+	            fillForm: this.props.singleBlogData
+	          }),
+	          _react2.default.createElement(
+	            _reactRouter.Link,
+	            {
+	              to: '/blogpost/' + this.props.params.id,
+	              onClick: function onClick() {
+	                _this.updateBlogPost(_this.props.blogPost._id);
+	              } },
+	            'Update'
+	          )
+	        )
+	      )
+	    );
+	  }
+	});
+	
+	exports.default = BlogPageUpdate;
+
+/***/ },
+/* 276 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(208);
 	
 	var _blogActions = __webpack_require__(268);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var BlogForm = function BlogForm(props) {
-	  var submitFormDataToDatabase = function submitFormDataToDatabase(event) {
-	    event.preventDefault();
-	    var that = undefined;
-	    console.log(Array.isArray(props.categories));
-	    _jquery2.default.ajax({
-	      url: '/api/blogpost',
-	      type: 'POST',
-	      data: {
-	        blogTitle: props.blogTitle,
-	        blogAuthor: props.blogAuthor,
-	        location: props.location,
-	        bodyText: props.bodyText,
-	        categories: props.categories,
-	        images: props.images
-	      }
-	    });
-	    (0, _blogActions.newEntryFormStoreData)('blogTitle', '');
-	    (0, _blogActions.newEntryFormStoreData)('blogAuthor', '');
-	    (0, _blogActions.newEntryFormStoreData)('location', '');
-	    (0, _blogActions.newEntryFormStoreData)('bodyText', '');
-	    (0, _blogActions.newEntryFormStoreData)('images', '');
-	  };
+	var Form = function Form(props) {
 	
 	  var handleFormChange = function handleFormChange(event) {
+	    console.log('bodyText ', props.blogTitle, props.bodyText);
 	    var name = event.target.name;
 	    var value = event.target.value;
 	    (0, _blogActions.newEntryFormStoreData)(name, value);
@@ -38967,6 +39186,7 @@
 	  };
 	
 	  var createCheckboxes = function createCheckboxes() {
+	
 	    return props.dropDownCategories.map(function (category, index) {
 	      return _react2.default.createElement(
 	        'div',
@@ -38983,74 +39203,41 @@
 	  };
 	
 	  return _react2.default.createElement(
-	    'form',
-	    { className: 'blogForm', onSubmit: submitFormDataToDatabase },
+	    'div',
+	    { className: 'formInner' },
 	    _react2.default.createElement(
 	      'div',
-	      { className: 'formInner' },
+	      { className: 'inputContainer' },
+	      _react2.default.createElement(
+	        'label',
+	        null,
+	        'Title'
+	      ),
+	      _react2.default.createElement('input', {
+	        type: 'text',
+	        name: 'blogTitle',
+	        placeholder: 'Title',
+	        value: props.fillForm ? props.fillForm.blogTitle : props.blogTitle,
+	        onChange: handleFormChange
+	      })
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'author-location' },
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'inputContainer' },
 	        _react2.default.createElement(
 	          'label',
 	          null,
-	          'Title'
+	          'Author'
 	        ),
 	        _react2.default.createElement('input', {
 	          type: 'text',
-	          name: 'blogTitle',
-	          placeholder: 'Title',
+	          name: 'blogAuthor',
+	          placeholder: 'author',
+	          value: props.fillForm ? props.fillForm.blogAuthor : props.blogAuthor,
 	          onChange: handleFormChange
-	        })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'author-location' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'inputContainer' },
-	          _react2.default.createElement(
-	            'label',
-	            null,
-	            'Author'
-	          ),
-	          _react2.default.createElement('input', {
-	            type: 'text',
-	            name: 'blogAuthor',
-	            placeholder: 'author',
-	            onChange: handleFormChange
-	          })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'inputContainer' },
-	          _react2.default.createElement(
-	            'label',
-	            null,
-	            'Location'
-	          ),
-	          _react2.default.createElement('input', {
-	            type: 'text',
-	            name: 'location',
-	            placeholder: 'Location',
-	            onChange: handleFormChange
-	          })
-	        )
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'inputContainer' },
-	        _react2.default.createElement(
-	          'label',
-	          null,
-	          'Enter Description'
-	        ),
-	        _react2.default.createElement('textarea', {
-	          type: 'textbox',
-	          name: 'bodyText',
-	          placeholder: 'Description',
-	          onChange: handleFormChange
-	          //style={{height: '200px'}}
 	        })
 	      ),
 	      _react2.default.createElement(
@@ -39059,16 +39246,162 @@
 	        _react2.default.createElement(
 	          'label',
 	          null,
-	          'Enter Description'
+	          'Location'
 	        ),
 	        _react2.default.createElement('input', {
 	          type: 'text',
-	          name: 'images',
-	          placeholder: 'Enter Url of Image (seperate each entry with a comma)',
+	          name: 'location',
+	          placeholder: 'Location',
+	          value: props.fillForm ? props.fillForm.location : props.location,
 	          onChange: handleFormChange
 	        })
+	      )
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'inputContainer' },
+	      _react2.default.createElement(
+	        'label',
+	        null,
+	        'Enter Description'
 	      ),
-	      createCheckboxes(),
+	      _react2.default.createElement('textarea', {
+	        type: 'textbox',
+	        name: 'bodyText',
+	        placeholder: 'Description',
+	        value: props.fillForm ? props.fillForm.blogText : props.bodyText,
+	        onChange: handleFormChange
+	        //style={{height: '200px'}}
+	      })
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'inputContainer' },
+	      _react2.default.createElement(
+	        'label',
+	        null,
+	        'Enter Description'
+	      ),
+	      _react2.default.createElement('input', {
+	        type: 'text',
+	        name: 'images',
+	        placeholder: 'Enter Url of Image (seperate each entry with a comma)',
+	        value: props.fillForm ? props.fillForm.images : props.images,
+	        onChange: handleFormChange
+	      })
+	    ),
+	    createCheckboxes()
+	  );
+	};
+	
+	exports.default = Form;
+
+/***/ },
+/* 277 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _blogForm = __webpack_require__(278);
+	
+	var _blogForm2 = _interopRequireDefault(_blogForm);
+	
+	var _reactRedux = __webpack_require__(172);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var appToState = function appToState(state) {
+	  return {
+	    blogTitle: state.blogReducer.newBlogEntry.blogTitle,
+	    blogAuthor: state.blogReducer.newBlogEntry.blogAuthor,
+	    location: state.blogReducer.newBlogEntry.location,
+	    bodyText: state.blogReducer.newBlogEntry.bodyText,
+	    categories: state.blogReducer.newBlogEntry.categories,
+	    images: state.blogReducer.newBlogEntry.images,
+	    comments: state.blogReducer.newBlogEntry.comments,
+	    dropDownCategories: state.blogReducer.categories
+	  };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(appToState)(_blogForm2.default);
+
+/***/ },
+/* 278 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(208);
+	
+	var _jquery = __webpack_require__(267);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
+	
+	var _form = __webpack_require__(276);
+	
+	var _form2 = _interopRequireDefault(_form);
+	
+	var _blogActions = __webpack_require__(268);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	
+	var BlogForm = function BlogForm(props) {
+	  var _React$createElement;
+	
+	  var submitNewBlogPostToDatabase = function submitNewBlogPostToDatabase(event) {
+	    _jquery2.default.ajax({
+	      url: '/api/blogpost',
+	      type: 'POST',
+	      data: {
+	        blogTitle: props.blogTitle,
+	        blogAuthor: props.blogAuthor,
+	        location: props.location,
+	        bodyText: props.bodyText,
+	        categories: props.categories,
+	        images: props.images
+	      }
+	    });
+	    (0, _blogActions.newEntryFormStoreData)('blogTitle', '');
+	    (0, _blogActions.newEntryFormStoreData)('blogAuthor', '');
+	    (0, _blogActions.newEntryFormStoreData)('location', '');
+	    (0, _blogActions.newEntryFormStoreData)('bodyText', '');
+	    (0, _blogActions.newEntryFormStoreData)('images', '');
+	  };
+	
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(
+	      'h1',
+	      null,
+	      'New Blog Post'
+	    ),
+	    _react2.default.createElement(
+	      'form',
+	      { className: 'blogForm', action: '/', onSubmit: submitNewBlogPostToDatabase },
+	      _react2.default.createElement(_form2.default, (_React$createElement = {
+	        dropDownCategories: props.dropDownCategories,
+	        categories: props.categories,
+	        goToHome: true,
+	        blogTitle: props.blogTitle,
+	        blogAuthor: props.blogAuthor,
+	        location: props.location,
+	        bodyText: props.bodyText
+	      }, _defineProperty(_React$createElement, 'categories', props.categories), _defineProperty(_React$createElement, 'images', props.images), _React$createElement)),
 	      _react2.default.createElement(
 	        'button',
 	        null,
@@ -39081,7 +39414,7 @@
 	exports.default = BlogForm;
 
 /***/ },
-/* 274 */
+/* 279 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39090,7 +39423,7 @@
 	  value: true
 	});
 	
-	var _categoryPage = __webpack_require__(275);
+	var _categoryPage = __webpack_require__(280);
 	
 	var _categoryPage2 = _interopRequireDefault(_categoryPage);
 	
@@ -39108,7 +39441,7 @@
 	exports.default = (0, _reactRedux.connect)(appToState)(_categoryPage2.default);
 
 /***/ },
-/* 275 */
+/* 280 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39175,7 +39508,7 @@
 	// <Link to={`/blogpost/${post._id}`} key={index}><h1>{post.blogTitle}</h1></Link>
 
 /***/ },
-/* 276 */
+/* 281 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39185,7 +39518,7 @@
 	});
 	exports.AuthorFormContainer = undefined;
 	
-	var _authorForm = __webpack_require__(277);
+	var _authorForm = __webpack_require__(282);
 	
 	var _authorForm2 = _interopRequireDefault(_authorForm);
 	
@@ -39206,7 +39539,7 @@
 	var AuthorFormContainer = exports.AuthorFormContainer = (0, _reactRedux.connect)(mapStateToProps)(_authorForm2.default);
 
 /***/ },
-/* 277 */
+/* 282 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39223,7 +39556,7 @@
 	
 	var _jquery2 = _interopRequireDefault(_jquery);
 	
-	var _newAuthorAction = __webpack_require__(278);
+	var _newAuthorAction = __webpack_require__(283);
 	
 	var _newAuthorAction2 = _interopRequireDefault(_newAuthorAction);
 	
@@ -39268,7 +39601,7 @@
 	exports.default = AuthorForm;
 
 /***/ },
-/* 278 */
+/* 283 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39278,7 +39611,7 @@
 	});
 	exports.default = newAuthorFormAction;
 	
-	var _types = __webpack_require__(206);
+	var _types = __webpack_require__(205);
 	
 	var _store = __webpack_require__(202);
 	
@@ -39295,16 +39628,68 @@
 	}
 
 /***/ },
-/* 279 */
+/* 284 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _signup = __webpack_require__(285);
+	
+	var _signup2 = _interopRequireDefault(_signup);
+	
+	var _reactRedux = __webpack_require__(172);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var appToState = function appToState(state) {
+	  return {
+	    data: state.blogReducer.data
+	  };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(appToState)(_signup2.default);
+
+/***/ },
+/* 285 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Signup = function Signup() {
+	  return _react2.default.createElement(
+	    'h1',
+	    null,
+	    'Hey Im the Signup Page'
+	  );
+	};
+	
+	exports.default = Signup;
+
+/***/ },
+/* 286 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(280);
+	var content = __webpack_require__(287);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(282)(content, {});
+	var update = __webpack_require__(289)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -39321,10 +39706,10 @@
 	}
 
 /***/ },
-/* 280 */
+/* 287 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(281)();
+	exports = module.exports = __webpack_require__(288)();
 	// imports
 	
 	
@@ -39335,7 +39720,7 @@
 
 
 /***/ },
-/* 281 */
+/* 288 */
 /***/ function(module, exports) {
 
 	/*
@@ -39391,7 +39776,7 @@
 
 
 /***/ },
-/* 282 */
+/* 289 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -39641,144 +40026,6 @@
 			URL.revokeObjectURL(oldSrc);
 	}
 
-
-/***/ },
-/* 283 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _signup = __webpack_require__(284);
-	
-	var _signup2 = _interopRequireDefault(_signup);
-	
-	var _reactRedux = __webpack_require__(172);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var appToState = function appToState(state) {
-	  return {
-	    data: state.blogReducer.data
-	  };
-	};
-	
-	exports.default = (0, _reactRedux.connect)(appToState)(_signup2.default);
-
-/***/ },
-/* 284 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var Signup = function Signup() {
-	  return _react2.default.createElement(
-	    'h1',
-	    null,
-	    'Hey Im the Signup Page'
-	  );
-	};
-	
-	exports.default = Signup;
-
-/***/ },
-/* 285 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var Display = function Display(props) {
-	  return props.if ? _react2.default.createElement(
-	    'div',
-	    null,
-	    props.children
-	  ) : null;
-	};
-	
-	exports.default = Display;
-
-/***/ },
-/* 286 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactRouter = __webpack_require__(208);
-	
-	var _jquery = __webpack_require__(267);
-	
-	var _jquery2 = _interopRequireDefault(_jquery);
-	
-	var _display = __webpack_require__(285);
-	
-	var _display2 = _interopRequireDefault(_display);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var DisplayBlogPost = function DisplayBlogPost(props) {
-	
-	  var deleteBlogPost = function deleteBlogPost(postId) {
-	    _jquery2.default.ajax({
-	      url: "/api/blogpost",
-	      type: 'DELETE',
-	      data: { _id: postId }
-	    });
-	  };
-	
-	  return _react2.default.createElement(
-	    'div',
-	    null,
-	    _react2.default.createElement(
-	      'li',
-	      null,
-	      props.blogPost.blogTitle
-	    ),
-	    _react2.default.createElement(
-	      _display2.default,
-	      { 'if': props.blogPost.blogAuthor === props.author },
-	      _react2.default.createElement(
-	        _reactRouter.Link,
-	        { to: '/', onClick: function onClick() {
-	            deleteBlogPost(props.blogPost._id);
-	          } },
-	        'Delete'
-	      )
-	    )
-	  );
-	};
-	
-	exports.default = DisplayBlogPost;
 
 /***/ }
 /******/ ]);

@@ -1,5 +1,5 @@
-import BlogPage from '../components/blogPage'
 import {connect} from 'react-redux'
+import BlogPage from '../components/blogPage'
 
 const appToState = state => ({
   data: state.blogReducer.data,

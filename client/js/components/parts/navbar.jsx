@@ -22,6 +22,7 @@ const NavBar = () => {
           </ul>
         </div>
         <div>
+          <Link to='/blogform'><li>New Post</li></Link>
           <Link to='/signup'><li>SIGN IN</li></Link>
         </div>
         <div className='searchInput'>
