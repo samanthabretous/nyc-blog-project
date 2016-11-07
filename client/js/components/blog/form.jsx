@@ -41,7 +41,7 @@ const Form = (props) => {
   let createCheckboxes = () => {
 
     //while in update form check if the category if already in the store data
-    return props.dropDownCategories.map((category, index) => {
+    return Object.keys(props.dropDownCategories).map((category, index) => {
       let isChecked = props.blogInfo.categories.indexOf(category) > -1 ? true : false
       
       console.log('checkbox',isChecked, category)
@@ -52,7 +52,7 @@ const Form = (props) => {
             name='category'
             value={category}  
             onChange={handleCheckboxes}
-            checked={isChecked}
+            defaultChecked={isChecked}
           />
           {category}
         </div>

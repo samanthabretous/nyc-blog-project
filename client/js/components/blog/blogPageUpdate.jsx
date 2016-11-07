@@ -26,7 +26,7 @@ const BlogPageUpdate = React.createClass({
     return (
       <div>
         <Display if={this.props.singleBlogData.blogAuthor === this.props.author}>
-          <form 
+          <form className="blogForm"
             action={'/blogpost/' + this.props.params.id} 
             onSubmit={()=>{this.updateBlogPost(this.props.params.id)}}>
             <Form 
@@ -37,6 +37,9 @@ const BlogPageUpdate = React.createClass({
             />
             <button>Update</button>
           </form>
+       </Display>
+       <Display if={this.props.singleBlogData !== this.props.author}>
+        <h1>You are not authorized to be on this page</h1>
        </Display>
       </div>
     )

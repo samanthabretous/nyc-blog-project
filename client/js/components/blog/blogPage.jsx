@@ -24,10 +24,10 @@ const BlogPage = React.createClass({
 
       //get infomation about the author
       $.ajax({
-        url: `/api/authors/${data.blogAuthor}`
+        url: `/api/user/${data.blogAuthor}`
       })
-      .done((authorData) => {
-        this.setState({blogAuthor:authorData.firstName + " " + authorData.lastName})
+      .done((userData) => {
+        this.setState({blogAuthor:userData.firstName + " " + userData.lastName})
         
         //move data so it can be used in the update form
         moveSingleBlogDataToNewEntryBlogData()

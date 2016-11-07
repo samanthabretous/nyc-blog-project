@@ -2,9 +2,9 @@
 import React from 'react';
 import $ from 'jquery';
 
-import newAuthorFormAction from '../actions/newAuthorAction.js';
+import newUserFormAction from '../actions/newUserAction.js';
 
-const AuthorForm = (props) => {
+const UserForm = (props) => {
   let handleSubmit = (e) => {
     e.preventDefault();
     $.ajax({
@@ -22,7 +22,7 @@ const AuthorForm = (props) => {
   let handleChange = (e) => {
     let name = e.target.name;
     let value = e.target.value;
-    newAuthorFormAction(name, value);
+    newUserFormAction(name, value);
   };
 
   return (
@@ -39,4 +39,4 @@ const AuthorForm = (props) => {
   )
 }
 
-export default AuthorForm;
+export default UserForm;

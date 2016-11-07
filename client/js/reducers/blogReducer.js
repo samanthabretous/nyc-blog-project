@@ -8,7 +8,12 @@ import {
 
 const INTIAL_STATE = {
   data:[],
-  categories: ["Things to Do", "OH MY the Subway", "What are Humans", "I just need to leave NYC", "I would not eat that"], 
+  categories: {
+    "Things To Do": ["Things to Do"], 
+    "Food": ["I would not eat that"],
+    "Subway": ["OH MY the Subway"], 
+    "Hating":["What are Humans", "I just need to leave NYC"]
+  }, 
   newBlogEntry: {
     blogTitle: '',
     blogAuthor: '',

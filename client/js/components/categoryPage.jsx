@@ -4,6 +4,8 @@ import $ from 'jquery'
 
 import {updateStoreData} from '../actions/blogActions'
 import LatestCategoryPost from './parts/latestCategoryPost'
+import Card from './parts/card'
+
 
 const CategoryPage = React.createClass({
 
@@ -16,16 +18,36 @@ const CategoryPage = React.createClass({
       }
     })
   },
+  isIncluded(array){
+
+    //check to see if the post has the same categories as the params
+    let answer = array.map((description)=>{
+      let categories = this.props.categories[this.props.params.category]
+      return categories.includes(description)
+    })
+    return answer.includes(true)
+  },
 
   render(){
     
     //loop through all the blog post from the data received from the ajax call above and display
-    let posts = this.props.data ? this.props.data.map((post, index)=> 
-      <li key={index}><Link to={'/blogpost/' + post._id} key={index}>{post.blogTitle}</Link></li>
-    ) : null
+    let posts = this.props.data ? this.props.data.map((post, index)=> {
+      if(this.isIncluded(post.categories)){
+        return (
+          <Card 
+            key={index}
+            postId={post._id} 
+            blogTitle={post.blogTitle} 
+            bodyText={post.bodyText}
+          />
+        )
+      }
+    }) : null
     return (
       <div>
-        {posts}
+        <section className="listOfCards">
+          {posts}
+        </section>
       </div>
     )
   }
