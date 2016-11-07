@@ -6,7 +6,8 @@ const _initialState = {
   lastName: "Mack",
   email: 'victoria_mack24@gmail.com',
   location: "12345",
-  bio: ""
+  bio: "", 
+  owner: false
 }
 
 // const _initialState = {
@@ -15,7 +16,8 @@ const _initialState = {
 //   lastName: "",
 //   email: "",
 //   location: "",
-//   bio: ""
+//   bio: "", 
+    //owner: false
 // }
 
 

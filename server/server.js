@@ -7,12 +7,6 @@ const app = express();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
-
-const postModel = require('./blogPost/blogPost-model');
-const authorModel = require('./author/author-model.js');
-const BlogPost = mongoose.model('BlogPost');
-const Author = mongoose.model('Author');
-
 mongoose.connect('mongodb://localhost/first-blog');
 
 const db = mongoose.connection
@@ -26,13 +20,13 @@ db.on('open', function() {
   
   // Handles API/server side routing
   app.use('/api/blogpost', routes.blogPost);
-  app.use('/api/authors', routes.authors);
+  app.use('/api/user', routes.user);
   
   // Handles client side routing
   app.use('*', routes.home)
 
 
-  // Author.create({
+  // User.create({
   //   firstName: 'Victoria',
   //   lastName:'Mack',
   //   email: 'victoria_mack24@gmail.com',
