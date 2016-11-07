@@ -1,11 +1,11 @@
 // Require models
 const BlogPost = require('./blogPost/blogPost-model');
-const Author = require('./author/author-model.js');
+const Author = require('./user/user-model.js');
 const home = require('./home/home-router');
 
 // Require routes
 const blogPost = require('./blogPost/blogPost-router');
-const authors = require('./author/author-router.js');
+const user = require('./user/user-router.js');
 
 module.exports = {
   models: {
@@ -15,6 +15,6 @@ module.exports = {
   routes: {
     home: home, 
     blogPost: blogPost,
-    authors: authors
+    user: user
   }
 }

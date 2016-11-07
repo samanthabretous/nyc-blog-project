@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 
  // ************************************ AUTHOR/PROFILE SCHEMA ************************************
- const authorSchema = mongoose.Schema({
+ const userSchema = mongoose.Schema({
   firstName: {type: String, required: true},
   lastName: String,
   email: String,
@@ -10,9 +10,10 @@ const mongoose = require('mongoose');
   bio: String, // specify a character limit
   avatar: String,
   blogPosts: [Number],
-  comments: [Number]
+  comments: [Number], 
+  owner: Boolean
  });
 
 
-// Creates Author table based on authorSchema
- mongoose.model('Author', authorSchema);
+// Creates User table based on authorSchema
+ mongoose.model('User', userSchema);

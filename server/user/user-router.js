@@ -1,16 +1,16 @@
 const router = require('express').Router();
-const Author = require('mongoose').model('Author');
+const User = require('mongoose').model('User');
 
 // ***** Retrieves authors in DB
-const getAuthor = (req, res, next) => {
-  Author.find({}, (err, data) => {
+const getUser = (req, res, next) => {
+  User.find({}, (err, data) => {
     res.send(data);
   });
 };
 
-// ***** Creates new author and stores in Author model in DB
-const createAuthor = (req, res) => {
-  Author.create({
+// ***** Creates new author and stores in User model in DB
+const createUser = (req, res) => {
+  User.create({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     email: req.body.email,
@@ -20,19 +20,19 @@ const createAuthor = (req, res) => {
   })
 }
 
-const getOneAuthor = (req, res) => {
-  Author.findById(req.params.id, (err, data) => {
+const getOneUser = (req, res) => {
+  User.findById(req.params.id, (err, data) => {
     res.send(data);
   })
 };
 
 //configure router for get and post calls
 router.route('/:id')
-  .get(getOneAuthor)
+  .get(getOneUser)
 
 // ***** Routing for GET and POST requests
 router.route('/')
-  .get(getAuthor)
-  .post(createAuthor);
+  .get(getUser)
+  .post(createUser);
 
-  module.exports = router;
+module.exports = router;
