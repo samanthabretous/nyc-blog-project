@@ -3,7 +3,8 @@ import {
   UPDATE_DATA, 
   HANDLE_BLOGFORM_CHANGE, 
   ADD_CATEGORY_TO_NEW_BlOGPOST, 
-  UPDATE_BLOG_DATA
+  UPDATE_BLOG_DATA, 
+  MOVE_SINGLE_TO_NEW_ENTRY
 } from './types'
 
 export function updateStoreData(data) {
@@ -29,8 +30,14 @@ export function newEntryFormStoreData(name, value) {
 }
 
 export function addCategoryToStore(name){
-    store.dispatch({
+  store.dispatch({
     type: ADD_CATEGORY_TO_NEW_BlOGPOST,
     name
+  })
+}
+
+export function moveSingleBlogDataToNewEntryBlogData(){
+  store.dispatch({
+    type: MOVE_SINGLE_TO_NEW_ENTRY
   })
 }

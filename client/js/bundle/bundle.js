@@ -23309,6 +23309,7 @@
 	var HANDLE_BLOGFORM_CHANGE = exports.HANDLE_BLOGFORM_CHANGE = 'handle_blogform_change';
 	var ADD_CATEGORY_TO_NEW_BlOGPOST = exports.ADD_CATEGORY_TO_NEW_BlOGPOST = 'add_category_to_new_blogpost';
 	var UPDATE_BLOG_DATA = exports.UPDATE_BLOG_DATA = 'update_blog_data';
+	var MOVE_SINGLE_TO_NEW_ENTRY = exports.MOVE_SINGLE_TO_NEW_ENTRY = 'move_single_to_new_entry';
 	
 	var HANDLE_NEW_AUTHOR_FORM = exports.HANDLE_NEW_AUTHOR_FORM = 'handle_new_author_form';
 
@@ -23329,16 +23330,27 @@
 	  switch (action.type) {
 	    case _types.UPDATE_DATA:
 	      return Object.assign({}, state, { data: action.data });
+	    case _types.MOVE_SINGLE_TO_NEW_ENTRY:
+	      state.newBlogEntry.blogTitle = state.singleBlogData.blogTitle;
+	      state.newBlogEntry.blogAuthor = state.singleBlogData.blogAuthor;
+	      state.newBlogEntry.location = state.singleBlogData.location;
+	      state.newBlogEntry.bodyText = state.singleBlogData.bodyText;
+	      state.newBlogEntry.categories = state.singleBlogData.categories;
+	      state.newBlogEntry.images = state.singleBlogData.images;
+	      console.log('moving', state);
+	      return Object.assign({}, state);
 	    case _types.HANDLE_BLOGFORM_CHANGE:
 	      state.newBlogEntry[action.name] = action.value;
+	      console.log('reducer', state);
 	      return Object.assign({}, state);
 	    case _types.ADD_CATEGORY_TO_NEW_BlOGPOST:
 	      state.newBlogEntry.categories = action.name;
 	      return Object.assign({}, state);
 	    case _types.UPDATE_BLOG_DATA:
 	      return Object.assign({}, state, { singleBlogData: action.data });
+	    default:
+	      return state;
 	  }
-	  return state;
 	};
 	
 	var _types = __webpack_require__(205);
@@ -23352,7 +23364,7 @@
 	    location: '',
 	    bodyText: '',
 	    categories: [],
-	    images: []
+	    images: ''
 	  },
 	  singleBlogData: []
 	};
@@ -23377,7 +23389,7 @@
 	
 	var _mainContainer2 = _interopRequireDefault(_mainContainer);
 	
-	var _homePageContainer = __webpack_require__(265);
+	var _homePageContainer = __webpack_require__(266);
 	
 	var _homePageContainer2 = _interopRequireDefault(_homePageContainer);
 	
@@ -28295,9 +28307,11 @@
 	
 	var _reactRouter = __webpack_require__(208);
 	
+	var _blogActions = __webpack_require__(264);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var logoImage = __webpack_require__(264);
+	var logoImage = __webpack_require__(265);
 	
 	var NavBar = function NavBar() {
 	  var navLinks = function navLinks() {
@@ -28313,6 +28327,14 @@
 	        )
 	      );
 	    });
+	  };
+	
+	  var clearNewBlogEntry = function clearNewBlogEntry() {
+	    (0, _blogActions.newEntryFormStoreData)('blogTitle', '');
+	    (0, _blogActions.newEntryFormStoreData)('blogAuthor', '');
+	    (0, _blogActions.newEntryFormStoreData)('location', '');
+	    (0, _blogActions.newEntryFormStoreData)('bodyText', '');
+	    (0, _blogActions.newEntryFormStoreData)('images', '');
 	  };
 	
 	  return _react2.default.createElement(
@@ -28344,7 +28366,7 @@
 	        null,
 	        _react2.default.createElement(
 	          _reactRouter.Link,
-	          { to: '/blogform' },
+	          { to: '/blogform', onClick: clearNewBlogEntry },
 	          _react2.default.createElement(
 	            'li',
 	            null,
@@ -28374,12 +28396,70 @@
 
 /***/ },
 /* 264 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.updateStoreData = updateStoreData;
+	exports.updateBlogData = updateBlogData;
+	exports.newEntryFormStoreData = newEntryFormStoreData;
+	exports.addCategoryToStore = addCategoryToStore;
+	exports.moveSingleBlogDataToNewEntryBlogData = moveSingleBlogDataToNewEntryBlogData;
+	
+	var _store = __webpack_require__(202);
+	
+	var _store2 = _interopRequireDefault(_store);
+	
+	var _types = __webpack_require__(205);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function updateStoreData(data) {
+	  _store2.default.dispatch({
+	    type: _types.UPDATE_DATA,
+	    data: data
+	  });
+	}
+	
+	function updateBlogData(data) {
+	  _store2.default.dispatch({
+	    type: _types.UPDATE_BLOG_DATA,
+	    data: data
+	  });
+	}
+	
+	function newEntryFormStoreData(name, value) {
+	  _store2.default.dispatch({
+	    type: _types.HANDLE_BLOGFORM_CHANGE,
+	    name: name,
+	    value: value
+	  });
+	}
+	
+	function addCategoryToStore(name) {
+	  _store2.default.dispatch({
+	    type: _types.ADD_CATEGORY_TO_NEW_BlOGPOST,
+	    name: name
+	  });
+	}
+	
+	function moveSingleBlogDataToNewEntryBlogData() {
+	  _store2.default.dispatch({
+	    type: _types.MOVE_SINGLE_TO_NEW_ENTRY
+	  });
+	}
+
+/***/ },
+/* 265 */
 /***/ function(module, exports) {
 
 	module.exports = "data:image/png;base64,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"
 
 /***/ },
-/* 265 */
+/* 266 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28388,7 +28468,7 @@
 	  value: true
 	});
 	
-	var _homePage = __webpack_require__(266);
+	var _homePage = __webpack_require__(267);
 	
 	var _homePage2 = _interopRequireDefault(_homePage);
 	
@@ -28406,7 +28486,7 @@
 	exports.default = (0, _reactRedux.connect)(appToState)(_homePage2.default);
 
 /***/ },
-/* 266 */
+/* 267 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28421,11 +28501,11 @@
 	
 	var _reactRouter = __webpack_require__(208);
 	
-	var _jquery = __webpack_require__(267);
+	var _jquery = __webpack_require__(268);
 	
 	var _jquery2 = _interopRequireDefault(_jquery);
 	
-	var _blogActions = __webpack_require__(268);
+	var _blogActions = __webpack_require__(264);
 	
 	var _latestCategoryPost = __webpack_require__(269);
 	
@@ -28470,7 +28550,7 @@
 	// <Link to={`/blogpost/${post._id}`} key={index}><h1>{post.blogTitle}</h1></Link>
 
 /***/ },
-/* 267 */
+/* 268 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -38696,57 +38776,6 @@
 
 
 /***/ },
-/* 268 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.updateStoreData = updateStoreData;
-	exports.updateBlogData = updateBlogData;
-	exports.newEntryFormStoreData = newEntryFormStoreData;
-	exports.addCategoryToStore = addCategoryToStore;
-	
-	var _store = __webpack_require__(202);
-	
-	var _store2 = _interopRequireDefault(_store);
-	
-	var _types = __webpack_require__(205);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function updateStoreData(data) {
-	  _store2.default.dispatch({
-	    type: _types.UPDATE_DATA,
-	    data: data
-	  });
-	}
-	
-	function updateBlogData(data) {
-	  _store2.default.dispatch({
-	    type: _types.UPDATE_BLOG_DATA,
-	    data: data
-	  });
-	}
-	
-	function newEntryFormStoreData(name, value) {
-	  _store2.default.dispatch({
-	    type: _types.HANDLE_BLOGFORM_CHANGE,
-	    name: name,
-	    value: value
-	  });
-	}
-	
-	function addCategoryToStore(name) {
-	  _store2.default.dispatch({
-	    type: _types.ADD_CATEGORY_TO_NEW_BlOGPOST,
-	    name: name
-	  });
-	}
-
-/***/ },
 /* 269 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -38760,7 +38789,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _jquery = __webpack_require__(267);
+	var _jquery = __webpack_require__(268);
 	
 	var _jquery2 = _interopRequireDefault(_jquery);
 	
@@ -38835,7 +38864,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _jquery = __webpack_require__(267);
+	var _jquery = __webpack_require__(268);
 	
 	var _jquery2 = _interopRequireDefault(_jquery);
 	
@@ -38843,7 +38872,7 @@
 	
 	var _DisplayBlogPost2 = _interopRequireDefault(_DisplayBlogPost);
 	
-	var _blogActions = __webpack_require__(268);
+	var _blogActions = __webpack_require__(264);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -38863,19 +38892,19 @@
 	      url: '/api/blogpost/' + this.props.params.id
 	    }).done(function (data) {
 	      (0, _blogActions.updateBlogData)(data);
-	      console.log(data);
 	
 	      //get infomation about the author
 	      _jquery2.default.ajax({
 	        url: '/api/authors/' + data.blogAuthor
 	      }).done(function (authorData) {
-	        console.log(authorData);
 	        _this.setState({ blogAuthor: authorData.firstName + " " + authorData.lastName });
+	
+	        //move data so it can be used in the update form
+	        (0, _blogActions.moveSingleBlogDataToNewEntryBlogData)();
 	      });
 	    });
 	  },
 	  render: function render() {
-	    console.log(this.state.blogAuthor);
 	    return _react2.default.createElement(
 	      'div',
 	      null,
@@ -38907,7 +38936,7 @@
 	
 	var _reactRouter = __webpack_require__(208);
 	
-	var _jquery = __webpack_require__(267);
+	var _jquery = __webpack_require__(268);
 	
 	var _jquery2 = _interopRequireDefault(_jquery);
 	
@@ -38941,7 +38970,6 @@
 	    });
 	  };
 	
-	  console.log(props.blogPost);
 	  return _react2.default.createElement(
 	    'section',
 	    null,
@@ -39056,8 +39084,8 @@
 	
 	var appToState = function appToState(state) {
 	  return {
-	    data: state.blogReducer.data,
 	    singleBlogData: state.blogReducer.singleBlogData,
+	    newBlogEntry: state.blogReducer.newBlogEntry,
 	    author: state.authorFormReducer._id,
 	    categories: state.blogReducer.categories
 	  };
@@ -39081,6 +39109,10 @@
 	
 	var _reactRouter = __webpack_require__(208);
 	
+	var _jquery = __webpack_require__(268);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
+	
 	var _form = __webpack_require__(276);
 	
 	var _form2 = _interopRequireDefault(_form);
@@ -39094,16 +39126,23 @@
 	var BlogPageUpdate = _react2.default.createClass({
 	  displayName: 'BlogPageUpdate',
 	  updateBlogPost: function updateBlogPost(postId) {
-	    $.ajax({
+	    _jquery2.default.ajax({
 	      url: "/api/blogpost",
 	      type: 'PUT',
-	      data: { _id: postId }
+	      data: {
+	        id: postId,
+	        blogTitle: this.props.newBlogEntry.blogTitle,
+	        blogAuthor: this.props.newBlogEntry.blogAuthor,
+	        location: this.props.newBlogEntry.location,
+	        bodyText: this.props.newBlogEntry.bodyText,
+	        categories: this.props.newBlogEntry.categories,
+	        images: this.props.newBlogEntry.images
+	      }
 	    });
 	  },
 	  render: function render() {
 	    var _this = this;
 	
-	    console.log(this.props);
 	    return _react2.default.createElement(
 	      'div',
 	      null,
@@ -39112,18 +39151,20 @@
 	        { 'if': this.props.singleBlogData.blogAuthor === this.props.author },
 	        _react2.default.createElement(
 	          'form',
-	          null,
+	          {
+	            action: '/blogpost/' + this.props.params.id,
+	            onSubmit: function onSubmit() {
+	              _this.updateBlogPost(_this.props.params.id);
+	            } },
 	          _react2.default.createElement(_form2.default, {
 	            dropDownCategories: this.props.categories,
-	            fillForm: this.props.singleBlogData
+	            blogInfo: this.props.newBlogEntry,
+	            categories: this.props.singleBlogData.categories,
+	            updatingPost: true
 	          }),
 	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            {
-	              to: '/blogpost/' + this.props.params.id,
-	              onClick: function onClick() {
-	                _this.updateBlogPost(_this.props.blogPost._id);
-	              } },
+	            'button',
+	            null,
 	            'Update'
 	          )
 	        )
@@ -39150,14 +39191,17 @@
 	
 	var _reactRouter = __webpack_require__(208);
 	
-	var _blogActions = __webpack_require__(268);
+	var _display = __webpack_require__(273);
+	
+	var _display2 = _interopRequireDefault(_display);
+	
+	var _blogActions = __webpack_require__(264);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var Form = function Form(props) {
 	
 	  var handleFormChange = function handleFormChange(event) {
-	    console.log('bodyText ', props.blogTitle, props.bodyText);
 	    var name = event.target.name;
 	    var value = event.target.value;
 	    (0, _blogActions.newEntryFormStoreData)(name, value);
@@ -39172,7 +39216,6 @@
 	      if (props.categories.indexOf(newCategory) === -1) {
 	        allCategories = props.categories.concat(newCategory);
 	      } else {
-	        console.log('same', props.categories);
 	        allCategories = props.categories.filter(function (category) {
 	          if (category !== newCategory) return category;
 	        });
@@ -39180,14 +39223,19 @@
 	    } else {
 	      allCategories = [newCategory];
 	    }
-	
+	    console.log(allCategories);
 	    //send the previous values and new added value to the store
 	    (0, _blogActions.addCategoryToStore)(allCategories);
+	    createCheckboxes();
 	  };
 	
 	  var createCheckboxes = function createCheckboxes() {
 	
+	    //while in update form check if the category if already in the store data
 	    return props.dropDownCategories.map(function (category, index) {
+	      var isChecked = props.blogInfo.categories.indexOf(category) > -1 ? true : false;
+	
+	      console.log('checkbox', isChecked, category);
 	      return _react2.default.createElement(
 	        'div',
 	        { key: index },
@@ -39195,7 +39243,8 @@
 	          type: 'checkbox',
 	          name: 'category',
 	          value: category,
-	          onChange: handleCheckboxes
+	          onChange: handleCheckboxes,
+	          checked: isChecked
 	        }),
 	        category
 	      );
@@ -39217,7 +39266,7 @@
 	        type: 'text',
 	        name: 'blogTitle',
 	        placeholder: 'Title',
-	        value: props.fillForm ? props.fillForm.blogTitle : props.blogTitle,
+	        defaultValue: props.blogInfo.blogTitle,
 	        onChange: handleFormChange
 	      })
 	    ),
@@ -39236,7 +39285,7 @@
 	          type: 'text',
 	          name: 'blogAuthor',
 	          placeholder: 'author',
-	          value: props.fillForm ? props.fillForm.blogAuthor : props.blogAuthor,
+	          defaultValue: props.blogInfo.blogAuthor,
 	          onChange: handleFormChange
 	        })
 	      ),
@@ -39252,7 +39301,7 @@
 	          type: 'text',
 	          name: 'location',
 	          placeholder: 'Location',
-	          value: props.fillForm ? props.fillForm.location : props.location,
+	          defaultValue: props.blogInfo.location,
 	          onChange: handleFormChange
 	        })
 	      )
@@ -39269,7 +39318,7 @@
 	        type: 'textbox',
 	        name: 'bodyText',
 	        placeholder: 'Description',
-	        value: props.fillForm ? props.fillForm.blogText : props.bodyText,
+	        defaultValue: props.blogInfo.bodyText,
 	        onChange: handleFormChange
 	        //style={{height: '200px'}}
 	      })
@@ -39286,11 +39335,11 @@
 	        type: 'text',
 	        name: 'images',
 	        placeholder: 'Enter Url of Image (seperate each entry with a comma)',
-	        value: props.fillForm ? props.fillForm.images : props.images,
+	        defaultValue: props.blogInfo.images,
 	        onChange: handleFormChange
 	      })
 	    ),
-	    createCheckboxes()
+	    props.blogInfo.categories ? createCheckboxes() : null
 	  );
 	};
 	
@@ -39316,13 +39365,7 @@
 	
 	var appToState = function appToState(state) {
 	  return {
-	    blogTitle: state.blogReducer.newBlogEntry.blogTitle,
-	    blogAuthor: state.blogReducer.newBlogEntry.blogAuthor,
-	    location: state.blogReducer.newBlogEntry.location,
-	    bodyText: state.blogReducer.newBlogEntry.bodyText,
-	    categories: state.blogReducer.newBlogEntry.categories,
-	    images: state.blogReducer.newBlogEntry.images,
-	    comments: state.blogReducer.newBlogEntry.comments,
+	    blogInfo: state.blogReducer.newBlogEntry,
 	    dropDownCategories: state.blogReducer.categories
 	  };
 	};
@@ -39345,7 +39388,7 @@
 	
 	var _reactRouter = __webpack_require__(208);
 	
-	var _jquery = __webpack_require__(267);
+	var _jquery = __webpack_require__(268);
 	
 	var _jquery2 = _interopRequireDefault(_jquery);
 	
@@ -39353,33 +39396,25 @@
 	
 	var _form2 = _interopRequireDefault(_form);
 	
-	var _blogActions = __webpack_require__(268);
+	var _blogActions = __webpack_require__(264);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-	
 	var BlogForm = function BlogForm(props) {
-	  var _React$createElement;
 	
 	  var submitNewBlogPostToDatabase = function submitNewBlogPostToDatabase(event) {
 	    _jquery2.default.ajax({
 	      url: '/api/blogpost',
 	      type: 'POST',
 	      data: {
-	        blogTitle: props.blogTitle,
-	        blogAuthor: props.blogAuthor,
-	        location: props.location,
-	        bodyText: props.bodyText,
-	        categories: props.categories,
-	        images: props.images
+	        blogTitle: props.blogInfo.blogTitle,
+	        blogAuthor: props.blogInfo.blogAuthor,
+	        location: props.blogInfo.location,
+	        bodyText: props.blogInfo.bodyText,
+	        categories: props.blogInfo.categories,
+	        images: props.blogInfo.images
 	      }
 	    });
-	    (0, _blogActions.newEntryFormStoreData)('blogTitle', '');
-	    (0, _blogActions.newEntryFormStoreData)('blogAuthor', '');
-	    (0, _blogActions.newEntryFormStoreData)('location', '');
-	    (0, _blogActions.newEntryFormStoreData)('bodyText', '');
-	    (0, _blogActions.newEntryFormStoreData)('images', '');
 	  };
 	
 	  return _react2.default.createElement(
@@ -39393,15 +39428,12 @@
 	    _react2.default.createElement(
 	      'form',
 	      { className: 'blogForm', action: '/', onSubmit: submitNewBlogPostToDatabase },
-	      _react2.default.createElement(_form2.default, (_React$createElement = {
+	      _react2.default.createElement(_form2.default, {
 	        dropDownCategories: props.dropDownCategories,
-	        categories: props.categories,
+	        categories: props.blogInfo.categories,
 	        goToHome: true,
-	        blogTitle: props.blogTitle,
-	        blogAuthor: props.blogAuthor,
-	        location: props.location,
-	        bodyText: props.bodyText
-	      }, _defineProperty(_React$createElement, 'categories', props.categories), _defineProperty(_React$createElement, 'images', props.images), _React$createElement)),
+	        blogInfo: props.blogInfo
+	      }),
 	      _react2.default.createElement(
 	        'button',
 	        null,
@@ -39456,11 +39488,11 @@
 	
 	var _reactRouter = __webpack_require__(208);
 	
-	var _jquery = __webpack_require__(267);
+	var _jquery = __webpack_require__(268);
 	
 	var _jquery2 = _interopRequireDefault(_jquery);
 	
-	var _blogActions = __webpack_require__(268);
+	var _blogActions = __webpack_require__(264);
 	
 	var _latestCategoryPost = __webpack_require__(269);
 	
@@ -39552,7 +39584,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _jquery = __webpack_require__(267);
+	var _jquery = __webpack_require__(268);
 	
 	var _jquery2 = _interopRequireDefault(_jquery);
 	

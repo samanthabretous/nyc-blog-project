@@ -30,11 +30,17 @@ const deleteBlogPost =(req, res) =>{
 const updateBlogPost = (req, res) => {
   console.log(req.body)
   BlogPost.update(
-    {_id: contact.id}, 
-    upsertData, 
+    {_id: req.body.id}, 
+    {    
+      blogTitle: req.body.blogTitle,
+      blogAuthor: req.body.blogAuthor,
+      location: req.body.location, 
+      bodyText: req.body.bodyText, 
+      categories: req.body['categories[]']
+    }, 
     {upsert: true}, 
     (err) => {
-
+      console.log('there was an error')
     }
   );
 }

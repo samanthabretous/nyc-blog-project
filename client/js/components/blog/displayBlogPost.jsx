@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router'
 import $ from 'jquery'
-import Display from '../display'
+import Display from '../parts/display'
 
 
 const DisplayBlogPost = (props) => {
@@ -20,7 +20,6 @@ const DisplayBlogPost = (props) => {
     )
   }
 
-  console.log(props.blogPost)
   return (
     <section>
       <div className='listCategories'>
