@@ -1,4 +1,4 @@
-import {HANDLE_NEW_AUTHOR_FORM} from '../actions/types.js';
+import {HANDLE_NEW_USER_FORM} from '../actions/types.js';
 
 const _initialState = {
   _id: '581e144da8de15a917da801a', 
@@ -21,10 +21,10 @@ const _initialState = {
 // }
 
 
-export default function authorFormReducer(state = _initialState, action) {
+export default function userFormReducer(state = _initialState, action) {
   let stateCopy = Object.assign({}, state)
   switch(action.type) {
-    case HANDLE_NEW_AUTHOR_FORM:
+    case HANDLE_NEW_USER_FORM:
       stateCopy[action.name] = action.value;
       return stateCopy;
     default:

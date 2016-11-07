@@ -5,12 +5,12 @@ import {combineReducers} from 'redux';
 import {store} from '../store.js';
 
 // ************************************ IMPORT REDUCERS ************************************
-import authorFormReducer from './authorFormReducer.js';
+import userFormReducer from './userFormReducer.js';
 import blogReducer from './blogReducer.js';
 
 // ************************************ COMBINE REDUCERS ************************************
 const rootReducer = combineReducers({
-  authorFormReducer, 
+  userFormReducer, 
   blogReducer
 })
 
