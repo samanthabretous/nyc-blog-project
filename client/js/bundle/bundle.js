@@ -23224,9 +23224,9 @@
 	
 	var _store = __webpack_require__(202);
 	
-	var _authorFormReducer = __webpack_require__(204);
+	var _userFormReducer = __webpack_require__(293);
 	
-	var _authorFormReducer2 = _interopRequireDefault(_authorFormReducer);
+	var _userFormReducer2 = _interopRequireDefault(_userFormReducer);
 	
 	var _blogReducer = __webpack_require__(206);
 	
@@ -23240,7 +23240,7 @@
 	// ************************************ IMPORT REDUCERS ************************************
 	// ************************************ IMPORT NODE MODULES ************************************
 	var rootReducer = (0, _redux.combineReducers)({
-	  authorFormReducer: _authorFormReducer2.default,
+	  userFormReducer: _userFormReducer2.default,
 	  blogReducer: _blogReducer2.default
 	});
 	
@@ -23248,52 +23248,7 @@
 	exports.default = rootReducer;
 
 /***/ },
-/* 204 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = authorFormReducer;
-	
-	var _types = __webpack_require__(205);
-	
-	var _initialState = {
-	  _id: '581e144da8de15a917da801a',
-	  firstName: 'Victoria',
-	  lastName: "Mack",
-	  email: 'victoria_mack24@gmail.com',
-	  location: "12345",
-	  bio: ""
-	};
-	
-	// const _initialState = {
-	//   _id: "", 
-	//   firstName: "",
-	//   lastName: "",
-	//   email: "",
-	//   location: "",
-	//   bio: ""
-	// }
-	
-	
-	function authorFormReducer() {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _initialState;
-	  var action = arguments[1];
-	
-	  var stateCopy = Object.assign({}, state);
-	  switch (action.type) {
-	    case _types.HANDLE_NEW_AUTHOR_FORM:
-	      stateCopy[action.name] = action.value;
-	      return stateCopy;
-	    default:
-	      return stateCopy;
-	  }
-	}
-
-/***/ },
+/* 204 */,
 /* 205 */
 /***/ function(module, exports) {
 
@@ -23311,7 +23266,7 @@
 	var UPDATE_BLOG_DATA = exports.UPDATE_BLOG_DATA = 'update_blog_data';
 	var MOVE_SINGLE_TO_NEW_ENTRY = exports.MOVE_SINGLE_TO_NEW_ENTRY = 'move_single_to_new_entry';
 	
-	var HANDLE_NEW_AUTHOR_FORM = exports.HANDLE_NEW_AUTHOR_FORM = 'handle_new_author_form';
+	var HANDLE_NEW_USER_FORM = exports.HANDLE_NEW_USER_FORM = 'handle_new_user_form';
 
 /***/ },
 /* 206 */
@@ -23357,7 +23312,12 @@
 	
 	var INTIAL_STATE = {
 	  data: [],
-	  categories: ["Things to Do", "OH MY the Subway", "What are Humans", "I just need to leave NYC", "I would not eat that"],
+	  categories: {
+	    "Things To Do": ["Things to Do"],
+	    "Food": ["I would not eat that"],
+	    "Subway": ["OH MY the Subway"],
+	    "Hating": ["What are Humans", "I just need to leave NYC"]
+	  },
 	  newBlogEntry: {
 	    blogTitle: '',
 	    blogAuthor: '',
@@ -23409,17 +23369,13 @@
 	
 	var _categoryPageContainer2 = _interopRequireDefault(_categoryPageContainer);
 	
-	var _authorFormContainer = __webpack_require__(281);
+	var _userFormContainer = __webpack_require__(291);
 	
-	var _authorFormContainer2 = _interopRequireDefault(_authorFormContainer);
+	var _userFormContainer2 = _interopRequireDefault(_userFormContainer);
 	
 	var _signupContainer = __webpack_require__(284);
 	
 	var _signupContainer2 = _interopRequireDefault(_signupContainer);
-	
-	var _authorForm = __webpack_require__(282);
-	
-	var _authorForm2 = _interopRequireDefault(_authorForm);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -23432,7 +23388,7 @@
 	  _react2.default.createElement(_reactRouter.Route, { path: '/blogpost/:id/update', component: _blogPageUpdateContainer2.default }),
 	  _react2.default.createElement(_reactRouter.Route, { path: '/blogform', component: _blogFormContainer2.default }),
 	  _react2.default.createElement(_reactRouter.Route, { path: '/signup', component: _signupContainer2.default }),
-	  _react2.default.createElement(_reactRouter.Route, { path: '/authorform', component: _authorFormContainer2.default })
+	  _react2.default.createElement(_reactRouter.Route, { path: '/userform', component: _userFormContainer2.default })
 	);
 
 /***/ },
@@ -28246,7 +28202,8 @@
 	
 	var appToState = function appToState(state) {
 	  return {
-	    data: state.blogReducer.data
+	    data: state.blogReducer.data,
+	    categories: state.blogReducer.categories
 	  };
 	};
 	
@@ -28272,22 +28229,19 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var Main = _react2.default.createClass({
-	  displayName: 'Main',
-	  render: function render() {
-	    return _react2.default.createElement(
+	var Main = function Main(props) {
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(_navBar2.default, { categories: props.categories }),
+	    props.children,
+	    _react2.default.createElement(
 	      'div',
 	      null,
-	      _react2.default.createElement(_navBar2.default, null),
-	      this.props.children,
-	      _react2.default.createElement(
-	        'div',
-	        null,
-	        'Footer'
-	      )
-	    );
-	  }
-	});
+	      'Footer'
+	    )
+	  );
+	};
 	
 	exports.default = Main;
 
@@ -28313,9 +28267,9 @@
 	
 	var logoImage = __webpack_require__(265);
 	
-	var NavBar = function NavBar() {
+	var NavBar = function NavBar(props) {
 	  var navLinks = function navLinks() {
-	    var navLinks = ['Things to Do', 'Food', 'Subway', "Hating"];
+	    var navLinks = Object.keys(props.categories);
 	    return navLinks.map(function (link, index) {
 	      return _react2.default.createElement(
 	        _reactRouter.Link,
@@ -38895,9 +38849,9 @@
 	
 	      //get infomation about the author
 	      _jquery2.default.ajax({
-	        url: '/api/authors/' + data.blogAuthor
-	      }).done(function (authorData) {
-	        _this.setState({ blogAuthor: authorData.firstName + " " + authorData.lastName });
+	        url: '/api/user/' + data.blogAuthor
+	      }).done(function (userData) {
+	        _this.setState({ blogAuthor: userData.firstName + " " + userData.lastName });
 	
 	        //move data so it can be used in the update form
 	        (0, _blogActions.moveSingleBlogDataToNewEntryBlogData)();
@@ -39151,7 +39105,7 @@
 	        { 'if': this.props.singleBlogData.blogAuthor === this.props.author },
 	        _react2.default.createElement(
 	          'form',
-	          {
+	          { className: 'blogForm',
 	            action: '/blogpost/' + this.props.params.id,
 	            onSubmit: function onSubmit() {
 	              _this.updateBlogPost(_this.props.params.id);
@@ -39167,6 +39121,15 @@
 	            null,
 	            'Update'
 	          )
+	        )
+	      ),
+	      _react2.default.createElement(
+	        _display2.default,
+	        { 'if': this.props.singleBlogData !== this.props.author },
+	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          'You are not authorized to be on this page'
 	        )
 	      )
 	    );
@@ -39232,7 +39195,7 @@
 	  var createCheckboxes = function createCheckboxes() {
 	
 	    //while in update form check if the category if already in the store data
-	    return props.dropDownCategories.map(function (category, index) {
+	    return Object.keys(props.dropDownCategories).map(function (category, index) {
 	      var isChecked = props.blogInfo.categories.indexOf(category) > -1 ? true : false;
 	
 	      console.log('checkbox', isChecked, category);
@@ -39244,7 +39207,7 @@
 	          name: 'category',
 	          value: category,
 	          onChange: handleCheckboxes,
-	          checked: isChecked
+	          defaultChecked: isChecked
 	        }),
 	        category
 	      );
@@ -39498,6 +39461,10 @@
 	
 	var _latestCategoryPost2 = _interopRequireDefault(_latestCategoryPost);
 	
+	var _card = __webpack_require__(290);
+	
+	var _card2 = _interopRequireDefault(_card);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var CategoryPage = _react2.default.createClass({
@@ -39513,24 +39480,38 @@
 	      }
 	    });
 	  },
+	  isIncluded: function isIncluded(array) {
+	    var _this = this;
+	
+	    //check to see if the post has the same categories as the params
+	    var answer = array.map(function (description) {
+	      var categories = _this.props.categories[_this.props.params.category];
+	      return categories.includes(description);
+	    });
+	    return answer.includes(true);
+	  },
 	  render: function render() {
+	    var _this2 = this;
 	
 	    //loop through all the blog post from the data received from the ajax call above and display
 	    var posts = this.props.data ? this.props.data.map(function (post, index) {
-	      return _react2.default.createElement(
-	        'li',
-	        { key: index },
-	        _react2.default.createElement(
-	          _reactRouter.Link,
-	          { to: '/blogpost/' + post._id, key: index },
-	          post.blogTitle
-	        )
-	      );
+	      if (_this2.isIncluded(post.categories)) {
+	        return _react2.default.createElement(_card2.default, {
+	          key: index,
+	          postId: post._id,
+	          blogTitle: post.blogTitle,
+	          bodyText: post.bodyText
+	        });
+	      }
 	    }) : null;
 	    return _react2.default.createElement(
 	      'div',
 	      null,
-	      posts
+	      _react2.default.createElement(
+	        'section',
+	        { className: 'listOfCards' },
+	        posts
+	      )
 	    );
 	  }
 	});
@@ -39540,126 +39521,9 @@
 	// <Link to={`/blogpost/${post._id}`} key={index}><h1>{post.blogTitle}</h1></Link>
 
 /***/ },
-/* 281 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.AuthorFormContainer = undefined;
-	
-	var _authorForm = __webpack_require__(282);
-	
-	var _authorForm2 = _interopRequireDefault(_authorForm);
-	
-	var _reactRedux = __webpack_require__(172);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var mapStateToProps = function mapStateToProps(state) {
-	  return {
-	    firstName: state.authorFormReducer.firstName,
-	    lastName: state.authorFormReducer.lastName,
-	    email: state.authorFormReducer.email,
-	    location: state.authorFormReducer.location,
-	    bio: state.authorFormReducer.bio
-	  };
-	};
-	
-	var AuthorFormContainer = exports.AuthorFormContainer = (0, _reactRedux.connect)(mapStateToProps)(_authorForm2.default);
-
-/***/ },
-/* 282 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _jquery = __webpack_require__(268);
-	
-	var _jquery2 = _interopRequireDefault(_jquery);
-	
-	var _newAuthorAction = __webpack_require__(283);
-	
-	var _newAuthorAction2 = _interopRequireDefault(_newAuthorAction);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var AuthorForm = function AuthorForm(props) {
-	  var handleSubmit = function handleSubmit(e) {
-	    e.preventDefault();
-	    _jquery2.default.ajax({
-	      url: '/api/authors',
-	      type: 'POST',
-	      data: {
-	        firstName: props.firstName,
-	        lastName: props.lastName,
-	        email: props.email,
-	        location: props.location
-	      }
-	    });
-	  };
-	
-	  var handleChange = function handleChange(e) {
-	    var name = e.target.name;
-	    var value = e.target.value;
-	    (0, _newAuthorAction2.default)(name, value);
-	  };
-	
-	  return _react2.default.createElement(
-	    'div',
-	    null,
-	    _react2.default.createElement(
-	      'form',
-	      { onSubmit: handleSubmit },
-	      _react2.default.createElement('input', { type: 'text', name: 'firstName', placeholder: 'First Name', onChange: handleChange }),
-	      _react2.default.createElement('input', { type: 'text', name: 'lastName', placeholder: 'Last Name', onChange: handleChange }),
-	      _react2.default.createElement('input', { type: 'text', name: 'email', placeholder: 'Email Address', onChange: handleChange }),
-	      _react2.default.createElement('input', { type: 'text', name: 'location', placeholder: 'Location', onChange: handleChange }),
-	      _react2.default.createElement('input', { type: 'text', name: 'bio', placeholder: 'Brief Bio', onChange: handleChange }),
-	      _react2.default.createElement('input', { type: 'submit', name: 'submit', value: 'Submit' })
-	    )
-	  );
-	}; // ************************************ IMPORT NPM MODULES ************************************
-	exports.default = AuthorForm;
-
-/***/ },
-/* 283 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = newAuthorFormAction;
-	
-	var _types = __webpack_require__(205);
-	
-	var _store = __webpack_require__(202);
-	
-	var _store2 = _interopRequireDefault(_store);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function newAuthorFormAction(name, value) {
-	  _store2.default.dispatch({
-	    type: _types.HANDLE_NEW_AUTHOR_FORM,
-	    name: name,
-	    value: value
-	  });
-	}
-
-/***/ },
+/* 281 */,
+/* 282 */,
+/* 283 */,
 /* 284 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -39746,7 +39610,7 @@
 	
 	
 	// module
-	exports.push([module.id, "/*COLORS*/\nnav {\n  width: 100%;\n  background: green;\n  /*.main */ }\n  nav .main {\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n    justify-content: space-between;\n    max-width: 1220px;\n    margin: 0 auto;\n    font-size: 1.2em;\n    height: 65px;\n    /*.navLeft*/\n    /*.searchinput */ }\n    nav .main .navLeft {\n      width: 75%;\n      display: flex;\n      /*.navLinks*/ }\n      nav .main .navLeft .logo {\n        width: 15%;\n        display: flex;\n        align-content: center;\n        justify-content: center;\n        margin-right: 3%; }\n        nav .main .navLeft .logo img {\n          width: 100%;\n          height: auto; }\n      nav .main .navLeft .navLinks {\n        display: flex;\n        justify-content: space-between;\n        width: 50%;\n        margin-right: 3%;\n        padding: 0;\n        color: #FFEABC; }\n        nav .main .navLeft .navLinks li {\n          text-decoration: none;\n          list-style: none;\n          margin: 0%; }\n    nav .main .searchInput {\n      width: 20%;\n      border: 1px solid grey; }\n      nav .main .searchInput input {\n        width: 100%;\n        font-size: 20px; }\n\n/*.nav */\n.blogForm {\n  border: 1px solid red;\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n  align-items: center; }\n  .blogForm .formInner {\n    width: 80%;\n    margin: 0 auto;\n    border: 1px solid red; }\n    .blogForm .formInner .inputContainer {\n      display: flex;\n      flex-direction: row;\n      height: 50px;\n      padding-bottom: 5%; }\n      .blogForm .formInner .inputContainer label {\n        border: 1px solid grey;\n        border-radius: 15px 0 0 15px;\n        font-size: 18px;\n        padding: 1% auto;\n        width: 150px; }\n      .blogForm .formInner .inputContainer input {\n        width: 100%;\n        border: 1px solid grey;\n        border-radius: 0 15px 15px 0;\n        padding: 1%;\n        font-size: 18px; }\n    .blogForm .formInner .author-location {\n      border: 1px solid green;\n      display: flex;\n      justify-content: space-between; }\n      .blogForm .formInner .author-location .inputContainer {\n        width: 50%; }\n        .blogForm .formInner .author-location .inputContainer .input[name=author], .blogForm .formInner .author-location .inputContainer .input[name=author] {\n          width: 100%; }\n    .blogForm .formInner textarea {\n      width: 90%;\n      height: 200px;\n      font-size: 18px;\n      border: 1px solid grey;\n      border-radius: 0 15px 15px 0;\n      resize: none; }\n\n/*COLORS*/\nbody {\n  background: #FFEABC;\n  margin: 0;\n  width: 100%;\n  box-sizing: border-box; }\n", ""]);
+	exports.push([module.id, "/*COLORS*/\nnav {\n  width: 100%;\n  background: green;\n  /*.main */ }\n  nav .main {\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n    justify-content: space-between;\n    max-width: 1220px;\n    margin: 0 auto;\n    font-size: 1.2em;\n    height: 65px;\n    /*.navLeft*/\n    /*.searchinput */ }\n    nav .main .navLeft {\n      width: 75%;\n      display: flex;\n      /*.navLinks*/ }\n      nav .main .navLeft .logo {\n        width: 15%;\n        display: flex;\n        align-content: center;\n        justify-content: center;\n        margin-right: 3%; }\n        nav .main .navLeft .logo img {\n          width: 100%;\n          height: auto; }\n      nav .main .navLeft .navLinks {\n        display: flex;\n        justify-content: space-between;\n        width: 50%;\n        margin-right: 3%;\n        padding: 0;\n        color: #FFEABC; }\n        nav .main .navLeft .navLinks li {\n          text-decoration: none;\n          list-style: none;\n          margin: 0%; }\n    nav .main .searchInput {\n      width: 20%;\n      border: 1px solid grey; }\n      nav .main .searchInput input {\n        width: 100%;\n        font-size: 20px; }\n\n/*.nav */\n.blogForm {\n  border: 1px solid red;\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n  align-items: center; }\n  .blogForm .formInner {\n    width: 80%;\n    margin: 0 auto;\n    border: 1px solid red; }\n    .blogForm .formInner .inputContainer {\n      display: flex;\n      flex-direction: row;\n      height: 50px;\n      padding-bottom: 5%; }\n      .blogForm .formInner .inputContainer label {\n        border: 1px solid grey;\n        border-radius: 15px 0 0 15px;\n        font-size: 18px;\n        padding: 1% auto;\n        width: 150px; }\n      .blogForm .formInner .inputContainer input {\n        width: 100%;\n        border: 1px solid grey;\n        border-radius: 0 15px 15px 0;\n        padding: 1%;\n        font-size: 18px; }\n    .blogForm .formInner .author-location {\n      border: 1px solid green;\n      display: flex;\n      justify-content: space-between; }\n      .blogForm .formInner .author-location .inputContainer {\n        width: 50%; }\n        .blogForm .formInner .author-location .inputContainer .input[name=author], .blogForm .formInner .author-location .inputContainer .input[name=author] {\n          width: 100%; }\n    .blogForm .formInner textarea {\n      width: 90%;\n      height: 200px;\n      font-size: 18px;\n      border: 1px solid grey;\n      border-radius: 0 15px 15px 0;\n      resize: none; }\n\n/*COLORS*/\n.listOfCards {\n  border: 1px green dashed;\n  width: 85%;\n  margin: 0 auto;\n  display: flex;\n  flex-wrap: wrap; }\n\n.blogCard {\n  border: 1px solid red;\n  background: #FBCF30;\n  width: 28%;\n  margin: 1%; }\n\n/*COLORS*/\nbody {\n  background: #FFEABC;\n  margin: 0;\n  width: 100%;\n  box-sizing: border-box; }\n", ""]);
 	
 	// exports
 
@@ -40058,6 +39922,214 @@
 			URL.revokeObjectURL(oldSrc);
 	}
 
+
+/***/ },
+/* 290 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(208);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Card = function Card(props) {
+	  return _react2.default.createElement(
+	    _reactRouter.Link,
+	    { to: '/blogpost/' + props.postId, className: 'blogCard' },
+	    _react2.default.createElement(
+	      'article',
+	      null,
+	      _react2.default.createElement(
+	        'h3',
+	        null,
+	        props.blogTitle
+	      ),
+	      _react2.default.createElement(
+	        'p',
+	        null,
+	        props.bodyText
+	      )
+	    )
+	  );
+	};
+	
+	exports.default = Card;
+
+/***/ },
+/* 291 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _userForm = __webpack_require__(292);
+	
+	var _userForm2 = _interopRequireDefault(_userForm);
+	
+	var _reactRedux = __webpack_require__(172);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var mapStateToProps = function mapStateToProps(state) {
+	  return {
+	    firstName: state.userFormReducer.firstName,
+	    lastName: state.userFormReducer.lastName,
+	    email: state.userFormReducer.email,
+	    location: state.userFormReducer.location,
+	    bio: state.userFormReducer.bio
+	  };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps)(_userForm2.default);
+
+/***/ },
+/* 292 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _jquery = __webpack_require__(268);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
+	
+	var _newUserAction = __webpack_require__(294);
+	
+	var _newUserAction2 = _interopRequireDefault(_newUserAction);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var UserForm = function UserForm(props) {
+	  var handleSubmit = function handleSubmit(e) {
+	    e.preventDefault();
+	    _jquery2.default.ajax({
+	      url: '/api/authors',
+	      type: 'POST',
+	      data: {
+	        firstName: props.firstName,
+	        lastName: props.lastName,
+	        email: props.email,
+	        location: props.location
+	      }
+	    });
+	  };
+	
+	  var handleChange = function handleChange(e) {
+	    var name = e.target.name;
+	    var value = e.target.value;
+	    (0, _newUserAction2.default)(name, value);
+	  };
+	
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(
+	      'form',
+	      { onSubmit: handleSubmit },
+	      _react2.default.createElement('input', { type: 'text', name: 'firstName', placeholder: 'First Name', onChange: handleChange }),
+	      _react2.default.createElement('input', { type: 'text', name: 'lastName', placeholder: 'Last Name', onChange: handleChange }),
+	      _react2.default.createElement('input', { type: 'text', name: 'email', placeholder: 'Email Address', onChange: handleChange }),
+	      _react2.default.createElement('input', { type: 'text', name: 'location', placeholder: 'Location', onChange: handleChange }),
+	      _react2.default.createElement('input', { type: 'text', name: 'bio', placeholder: 'Brief Bio', onChange: handleChange }),
+	      _react2.default.createElement('input', { type: 'submit', name: 'submit', value: 'Submit' })
+	    )
+	  );
+	}; // ************************************ IMPORT NPM MODULES ************************************
+	exports.default = UserForm;
+
+/***/ },
+/* 293 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = userFormReducer;
+	
+	var _types = __webpack_require__(205);
+	
+	var _initialState = {
+	  _id: '581e144da8de15a917da801a',
+	  firstName: 'Victoria',
+	  lastName: "Mack",
+	  email: 'victoria_mack24@gmail.com',
+	  location: "12345",
+	  bio: "",
+	  owner: false
+	};
+	
+	// const _initialState = {
+	//   _id: "", 
+	//   firstName: "",
+	//   lastName: "",
+	//   email: "",
+	//   location: "",
+	//   bio: "", 
+	//owner: false
+	// }
+	
+	
+	function userFormReducer() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _initialState;
+	  var action = arguments[1];
+	
+	  var stateCopy = Object.assign({}, state);
+	  switch (action.type) {
+	    case _types.HANDLE_NEW_USER_FORM:
+	      stateCopy[action.name] = action.value;
+	      return stateCopy;
+	    default:
+	      return stateCopy;
+	  }
+	}
+
+/***/ },
+/* 294 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = newAuthorFormAction;
+	
+	var _types = __webpack_require__(205);
+	
+	var _store = __webpack_require__(202);
+	
+	var _store2 = _interopRequireDefault(_store);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function newAuthorFormAction(name, value) {
+	  _store2.default.dispatch({
+	    type: _types.HANDLE_NEW_USER_FORM,
+	    name: name,
+	    value: value
+	  });
+	}
 
 /***/ }
 /******/ ]);

@@ -7,10 +7,8 @@ import BlogPageContainer from './middleware/blogPageContainer'
 import BlogPageUpdateContainer from './middleware/blogPageUpdateContainer'
 import BlogFormContainer from './middleware/blogFormContainer'
 import CategoryPageContainer from './middleware/categoryPageContainer'
-import AuthorFormContainer from './middleware/authorFormContainer.js'
-import SignupContainer from './middleware/signupContainer.js'
-
-import AuthorForm from './components/authorForm.jsx';
+import UserFormContainer from './middleware/userFormContainer'
+import SignupContainer from './middleware/signupContainer'
 
 export default (
   <Route path="/" component={MainContainer}>
@@ -20,6 +18,6 @@ export default (
     <Route path='/blogpost/:id/update' component={BlogPageUpdateContainer}/>
     <Route path='/blogform' component={BlogFormContainer}/>
     <Route path='/signup' component={SignupContainer}/>
-    <Route path='/authorform' component={AuthorFormContainer}/>
+    <Route path='/userform' component={UserFormContainer}/>
   </Route> 
 );

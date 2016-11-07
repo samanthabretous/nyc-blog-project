@@ -4,9 +4,9 @@ import {Link} from 'react-router'
 import {newEntryFormStoreData} from '../../actions/blogActions'
 let logoImage = require("../../../images/nycweird.png")
 
-const NavBar = () => {
+const NavBar = (props) => {
   let navLinks = () => {
-    let navLinks =['Things to Do', 'Food', 'Subway', "Hating"]
+    let navLinks = Object.keys(props.categories)
     return navLinks.map((link, index) =>
       <Link key={index} to={'/category/'+link}><li>{link.toUpperCase()}</li></Link>
     ) 
