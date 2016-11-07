@@ -1,8 +1,11 @@
 import React from 'react'
 import $ from 'jquery'
 
-import DisplayBlogPost from './parts/blog/DisplayBlogPost'
-import {updateBlogData} from '../actions/blogActions'
+import DisplayBlogPost from './DisplayBlogPost'
+import {
+  updateBlogData, 
+  moveSingleBlogDataToNewEntryBlogData
+} from '../../actions/blogActions'
 
 const BlogPage = React.createClass({
 
@@ -18,21 +21,21 @@ const BlogPage = React.createClass({
     })
     .done((data) => {
       updateBlogData(data)
-      console.log(data)
 
       //get infomation about the author
       $.ajax({
         url: `/api/authors/${data.blogAuthor}`
       })
       .done((authorData) => {
-        console.log(authorData)
         this.setState({blogAuthor:authorData.firstName + " " + authorData.lastName})
+        
+        //move data so it can be used in the update form
+        moveSingleBlogDataToNewEntryBlogData()
       })
     })
   },
 
   render(){
-    console.log(this.state.blogAuthor)
     return (
       <div>
         <DisplayBlogPost 

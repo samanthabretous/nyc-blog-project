@@ -1,15 +1,16 @@
 import React from 'react'
 import {Link} from 'react-router'
 
+import Display from '../parts/display'
+
 import {
   newEntryFormStoreData, 
-  addCategoryToStore
-} from '../../../actions/blogActions'
+  addCategoryToStore, 
+} from '../../actions/blogActions'
 
 const Form = (props) => {
 
   let handleFormChange = (event) => {
-        console.log('bodyText ',props.blogTitle, props.bodyText)
     let name = event.target.name
     let value = event.target.value
     newEntryFormStoreData(name, value)
@@ -24,7 +25,6 @@ const Form = (props) => {
       if (props.categories.indexOf(newCategory) === -1){
         allCategories = props.categories.concat(newCategory)
       } else {
-        console.log('same', props.categories)
         allCategories = props.categories.filter((category)=>{
           if (category !== newCategory) return category
         })
@@ -32,38 +32,45 @@ const Form = (props) => {
     } else {
       allCategories = [newCategory]
     }
-
+    console.log(allCategories)
     //send the previous values and new added value to the store
     addCategoryToStore(allCategories)
+    createCheckboxes()
   }
   
   let createCheckboxes = () => {
 
-    return props.dropDownCategories.map((category, index) => ( 
-      <div key={index}>
-        <input 
-          type='checkbox' 
-          name='category'
-          value={category}  
-          onChange={handleCheckboxes}
-        />
-        {category}
-      </div>
-    ))
+    //while in update form check if the category if already in the store data
+    return props.dropDownCategories.map((category, index) => {
+      let isChecked = props.blogInfo.categories.indexOf(category) > -1 ? true : false
+      
+      console.log('checkbox',isChecked, category)
+      return ( 
+        <div key={index}>
+          <input 
+            type='checkbox' 
+            name='category'
+            value={category}  
+            onChange={handleCheckboxes}
+            checked={isChecked}
+          />
+          {category}
+        </div>
+      )
+    })
   }
 
 
 
   return (
     <div className='formInner'>
-
       <div className='inputContainer'>
         <label>Title</label>
         <input 
           type="text" 
           name='blogTitle'
           placeholder="Title"
-          value={props.fillForm ? props.fillForm.blogTitle : props.blogTitle}
+          defaultValue={props.blogInfo.blogTitle}
           onChange={handleFormChange}
         />
       </div>
@@ -75,7 +82,7 @@ const Form = (props) => {
             type="text"
             name='blogAuthor' 
             placeholder="author"
-            value={props.fillForm ? props.fillForm.blogAuthor : props.blogAuthor}
+            defaultValue={props.blogInfo.blogAuthor}
             onChange={handleFormChange}
           />
         </div>
@@ -86,7 +93,7 @@ const Form = (props) => {
             type="text"
             name='location' 
             placeholder="Location"
-            value={props.fillForm ? props.fillForm.location : props.location}
+            defaultValue={props.blogInfo.location}
             onChange={handleFormChange}
           />
         </div>
@@ -98,7 +105,7 @@ const Form = (props) => {
           type="textbox"
           name='bodyText' 
           placeholder="Description"
-          value={props.fillForm ? props.fillForm.blogText : props.bodyText}
+          defaultValue={props.blogInfo.bodyText}
           onChange={handleFormChange}
           //style={{height: '200px'}}
         ></textarea>
@@ -109,11 +116,11 @@ const Form = (props) => {
         type="text"
         name='images' 
         placeholder="Enter Url of Image (seperate each entry with a comma)"
-        value={props.fillForm ? props.fillForm.images : props.images}
+        defaultValue={props.blogInfo.images}
         onChange={handleFormChange}
       />
     </div>
-    {createCheckboxes()}
+    {props.blogInfo.categories ? createCheckboxes() : null}
   </div>
   )
 }
