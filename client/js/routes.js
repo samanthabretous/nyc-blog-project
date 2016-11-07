@@ -10,7 +10,6 @@ import CategoryPageContainer from './middleware/categoryPageContainer'
 import AuthorFormContainer from './middleware/authorFormContainer.js'
 import SignupContainer from './middleware/signupContainer.js'
 
-import AuthorForm from './components/authorForm.jsx';
 
 export default (
   <Route path="/" component={MainContainer}>

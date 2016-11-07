@@ -23417,10 +23417,6 @@
 	
 	var _signupContainer2 = _interopRequireDefault(_signupContainer);
 	
-	var _authorForm = __webpack_require__(282);
-	
-	var _authorForm2 = _interopRequireDefault(_authorForm);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = _react2.default.createElement(

@@ -4,6 +4,7 @@ const Author = require('mongoose').model('Author');
 // ***** Retrieves authors in DB
 const getAuthor = (req, res, next) => {
   Author.find({}, (err, data) => {
+    console.log(data);
     res.send(data);
   });
 };

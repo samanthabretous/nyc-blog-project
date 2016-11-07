@@ -1,8 +1,13 @@
-import React from 'react'
+import React from 'react';
 
 const Profile = () => {
   return (
-    <h1>Hey Im the Profile Page</h1>
+    <div>
+      <h1>USER NAME</h1>
+      <h2>Location</h2>
+      <h3>Bio</h3>
+      <h1>Recent Blog Posts</h1>
+    </div>
   )
 }
 
