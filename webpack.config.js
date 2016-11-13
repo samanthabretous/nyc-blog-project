@@ -13,7 +13,7 @@ module.exports = {
         loaders: ["style", "css", "sass"]
       },
       { 
-        test: /\.(png|jpg)$/, 
+        test: /\.(png|jpg|otf)$/, 
         loader: 'url-loader?limit=8192' 
       },
       {

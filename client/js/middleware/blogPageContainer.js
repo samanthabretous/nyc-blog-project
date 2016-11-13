@@ -4,7 +4,7 @@ import BlogPage from '../components/blog/blogPage'
 const appToState = state => ({
   data: state.blogReducer.data,
   singleBlogData: state.blogReducer.singleBlogData,
-  author: state.authorFormReducer._id
+  author: state.userFormReducer._id
 })
 
 export default connect(appToState)(BlogPage)

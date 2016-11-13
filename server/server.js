@@ -25,7 +25,6 @@ db.on('open', function() {
   // Handles client side routing
   app.use('*', routes.home)
 
-
   app.listen(5555, function() {
     console.log('Listening on port 5555');
   })

@@ -6,9 +6,9 @@ const blogSchema = mongoose.Schema({
   date: { type: Date, default: Date.now },
   location: String, 
   bodyText: String, 
-  categories: [{type: String}],
+  categories: [],
   images: String,
-  comments: [Number]
+  comments: [String]
 });
 
 

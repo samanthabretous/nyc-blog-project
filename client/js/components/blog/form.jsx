@@ -52,7 +52,7 @@ const Form = (props) => {
             name='category'
             value={category}  
             onChange={handleCheckboxes}
-            defaultChecked={isChecked}
+            checked={isChecked}
           />
           {category}
         </div>

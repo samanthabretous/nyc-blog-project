@@ -2,15 +2,15 @@
 import {combineReducers} from 'redux';
 
 // ************************************ IMPORT STORE ************************************
-import {store} from '../store.js';
+import {store} from '../store';
 
 // ************************************ IMPORT REDUCERS ************************************
-import userFormReducer from './userFormReducer.js';
-import blogReducer from './blogReducer.js';
+import userFormReducer from './userFormReducer';
+import blogReducer from './blogReducer';
 
 // ************************************ COMBINE REDUCERS ************************************
 const rootReducer = combineReducers({
-  userFormReducer, 
+  //userFormReducer, 
   blogReducer
 })
 
