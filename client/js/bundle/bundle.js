@@ -23464,7 +23464,7 @@
 	
 	var _store2 = _interopRequireDefault(_store);
 	
-	var _blogThunkActions = __webpack_require__(295);
+	var _blogThunkActions = __webpack_require__(289);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -39836,7 +39836,45 @@
 	exports.default = NotFound;
 
 /***/ },
-/* 289 */,
+/* 289 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.getBlogPostsAsync = exports.getAllBlogPostsData = undefined;
+	
+	var _jquery = __webpack_require__(269);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
+	
+	var _types = __webpack_require__(206);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	//send all blogs to the store
+	var getAllBlogPostsData = exports.getAllBlogPostsData = function getAllBlogPostsData(blogposts) {
+	  return {
+	    type: _types.GET_ALL_BLOG_POSTS_DATA,
+	    payload: blogposts
+	  };
+	};
+	
+	//get All blog post and send to store
+	var getBlogPostsAsync = exports.getBlogPostsAsync = function getBlogPostsAsync() {
+	  return function (dispatch) {
+	    _jquery2.default.ajax({
+	      url: '/api/blogpost/',
+	      type: 'GET'
+	    }).done(function (blogposts) {
+	      dispatch(getAllBlogPostsData(blogposts));
+	    });
+	  };
+	};
+
+/***/ },
 /* 290 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -40189,45 +40227,6 @@
 			URL.revokeObjectURL(oldSrc);
 	}
 
-
-/***/ },
-/* 295 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.getBlogPostsAsync = exports.getAllBlogPostsData = undefined;
-	
-	var _jquery = __webpack_require__(269);
-	
-	var _jquery2 = _interopRequireDefault(_jquery);
-	
-	var _types = __webpack_require__(206);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	//send all blogs to the store
-	var getAllBlogPostsData = exports.getAllBlogPostsData = function getAllBlogPostsData(blogposts) {
-	  return {
-	    type: _types.GET_ALL_BLOG_POSTS_DATA,
-	    payload: blogposts
-	  };
-	};
-	
-	//get All blog post and send to store
-	var getBlogPostsAsync = exports.getBlogPostsAsync = function getBlogPostsAsync() {
-	  return function (dispatch) {
-	    _jquery2.default.ajax({
-	      url: '/api/blogpost/',
-	      type: 'GET'
-	    }).done(function (blogposts) {
-	      dispatch(getAllBlogPostsData(blogposts));
-	    });
-	  };
-	};
 
 /***/ }
 /******/ ]);

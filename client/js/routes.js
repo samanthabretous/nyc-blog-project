@@ -19,6 +19,7 @@ import {getBlogPostsAsync, getSingleBlogPostAsync} from './actions/blogThunkActi
 // const getBlogPost = (nextState) => {store.dispatch(getSingleBlogPostAsync(nextState.params.id))}
 const getAllBlogPosts = () => {store.dispatch(getBlogPostsAsync())}
 
+
 export default (
   <Route>
   <Route path="/" component={MainContainer}>
