@@ -10,13 +10,10 @@ const getUser = (req, res, next) => {
 
 // ***** Creates new author and stores in User model in DB
 const createUser = (req, res) => {
-  User.create({
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    email: req.body.email,
-    location:  req.body.location
-  }, () => {
-    console.log('New author profile created.')
+  console.log(req)
+  User.create(req.body, (err) => {
+    if (err) console.log("Error creating author")
+    else console.log('New author profile created.')
   })
 }
 

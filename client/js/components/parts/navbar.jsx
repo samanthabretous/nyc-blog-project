@@ -31,7 +31,7 @@ const NavBar = (props) => {
             {navLinks()}
           </ul>
         </div>
-        <div>
+        <div className="userSignin">
           <Link to='/blogform' onClick={clearNewBlogEntry}><li>New Post</li></Link>
           <Link to='/signup'><li>SIGN IN</li></Link>
         </div>

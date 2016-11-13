@@ -4,7 +4,7 @@ import BlogPageUpdate from '../components/blog/blogPageUpdate'
 const appToState = state => ({
   singleBlogData: state.blogReducer.singleBlogData,
   newBlogEntry: state.blogReducer.newBlogEntry,
-  author: state.authorFormReducer._id, 
+  author: state.userFormReducer._id, 
   categories: state.blogReducer.categories
 })
 

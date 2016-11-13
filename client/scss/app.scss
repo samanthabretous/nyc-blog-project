@@ -5,9 +5,15 @@
 
 @import 'utilities/variables';
 
+@font-face{
+  font-family: 'lemonFont';
+  src: url('../fonts/DK_Lemon_Yellow_Sun.otf')
+}
+
 body{
-  background: $pale;
+  background: white;
   margin: 0;
   width: 100%;
   box-sizing: border-box;
+  font-family: 'lemonFont';
 }

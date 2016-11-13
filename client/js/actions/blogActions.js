@@ -1,23 +1,19 @@
 import store from '../store'
 import {
-  UPDATE_DATA, 
+  GET_ALL_BLOG_POSTS_DATA, 
+  GET_SINGLE_BLOG_POST_DATA, 
   HANDLE_BLOGFORM_CHANGE, 
   ADD_CATEGORY_TO_NEW_BlOGPOST, 
-  UPDATE_BLOG_DATA, 
   MOVE_SINGLE_TO_NEW_ENTRY
 } from './types'
 
-export function updateStoreData(data) {
-  store.dispatch({
-    type: UPDATE_DATA,
-    data
-  })
-}
 
-export function updateBlogData(data) {
+
+//send one blog to the store
+export function getSingleBlogPostData(data) {
   store.dispatch({
-    type: UPDATE_BLOG_DATA,
-    data
+    type: GET_SINGLE_BLOG_POST_DATA,
+    payload: data
   })
 }
 
