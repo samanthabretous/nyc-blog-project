@@ -36,11 +36,9 @@ const CategoryPage = React.createClass({
       }
     }) : null
     return (
-      <div>
         <section className="listOfCards">
           {posts}
         </section>
-      </div>
     )
   }
 })

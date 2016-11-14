@@ -1,5 +1,5 @@
 import {connect} from 'react-redux'
-import BlogPageUpdate from '../components/blog/blogPageUpdate'
+import BlogPageUpdate from '../components/blog/UpdateBlog'
 
 const appToState = state => ({
   singleBlogData: state.blogReducer.singleBlogData,

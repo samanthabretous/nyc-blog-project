@@ -1,10 +1,11 @@
 import React from 'react'
 import {Link} from 'react-router'
 import $ from 'jquery'
+import store from '../../store'
 import Display from '../parts/display'
 
 
-const DisplayBlogPost = (props) => {
+const DisplayBlog = (props) => {
 
   let deleteBlogPost = (postId) =>{
     $.ajax({
@@ -28,7 +29,7 @@ const DisplayBlogPost = (props) => {
       <div className='blogHeader'>
         <h1>{props.blogPost.blogTitle}</h1>
         <div>
-          <p>{props.blogAuthor} • {props.blogPost.date}</p>
+          <p>{props.blogAuthor.firstName} • {props.blogPost.date}</p>
           <p>{props.blogPost.location}</p>
         </div>
       </div>
@@ -46,4 +47,4 @@ const DisplayBlogPost = (props) => {
   )
 }
 
-export default DisplayBlogPost
+export default DisplayBlog

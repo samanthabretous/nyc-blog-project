@@ -44,17 +44,18 @@ const Form = (props) => {
     return Object.keys(props.dropDownCategories).map((category, index) => {
       let isChecked = props.blogInfo.categories.indexOf(category) > -1 ? true : false
       
-      console.log('checkbox',isChecked, category)
+      //console.log('checkbox',isChecked, category)
+      console.log(props.dropDownCategories[category][0])
       return ( 
         <div key={index}>
           <input 
             type='checkbox' 
             name='category'
-            value={category}  
+            value={props.dropDownCategories[category][0]}  
             onChange={handleCheckboxes}
             defaultChecked={isChecked}
           />
-          {category}
+          {props.dropDownCategories[category][0]}
         </div>
       )
     })
