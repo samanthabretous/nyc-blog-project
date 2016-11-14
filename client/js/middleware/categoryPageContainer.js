@@ -4,7 +4,7 @@ import CategoryPage from '../components/categoryPage'
 
 const CategoryPageContainer = (props) => (
   props.data ?
-  <CategoryPage data={props.data} categories={props.categories}/> : <h1>Loading...</h1>
+  <CategoryPage whichCategory={props.params.category} data={props.data} categories={props.categories}/> : <h1>Loading...</h1>
 )
 
 const appToState = state => ({

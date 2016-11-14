@@ -13,7 +13,7 @@ const Form = (props) => {
   let handleFormChange = (event) => {
     let name = event.target.name
     let value = event.target.value
-    newEntryFormStoreData(name, value)
+    props.changeParentState(name, value)
   }
 
   let handleCheckboxes = (event) => {
@@ -34,7 +34,7 @@ const Form = (props) => {
     }
     console.log(allCategories)
     //send the previous values and new added value to the store
-    addCategoryToStore(allCategories)
+    props.changeParentState('categories', allCategories)
     createCheckboxes()
   }
   
@@ -52,7 +52,7 @@ const Form = (props) => {
             name='category'
             value={category}  
             onChange={handleCheckboxes}
-            checked={isChecked}
+            defaultChecked={isChecked}
           />
           {category}
         </div>

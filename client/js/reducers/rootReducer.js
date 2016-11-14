@@ -10,7 +10,7 @@ import blogReducer from './blogReducer';
 
 // ************************************ COMBINE REDUCERS ************************************
 const rootReducer = combineReducers({
-  //userFormReducer, 
+  userFormReducer, 
   blogReducer
 })
 

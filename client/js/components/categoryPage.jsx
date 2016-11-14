@@ -14,7 +14,7 @@ const CategoryPage = React.createClass({
     let answer = array.map((description)=>{
       console.log(this.props.categories)
       console.log(this.props)
-      let categories = this.props.categories[this.props.params.category]
+      let categories = this.props.categories[this.props.whichCategory]
       return categories.includes(description)
     })
     return answer.includes(true)

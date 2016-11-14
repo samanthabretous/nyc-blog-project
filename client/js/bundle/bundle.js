@@ -23272,7 +23272,7 @@
 	// ************************************ IMPORT REDUCERS ************************************
 	// ************************************ IMPORT NODE MODULES ************************************
 	var rootReducer = (0, _redux.combineReducers)({
-	  //userFormReducer, 
+	  userFormReducer: _userFormReducer2.default,
 	  blogReducer: _blogReducer2.default
 	});
 	
@@ -23339,12 +23339,16 @@
 	/**
 	 * export our different types so that our actions and components can use them
 	 */
+	
+	//blog reducer
 	var GET_ALL_BLOG_POSTS_DATA = exports.GET_ALL_BLOG_POSTS_DATA = 'get_all_blog_posts_data';
 	var GET_SINGLE_BLOG_POST_DATA = exports.GET_SINGLE_BLOG_POST_DATA = 'get_single_blog_post_data';
+	var CREATE_BLOG_POST = exports.CREATE_BLOG_POST = 'create_blog_post';
 	var HANDLE_BLOGFORM_CHANGE = exports.HANDLE_BLOGFORM_CHANGE = 'handle_blogform_change';
 	var ADD_CATEGORY_TO_NEW_BlOGPOST = exports.ADD_CATEGORY_TO_NEW_BlOGPOST = 'add_category_to_new_blogpost';
 	var MOVE_SINGLE_TO_NEW_ENTRY = exports.MOVE_SINGLE_TO_NEW_ENTRY = 'move_single_to_new_entry';
 	
+	//user reducer
 	var HANDLE_NEW_USER_FORM = exports.HANDLE_NEW_USER_FORM = 'handle_new_user_form';
 
 /***/ },
@@ -23365,29 +23369,18 @@
 	    case _types.GET_ALL_BLOG_POSTS_DATA:
 	      console.log(Object.assign({}, state, { data: action.payload }));
 	      return Object.assign({}, state, { data: action.payload });
+	    case _types.CREATE_BLOG_POST:
+	      return Object.assign({}, state, { data: [].concat(_toConsumableArray(state.data), [action.payload]) });
 	    case _types.GET_SINGLE_BLOG_POST_DATA:
 	      return Object.assign({}, state, { singleBlogData: action.payload });
-	    case _types.MOVE_SINGLE_TO_NEW_ENTRY:
-	      state.newBlogEntry.blogTitle = state.singleBlogData.blogTitle;
-	      state.newBlogEntry.blogAuthor = state.singleBlogData.blogAuthor;
-	      state.newBlogEntry.location = state.singleBlogData.location;
-	      state.newBlogEntry.bodyText = state.singleBlogData.bodyText;
-	      state.newBlogEntry.categories = state.singleBlogData.categories;
-	      state.newBlogEntry.images = state.singleBlogData.images;
-	      return Object.assign({}, state);
-	    case _types.HANDLE_BLOGFORM_CHANGE:
-	      state.newBlogEntry[action.name] = action.value;
-	      console.log('reducer', state);
-	      return Object.assign({}, state);
-	    case _types.ADD_CATEGORY_TO_NEW_BlOGPOST:
-	      state.newBlogEntry.categories = action.name;
-	      return Object.assign({}, state);
 	    default:
 	      return state;
 	  }
 	};
 	
 	var _types = __webpack_require__(206);
+	
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 	
 	var INTIAL_STATE = {
 	  categories: {
@@ -23397,15 +23390,7 @@
 	    "Hating": ["What are Humans", "I just need to leave NYC"]
 	  },
 	  data: [],
-	  singleBlogData: [],
-	  newBlogEntry: {
-	    blogTitle: '',
-	    blogAuthor: '',
-	    location: '',
-	    bodyText: '',
-	    categories: [],
-	    images: ''
-	  }
+	  singleBlogData: []
 	};
 
 /***/ },
@@ -23440,9 +23425,9 @@
 	
 	var _blogPageUpdateContainer2 = _interopRequireDefault(_blogPageUpdateContainer);
 	
-	var _blogFormContainer = __webpack_require__(278);
+	var _createBlogContainer = __webpack_require__(295);
 	
-	var _blogFormContainer2 = _interopRequireDefault(_blogFormContainer);
+	var _createBlogContainer2 = _interopRequireDefault(_createBlogContainer);
 	
 	var _categoryPageContainer = __webpack_require__(280);
 	
@@ -23483,7 +23468,13 @@
 	  _react2.default.createElement(
 	    _reactRouter.Route,
 	    { path: '/', component: _mainContainer2.default },
-	    _react2.default.createElement(_reactRouter.IndexRoute, { component: _homePageContainer2.default, onEnter: getAllBlogPosts })
+	    _react2.default.createElement(_reactRouter.IndexRoute, { component: _homePageContainer2.default, onEnter: getAllBlogPosts }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/blogpost/:id', component: _blogPageContainer2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/category/:category', component: _categoryPageContainer2.default, onEnter: getAllBlogPosts }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/blogpost/:id/update', component: _blogPageUpdateContainer2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/create-blog', component: _createBlogContainer2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/signup', component: _signupContainer2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/userform', component: _userFormContainer2.default })
 	  ),
 	  _react2.default.createElement(_reactRouter.Route, { path: '*', component: _notFound2.default })
 	);
@@ -28381,14 +28372,6 @@
 	    });
 	  };
 	
-	  var clearNewBlogEntry = function clearNewBlogEntry() {
-	    (0, _blogActions.newEntryFormStoreData)('blogTitle', '');
-	    (0, _blogActions.newEntryFormStoreData)('blogAuthor', '');
-	    (0, _blogActions.newEntryFormStoreData)('location', '');
-	    (0, _blogActions.newEntryFormStoreData)('bodyText', '');
-	    (0, _blogActions.newEntryFormStoreData)('images', '');
-	  };
-	
 	  return _react2.default.createElement(
 	    'nav',
 	    null,
@@ -28418,7 +28401,7 @@
 	        { className: 'userSignin' },
 	        _react2.default.createElement(
 	          _reactRouter.Link,
-	          { to: '/blogform', onClick: clearNewBlogEntry },
+	          { to: '/create-blog' },
 	          _react2.default.createElement(
 	            'li',
 	            null,
@@ -39241,7 +39224,7 @@
 	  var handleFormChange = function handleFormChange(event) {
 	    var name = event.target.name;
 	    var value = event.target.value;
-	    (0, _blogActions.newEntryFormStoreData)(name, value);
+	    props.changeParentState(name, value);
 	  };
 	
 	  var handleCheckboxes = function handleCheckboxes(event) {
@@ -39262,7 +39245,7 @@
 	    }
 	    console.log(allCategories);
 	    //send the previous values and new added value to the store
-	    (0, _blogActions.addCategoryToStore)(allCategories);
+	    props.changeParentState('categories', allCategories);
 	    createCheckboxes();
 	  };
 	
@@ -39281,7 +39264,7 @@
 	          name: 'category',
 	          value: category,
 	          onChange: handleCheckboxes,
-	          checked: isChecked
+	          defaultChecked: isChecked
 	        }),
 	        category
 	      );
@@ -39383,106 +39366,8 @@
 	exports.default = Form;
 
 /***/ },
-/* 278 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _blogForm = __webpack_require__(279);
-	
-	var _blogForm2 = _interopRequireDefault(_blogForm);
-	
-	var _reactRedux = __webpack_require__(172);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var appToState = function appToState(state) {
-	  return {
-	    blogInfo: state.blogReducer.newBlogEntry,
-	    dropDownCategories: state.blogReducer.categories
-	  };
-	};
-	
-	exports.default = (0, _reactRedux.connect)(appToState)(_blogForm2.default);
-
-/***/ },
-/* 279 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactRouter = __webpack_require__(209);
-	
-	var _jquery = __webpack_require__(269);
-	
-	var _jquery2 = _interopRequireDefault(_jquery);
-	
-	var _form = __webpack_require__(277);
-	
-	var _form2 = _interopRequireDefault(_form);
-	
-	var _blogActions = __webpack_require__(265);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var BlogForm = function BlogForm(props) {
-	
-	  var submitNewBlogPostToDatabase = function submitNewBlogPostToDatabase(event) {
-	    _jquery2.default.ajax({
-	      url: '/api/blogpost',
-	      type: 'POST',
-	      data: {
-	        blogTitle: props.blogInfo.blogTitle,
-	        blogAuthor: props.blogInfo.blogAuthor,
-	        location: props.blogInfo.location,
-	        bodyText: props.blogInfo.bodyText,
-	        categories: props.blogInfo.categories,
-	        images: props.blogInfo.images
-	      }
-	    });
-	  };
-	
-	  return _react2.default.createElement(
-	    'div',
-	    null,
-	    _react2.default.createElement(
-	      'h1',
-	      null,
-	      'New Blog Post'
-	    ),
-	    _react2.default.createElement(
-	      'form',
-	      { className: 'blogForm', action: '/', onSubmit: submitNewBlogPostToDatabase },
-	      _react2.default.createElement(_form2.default, {
-	        dropDownCategories: props.dropDownCategories,
-	        categories: props.blogInfo.categories,
-	        goToHome: true,
-	        blogInfo: props.blogInfo
-	      }),
-	      _react2.default.createElement(
-	        'button',
-	        null,
-	        'Submit'
-	      )
-	    )
-	  );
-	};
-	
-	exports.default = BlogForm;
-
-/***/ },
+/* 278 */,
+/* 279 */,
 /* 280 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -39505,7 +39390,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var CategoryPageContainer = function CategoryPageContainer(props) {
-	  return props.data ? _react2.default.createElement(_categoryPage2.default, { data: props.data, categories: props.categories }) : _react2.default.createElement(
+	  return props.data ? _react2.default.createElement(_categoryPage2.default, { whichCategory: props.params.category, data: props.data, categories: props.categories }) : _react2.default.createElement(
 	    'h1',
 	    null,
 	    'Loading...'
@@ -39562,7 +39447,7 @@
 	    var answer = array.map(function (description) {
 	      console.log(_this.props.categories);
 	      console.log(_this.props);
-	      var categories = _this.props.categories[_this.props.params.category];
+	      var categories = _this.props.categories[_this.props.whichCategory];
 	      return categories.includes(description);
 	    });
 	    return answer.includes(true);
@@ -39844,7 +39729,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.getBlogPostsAsync = exports.getAllBlogPostsData = undefined;
+	exports.createBlogPostAsync = exports.createBlogPost = exports.getBlogPostsAsync = exports.getAllBlogPostsData = undefined;
 	
 	var _jquery = __webpack_require__(269);
 	
@@ -39870,6 +39755,25 @@
 	      type: 'GET'
 	    }).done(function (blogposts) {
 	      dispatch(getAllBlogPostsData(blogposts));
+	    });
+	  };
+	};
+	
+	var createBlogPost = exports.createBlogPost = function createBlogPost(newBlogPost) {
+	  return {
+	    type: _types.CREATE_BLOG_POST,
+	    payload: newBlogPost
+	  };
+	};
+	
+	var createBlogPostAsync = exports.createBlogPostAsync = function createBlogPostAsync(newBlogPost) {
+	  return function (dispatch) {
+	    _jquery2.default.ajax({
+	      url: '/api/blogpost',
+	      type: 'POST',
+	      data: newBlogPost
+	    }).done(function (data) {
+	      dispatch(createBlogPost(data));
 	    });
 	  };
 	};
@@ -39909,7 +39813,7 @@
 	
 	
 	// module
-	exports.push([module.id, "/*COLORS*/\nnav {\n  width: 100%;\n  background: #FFEABC;\n  position: fixed;\n  top: 0;\n  right: 0;\n  /*.main */ }\n  nav .main {\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n    justify-content: space-between;\n    max-width: 1220px;\n    margin: 0 auto;\n    font-size: 1.2em;\n    height: auto;\n    /*.navLeft*/\n    /*.searchinput */ }\n    nav .main .navLeft {\n      width: 60%;\n      display: flex;\n      border: 1px solid red;\n      /*.logo*/\n      /*.navLinks*/ }\n      nav .main .navLeft .logo {\n        width: 20%;\n        height: 100%;\n        display: flex;\n        align-content: center;\n        justify-content: center;\n        margin: 1% 0;\n        border: 1px solid red;\n        /*.logo a*/ }\n        nav .main .navLeft .logo a {\n          height: auto; }\n          nav .main .navLeft .logo a img {\n            width: 100%;\n            height: auto; }\n      nav .main .navLeft .navLinks {\n        display: flex;\n        justify-content: space-between;\n        width: 50%;\n        margin: 0 0 0 3%;\n        padding: 0;\n        color: #FA3522;\n        font-size: 36px;\n        border: 1px solid green; }\n        nav .main .navLeft .navLinks a {\n          text-decoration: none;\n          color: #FA3522; }\n          nav .main .navLeft .navLinks a li {\n            list-style: none;\n            margin: 0%; }\n        nav .main .navLeft .navLinks a:visited {\n          color: inherit; }\n    nav .main .userSignin {\n      display: flex; }\n      nav .main .userSignin a {\n        text-decoration: none;\n        color: #FFEABC; }\n        nav .main .userSignin a li {\n          list-style: none; }\n      nav .main .userSignin a:visited {\n        colot: inherit; }\n    nav .main .searchInput {\n      width: 20%;\n      border: 1px solid grey; }\n      nav .main .searchInput input {\n        width: 100%;\n        font-size: 20px; }\n\n/*.nav */\n.blogForm {\n  border: 1px solid red;\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n  align-items: center; }\n  .blogForm .formInner {\n    width: 80%;\n    margin: 0 auto;\n    border: 1px solid red; }\n    .blogForm .formInner .inputContainer {\n      display: flex;\n      flex-direction: row;\n      height: 50px;\n      padding-bottom: 5%; }\n      .blogForm .formInner .inputContainer label {\n        border: 1px solid grey;\n        border-radius: 15px 0 0 15px;\n        font-size: 18px;\n        padding: 1% auto;\n        width: 150px; }\n      .blogForm .formInner .inputContainer input {\n        width: 100%;\n        border: 1px solid grey;\n        border-radius: 0 15px 15px 0;\n        padding: 1%;\n        font-size: 18px; }\n    .blogForm .formInner .author-location {\n      border: 1px solid green;\n      display: flex;\n      justify-content: space-between; }\n      .blogForm .formInner .author-location .inputContainer {\n        width: 50%; }\n        .blogForm .formInner .author-location .inputContainer .input[name=author], .blogForm .formInner .author-location .inputContainer .input[name=author] {\n          width: 100%; }\n    .blogForm .formInner textarea {\n      width: 90%;\n      height: 200px;\n      font-size: 18px;\n      border: 1px solid grey;\n      border-radius: 0 15px 15px 0;\n      resize: none; }\n\n/*COLORS*/\n.listOfCards {\n  border: 1px green dashed;\n  width: 85%;\n  margin: 0 auto;\n  display: flex;\n  flex-wrap: wrap; }\n\n.blogCard {\n  border: 1px solid red;\n  background: #FBCF30;\n  width: 28%;\n  margin: 1%; }\n\n/*COLORS*/\n@font-face {\n  font-family: 'lemonFont';\n  src: url(" + __webpack_require__(293) + "); }\n\nbody {\n  background: white;\n  margin: 0;\n  width: 100%;\n  box-sizing: border-box;\n  font-family: 'lemonFont'; }\n", ""]);
+	exports.push([module.id, "/*COLORS*/\nnav {\n  width: 100%;\n  background: #FFEABC;\n  position: fixed;\n  top: 0;\n  right: 0;\n  /*.main */ }\n  nav .main {\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n    justify-content: space-between;\n    max-width: 1220px;\n    margin: 0 auto;\n    font-size: 1.2em;\n    height: auto;\n    /*.navLeft*/\n    /*.searchinput */ }\n    nav .main .navLeft {\n      width: 60%;\n      display: flex;\n      border: 1px solid red;\n      /*.logo*/\n      /*.navLinks*/ }\n      nav .main .navLeft .logo {\n        width: 20%;\n        height: 100%;\n        display: flex;\n        align-content: center;\n        justify-content: center;\n        margin: 1% 0;\n        border: 1px solid red;\n        /*.logo a*/ }\n        nav .main .navLeft .logo a {\n          height: auto; }\n          nav .main .navLeft .logo a img {\n            width: 100%;\n            height: auto; }\n      nav .main .navLeft .navLinks {\n        display: flex;\n        justify-content: space-between;\n        width: 50%;\n        margin: 0 0 0 3%;\n        padding: 0;\n        color: #FA3522;\n        font-size: 36px;\n        border: 1px solid green; }\n        nav .main .navLeft .navLinks a {\n          text-decoration: none;\n          color: #FA3522; }\n          nav .main .navLeft .navLinks a li {\n            list-style: none;\n            margin: 0%; }\n        nav .main .navLeft .navLinks a:visited {\n          color: inherit; }\n    nav .main .userSignin {\n      display: flex; }\n      nav .main .userSignin a {\n        text-decoration: none;\n        color: white; }\n        nav .main .userSignin a li {\n          list-style: none; }\n      nav .main .userSignin a:visited {\n        colot: inherit; }\n    nav .main .searchInput {\n      width: 20%;\n      border: 1px solid grey; }\n      nav .main .searchInput input {\n        width: 100%;\n        font-size: 20px; }\n\n/*.nav */\n.blogForm {\n  border: 1px solid red;\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n  align-items: center; }\n  .blogForm .formInner {\n    width: 80%;\n    margin: 0 auto;\n    border: 1px solid red; }\n    .blogForm .formInner .inputContainer {\n      display: flex;\n      flex-direction: row;\n      height: 50px;\n      padding-bottom: 5%; }\n      .blogForm .formInner .inputContainer label {\n        border: 1px solid grey;\n        border-radius: 15px 0 0 15px;\n        font-size: 18px;\n        padding: 1% auto;\n        width: 150px; }\n      .blogForm .formInner .inputContainer input {\n        width: 100%;\n        border: 1px solid grey;\n        border-radius: 0 15px 15px 0;\n        padding: 1%;\n        font-size: 18px; }\n    .blogForm .formInner .author-location {\n      border: 1px solid green;\n      display: flex;\n      justify-content: space-between; }\n      .blogForm .formInner .author-location .inputContainer {\n        width: 50%; }\n        .blogForm .formInner .author-location .inputContainer .input[name=author], .blogForm .formInner .author-location .inputContainer .input[name=author] {\n          width: 100%; }\n    .blogForm .formInner textarea {\n      width: 90%;\n      height: 200px;\n      font-size: 18px;\n      border: 1px solid grey;\n      border-radius: 0 15px 15px 0;\n      resize: none; }\n\n/*COLORS*/\n.listOfCards {\n  border: 1px green dashed;\n  width: 85%;\n  margin: 0 auto;\n  display: flex;\n  flex-wrap: wrap; }\n\n.blogCard {\n  border: 1px solid red;\n  background: #FBCF30;\n  width: 28%;\n  margin: 1%; }\n\n/*COLORS*/\n@font-face {\n  font-family: 'lemonFont';\n  src: url(" + __webpack_require__(293) + "); }\n\nbody {\n  background: white;\n  margin: 0;\n  width: 100%;\n  box-sizing: border-box;\n  font-family: 'lemonFont'; }\n", ""]);
 	
 	// exports
 
@@ -40227,6 +40131,145 @@
 			URL.revokeObjectURL(oldSrc);
 	}
 
+
+/***/ },
+/* 295 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _CreateBlog = __webpack_require__(296);
+	
+	var _CreateBlog2 = _interopRequireDefault(_CreateBlog);
+	
+	var _reactRedux = __webpack_require__(172);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var appToState = function appToState(state) {
+	  return {
+	    dropDownCategories: state.blogReducer.categories
+	  };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(appToState)(_CreateBlog2.default);
+
+/***/ },
+/* 296 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(209);
+	
+	var _jquery = __webpack_require__(269);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
+	
+	var _store = __webpack_require__(202);
+	
+	var _store2 = _interopRequireDefault(_store);
+	
+	var _form = __webpack_require__(277);
+	
+	var _form2 = _interopRequireDefault(_form);
+	
+	var _blogThunkActions = __webpack_require__(289);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var CreateBlog = function (_React$Component) {
+	  _inherits(CreateBlog, _React$Component);
+	
+	  function CreateBlog(props) {
+	    _classCallCheck(this, CreateBlog);
+	
+	    var _this = _possibleConstructorReturn(this, (CreateBlog.__proto__ || Object.getPrototypeOf(CreateBlog)).call(this, props));
+	
+	    _this.state = {
+	      blogTitle: _this.props.blogTitle,
+	      blogAuthor: "",
+	      location: "",
+	      bodyText: "",
+	      categories: [],
+	      images: []
+	    };
+	    _this.changeParentState = _this.changeParentState.bind(_this);
+	    _this.submitNewBlogPost = _this.submitNewBlogPost.bind(_this);
+	    return _this;
+	  }
+	
+	  _createClass(CreateBlog, [{
+	    key: 'submitNewBlogPost',
+	    value: function submitNewBlogPost(event) {
+	      _store2.default.dispatch((0, _blogThunkActions.createBlogPostAsync)(this.state));
+	      //figure out a way to clear the form only once submitted
+	      //http://stackoverflow.com/questions/36197268/is-there-a-method-to-reset-a-react-component-using-es6-classes-to-its-initial-s
+	    }
+	  }, {
+	    key: 'changeParentState',
+	    value: function changeParentState(name, value) {
+	      this.setState(_defineProperty({}, name, value));
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          'New Blog Post'
+	        ),
+	        _react2.default.createElement(
+	          'form',
+	          { className: 'blogForm', action: '/', onSubmit: this.submitNewBlogPost },
+	          _react2.default.createElement(_form2.default, {
+	            changeParentState: this.changeParentState,
+	            dropDownCategories: this.props.dropDownCategories,
+	            categories: this.state.categories,
+	            goToHome: true,
+	            blogInfo: this.state
+	          }),
+	          _react2.default.createElement(
+	            'button',
+	            null,
+	            'Submit'
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return CreateBlog;
+	}(_react2.default.Component);
+	
+	CreateBlog.defaultProps = { blogTitle: "World" };
+	
+	exports.default = CreateBlog;
 
 /***/ }
 /******/ ]);

@@ -12,14 +12,6 @@ const NavBar = (props) => {
     ) 
   }
 
-  let clearNewBlogEntry = () => {
-    newEntryFormStoreData('blogTitle', '')
-    newEntryFormStoreData('blogAuthor', '')
-    newEntryFormStoreData('location', '')
-    newEntryFormStoreData('bodyText', '')
-    newEntryFormStoreData('images', '')
-  }
-
   return (
     <nav>
       <div className='main'>
@@ -32,7 +24,7 @@ const NavBar = (props) => {
           </ul>
         </div>
         <div className="userSignin">
-          <Link to='/blogform' onClick={clearNewBlogEntry}><li>New Post</li></Link>
+          <Link to='/create-blog'><li>New Post</li></Link>
           <Link to='/signup'><li>SIGN IN</li></Link>
         </div>
         <div className='searchInput'>

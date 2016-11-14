@@ -1,5 +1,6 @@
 import {
   GET_ALL_BLOG_POSTS_DATA, 
+  CREATE_BLOG_POST,
   GET_SINGLE_BLOG_POST_DATA, 
   HANDLE_BLOGFORM_CHANGE, 
   ADD_CATEGORY_TO_NEW_BlOGPOST, 
@@ -14,15 +15,7 @@ const INTIAL_STATE = {
     "Hating":["What are Humans", "I just need to leave NYC"]
   }, 
   data:[],
-  singleBlogData: [],
-  newBlogEntry: {
-    blogTitle: '',
-    blogAuthor: '',
-    location: '', 
-    bodyText: '', 
-    categories: [],
-    images: '',
-  }
+  singleBlogData: []
 }
 
 export default function(state = INTIAL_STATE, action) {
@@ -30,23 +23,10 @@ export default function(state = INTIAL_STATE, action) {
     case GET_ALL_BLOG_POSTS_DATA: 
       console.log(Object.assign({}, state, {data: action.payload}))
       return Object.assign({}, state, {data: action.payload});
+    case CREATE_BLOG_POST:
+      return Object.assign({}, state, {data: [...state.data, action.payload]})
     case GET_SINGLE_BLOG_POST_DATA: 
       return Object.assign({}, state, {singleBlogData: action.payload});
-    case MOVE_SINGLE_TO_NEW_ENTRY: 
-      state.newBlogEntry.blogTitle = state.singleBlogData.blogTitle
-      state.newBlogEntry.blogAuthor = state.singleBlogData.blogAuthor
-      state.newBlogEntry.location = state.singleBlogData.location
-      state.newBlogEntry.bodyText = state.singleBlogData.bodyText
-      state.newBlogEntry.categories = state.singleBlogData.categories
-      state.newBlogEntry.images = state.singleBlogData.images
-      return Object.assign({}, state);
-    case HANDLE_BLOGFORM_CHANGE:
-      state.newBlogEntry[action.name] = action.value
-      console.log('reducer',state)
-      return Object.assign({}, state);
-    case ADD_CATEGORY_TO_NEW_BlOGPOST: 
-      state.newBlogEntry.categories = action.name
-      return Object.assign({}, state);
     default: 
       return state
   }

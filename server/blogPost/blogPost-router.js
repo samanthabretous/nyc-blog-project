@@ -16,11 +16,11 @@ const createBlogPost = (req, res) =>{
     location: req.body.location, 
     bodyText: req.body.bodyText, 
     categories: req.body['categories[]'],
-  }, (err) => {
+  }, (err, data) => {
     if (err) console.log("error making post")
     else {
       console.log('post successfully created');
-      res.send("hello")
+      res.send(data)
     }
   })
 }

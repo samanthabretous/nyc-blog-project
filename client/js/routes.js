@@ -6,7 +6,7 @@ import MainContainer from './middleware/mainContainer'
 import HomePageContainer from './middleware/homePageContainer'
 import BlogPageContainer from './middleware/blogPageContainer'
 import BlogPageUpdateContainer from './middleware/blogPageUpdateContainer'
-import BlogFormContainer from './middleware/blogFormContainer'
+import CreateBlogContainer from './middleware/createBlogContainer'
 import CategoryPageContainer from './middleware/categoryPageContainer'
 import UserFormContainer from './middleware/userFormContainer'
 import SignupContainer from './middleware/signupContainer'
@@ -25,12 +25,12 @@ export default (
   <Route>
   <Route path="/" component={MainContainer}>
     <IndexRoute component={HomePageContainer} onEnter={getAllBlogPosts}/>
-    {/*<Route path='/blogpost/:id' component={BlogPageContainer} />
-    <Route path='/category/:category' component={CategoryPageContainer} />
+    <Route path='/blogpost/:id' component={BlogPageContainer} />
+    <Route path='/category/:category' component={CategoryPageContainer} onEnter={getAllBlogPosts}/>
     <Route path='/blogpost/:id/update' component={BlogPageUpdateContainer}/>
-    <Route path='/create-blog' component={BlogFormContainer}/>
+    <Route path='/create-blog' component={CreateBlogContainer}/>
     <Route path='/signup' component={SignupContainer}/>
-    <Route path='/userform' component={UserFormContainer}/>*/}
+    <Route path='/userform' component={UserFormContainer}/>
 
   </Route> 
   <Route path="*" component={NotFound} />
