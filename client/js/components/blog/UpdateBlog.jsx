@@ -1,11 +1,29 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {Link} from 'react-router'
 import $ from 'jquery'
 
 import Form from './form'
 import Display from '../parts/display'
 
-const BlogPageUpdate = React.createClass({
+class UpdateBlog extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      blogTitle: this.props.blogTitle,
+      blogAuthor: "",
+      location: "", 
+      bodyText: "", 
+      categories: [],
+      images: []
+    };
+    this.changeParentState = this.changeParentState.bind(this);
+    this.submitNewBlogPost = this.submitNewBlogPost.bind(this);
+  };
+  updateBlogPost(event) {
+    store.dispatch(createBlogPostAsync(this.state));
+    //figure out a way to clear the form only once submitted
+    //http://stackoverflow.com/questions/36197268/is-there-a-method-to-reset-a-react-component-using-es6-classes-to-its-initial-s
+  };
 
   updateBlogPost(postId){
     $.ajax({
@@ -46,4 +64,4 @@ const BlogPageUpdate = React.createClass({
   }
 })
 
-export default BlogPageUpdate
+export default UpdateBlog

@@ -3,7 +3,7 @@ import {Link} from 'react-router'
 import $ from 'jquery'
 
 import store from '../../store'
-import Form from './form'
+import Form from './Form'
 import {
   createBlogPostAsync
 } from '../../actions/blogThunkActions'

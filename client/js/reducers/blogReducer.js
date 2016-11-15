@@ -4,6 +4,7 @@ import {
   GET_SINGLE_BLOG_POST_DATA, 
   GET_SINGLE_BLOG_POST_AUTHOR,
   CREATE_BLOG_POST,
+  UPDATE_BLOG_POST,
   DELETE_BLOG_POST
 } from '../actions/types'
 
@@ -30,9 +31,12 @@ export default function(state = INTIAL_STATE, action) {
       return Object.assign({}, state, {singleBlogAuthor: action.payload});
     case CREATE_BLOG_POST:
       return Object.assign({}, state, {data: [...state.data, action.payload]})
+    case UPDATE_BLOG_POST:
+      let updateData = _.update(state.data, action.payload._id,(blogpost) => action.payload);
+      return Object.assign({}, state, {data: updateData})
     case DELETE_BLOG_POST:
-      let newData = _.remove(state.data, (blogpost) => blogpost._id !== action.payload);
-      return Object.assign({}, state, {data: newData})
+      let removeData = _.remove(state.data, (blogpost) => blogpost._id !== action.payload);
+      return Object.assign({}, state, {data: removeData})
     default: 
       return state
   }

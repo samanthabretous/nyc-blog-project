@@ -4,6 +4,7 @@ import {
   GET_SINGLE_BLOG_POST_DATA,
   GET_SINGLE_BLOG_POST_AUTHOR,
   CREATE_BLOG_POST,
+  UPDATE_BLOG_POST,
   DELETE_BLOG_POST
 } from './types'
 
@@ -69,6 +70,23 @@ export const createBlogPostAsync = newBlogPost => dispatch => {
   })
   .done(data => {
     dispatch(createBlogPost(data));
+  })
+}
+
+//UPDATE BLOG POST------------------------------------
+export const updateBlogPost = newBlogPost => ({
+  type: UPDATE_BLOG_POST,
+  payload: newBlogPost
+})
+
+export const updateBlogPostAsync = blogPost => dispatch => {
+  $.ajax({
+    url: '/api/blogpost',
+    type: 'PUT',
+    data: blogPost, 
+  })
+  .done(data => {
+    dispatch(updateBlogPost(data));
   })
 }
 
