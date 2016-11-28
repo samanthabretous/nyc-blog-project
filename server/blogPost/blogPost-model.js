@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 
 const blogSchema = mongoose.Schema({
   blogTitle: {type: String, required: true},
-  blogAuthor: String,
+  blogAuthor: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
   date: { type: Date, default: Date.now },
   location: String, 
   bodyText: String, 
-  categories: [],
+  categories: [String],
   images: String,
   comments: [String]
 });

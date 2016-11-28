@@ -7,7 +7,7 @@ const BlogPageContainer = (props) => (
     <div>
       <DisplayBlog 
         blogPost={props.singleBlogData}
-        blogAuthor={props.singleBlogAuthor}
+        blogAuthor={props.singleBlogData.blogAuthor}
         author={props.author}
         whichPost={props.params.id}
       />
@@ -18,7 +18,6 @@ const BlogPageContainer = (props) => (
 const appToState = state => ({
   data: state.blogReducer.data,
   singleBlogData: state.blogReducer.singleBlogData,
-  singleBlogAuthor: state.blogReducer.singleBlogAuthor,
   author: state.userFormReducer._id
 })
 

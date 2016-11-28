@@ -44,15 +44,6 @@ export const getSingleBlogPostAsync = (postId) => (dispatch) => {
   })
   .done((blogpost) => {
     dispatch(getSingleBlogPost(blogpost))
-
-    //get infomation about the author
-    $.ajax({
-      url: `/api/user/${blogpost.blogAuthor}`,
-      type: 'GET'
-    })
-    .done((author) => {
-      dispatch(getSingleBlogPostAuthor(author))
-    })
   })
 }
 

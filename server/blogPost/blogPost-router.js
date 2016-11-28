@@ -10,13 +10,7 @@ const getBlogPost = (req, res, next) => {
 
 const createBlogPost = (req, res) =>{
   console.log(req.body)
-  BlogPost.create({
-    blogTitle: req.body.blogTitle,
-    blogAuthor: req.body.blogAuthor,
-    location: req.body.location, 
-    bodyText: req.body.bodyText, 
-    categories: req.body['categories[]'],
-  }, (err, data) => {
+  BlogPost.create(req.body, (err, data) => {
     if (err) console.log("error making post")
     else {
       console.log('post successfully created');
@@ -50,9 +44,12 @@ const updateBlogPost = (req, res) => {
 }
 
 const getOneBlogPost = (req, res) => {
-  BlogPost.findById(req.params.id, (err, data) => {
-    res.send(data);
-  })
+  BlogPost.findById(req.params.id)
+    .populate('blogAuthor')
+    .exec((err, data) => {
+      res.send(data);
+    }
+  )
 };
 
 //configure router for get and post calls

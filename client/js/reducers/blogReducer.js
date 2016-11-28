@@ -17,7 +17,6 @@ const INTIAL_STATE = {
   }, 
   data:[],
   singleBlogData: [],
-  singleBlogAuthor: []
 }
 
 export default function(state = INTIAL_STATE, action) {
@@ -27,8 +26,6 @@ export default function(state = INTIAL_STATE, action) {
       return Object.assign({}, state, {data: action.payload});
     case GET_SINGLE_BLOG_POST_DATA: 
       return Object.assign({}, state, {singleBlogData: action.payload});
-    case GET_SINGLE_BLOG_POST_AUTHOR:
-      return Object.assign({}, state, {singleBlogAuthor: action.payload});
     case CREATE_BLOG_POST:
       return Object.assign({}, state, {data: [...state.data, action.payload]})
     case UPDATE_BLOG_POST:
